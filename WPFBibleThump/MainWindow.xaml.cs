@@ -24,5 +24,23 @@ namespace WPFBibleThump
         {
             InitializeComponent();
         }
+
+        private void CityTheseus_Click(object sender, RoutedEventArgs e)
+        {
+            CityTheseus cityT = new CityTheseus
+            {
+                Owner = this
+            };
+            cityT.ShowDialog();
+        }
+
+        private void StreetTheseus_Click(object sender, RoutedEventArgs e)
+        {
+            StreetTheseus streetT = new StreetTheseus
+            {
+                Owner = this
+            };
+            streetT.ShowDialog();
+        }
     }
 }

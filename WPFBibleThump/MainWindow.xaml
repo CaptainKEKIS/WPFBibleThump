@@ -6,14 +6,25 @@
         xmlns:local="clr-namespace:WPFBibleThump"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="10 8 10 8" />
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Height" Value="30" />
+        </Style>
+        <Style TargetType="MenuItem">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
-        <DataGrid>
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Foreground="#FFB2208A"/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Foreground="#FFD43636"/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Foreground="#FF0D488F"/>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Foreground="#FFD3C04D"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <Menu HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <MenuItem Header="Справочники">
+                <MenuItem x:Name="CityTheseus" Header="Города" Click="CityTheseus_Click"/>
+                <MenuItem x:Name="StreetTheseus" Header="Улицы" Click="StreetTheseus_Click"/>
+            </MenuItem>
+        </Menu>
+
     </Grid>
+
 </Window>
