@@ -126,6 +126,8 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -147,6 +149,84 @@
     <Compile Include="AddWindow.xaml.cs">
       <DependentUpon>AddWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\BiblioModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BiblioModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BiblioModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BiblioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BiblioModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BiblioModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sysdiagrams.cs">
+      <DependentUpon>BiblioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Авторы.cs">
+      <DependentUpon>BiblioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Выданные_книги.cs">
+      <DependentUpon>BiblioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Города.cs">
+      <DependentUpon>BiblioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Издательства.cs">
+      <DependentUpon>BiblioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Книги.cs">
+      <DependentUpon>BiblioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Объекты.cs">
+      <DependentUpon>BiblioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Пользователи.cs">
+      <DependentUpon>BiblioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Пользователи_Объекты.cs">
+      <DependentUpon>BiblioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Систематический_каталог.cs">
+      <DependentUpon>BiblioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Улицы.cs">
+      <DependentUpon>BiblioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Читатели.cs">
+      <DependentUpon>BiblioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Экземпляры_книги.cs">
+      <DependentUpon>BiblioModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SysCatalogue.xaml.cs">
+      <DependentUpon>SysCatalogue.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\StreetsViewModel.cs" />
+    <Page Include="AuthorTheseus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BooksTheseus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="IssuedBooks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PublishTheseus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Readers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="StreetTheseus.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -163,6 +243,21 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AuthorTheseus.xaml.cs">
+      <DependentUpon>AuthorTheseus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BooksTheseus.xaml.cs">
+      <DependentUpon>BooksTheseus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="IssuedBooks.xaml.cs">
+      <DependentUpon>IssuedBooks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PublishTheseus.xaml.cs">
+      <DependentUpon>PublishTheseus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Readers.xaml.cs">
+      <DependentUpon>Readers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StreetTheseus.xaml.cs">
       <DependentUpon>StreetTheseus.xaml</DependentUpon>
     </Compile>
@@ -174,6 +269,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="AddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SysCatalogue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -196,6 +295,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Model\BiblioModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BiblioModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\BiblioModel.edmx.diagram">
+      <DependentUpon>BiblioModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -205,8 +311,21 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Model\" />
+    <Content Include="Model\BiblioModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BiblioModel.Context.cs</LastGenOutput>
+      <DependentUpon>BiblioModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Model\BiblioModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BiblioModel.edmx</DependentUpon>
+      <LastGenOutput>BiblioModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

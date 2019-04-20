@@ -16,15 +16,19 @@
             <Setter Property="Margin" Value="5"/>
         </Style>
     </Window.Resources>
-    
+
     <Grid>
         <Menu HorizontalAlignment="Stretch" VerticalAlignment="Top">
             <MenuItem Header="Справочники">
                 <MenuItem x:Name="CityTheseus" Header="Города" Click="CityTheseus_Click"/>
                 <MenuItem x:Name="StreetTheseus" Header="Улицы" Click="StreetTheseus_Click"/>
+                <MenuItem x:Name="AuthorTheseus" Header="Авторы" Click="AuthorTheseus_Click"/>
+                <MenuItem x:Name="PublishTheseus" Header="Издательства" Click="PublishTheseus_Click"/>
+                <MenuItem x:Name="SysCatalogue" Header="Системный каталог" Click="SysCatalogue_Click"/>
+                <MenuItem x:Name="BooksTheseus" Header="Книги" Click="BooksTheseus_Click"/>
+                <MenuItem x:Name="IssuedBooks" Header="Выданные книги" Click="IssuedBooks_Click"/>
+                <MenuItem x:Name="Readers" Header="Читатели" Click="Readers_Click"/>
             </MenuItem>
         </Menu>
-
     </Grid>
-
 </Window>

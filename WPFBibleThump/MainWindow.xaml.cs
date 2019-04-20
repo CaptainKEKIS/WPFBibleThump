@@ -42,5 +42,59 @@ namespace WPFBibleThump
             };
             streetT.ShowDialog();
         }
+
+        private void AuthorTheseus_Click(object sender, RoutedEventArgs e)
+        {
+            AuthorTheseus AuthorT = new AuthorTheseus
+            {
+                Owner = this
+            };
+            AuthorT.ShowDialog();
+        }
+
+        private void PublishTheseus_Click(object sender, RoutedEventArgs e)
+        {
+            PublishTheseus PublishT = new PublishTheseus
+            {
+                Owner = this
+            };
+            PublishT.ShowDialog();
+        }
+
+        private void SysCatalogue_Click(object sender, RoutedEventArgs e)
+        {
+            SysCatalogue SysCatalogueT = new SysCatalogue
+            {
+                Owner = this
+            };
+            SysCatalogueT.ShowDialog();
+        }
+
+        private void BooksTheseus_Click(object sender, RoutedEventArgs e)
+        {
+            BooksTheseus BooksT = new BooksTheseus
+            {
+                Owner = this
+            };
+            BooksT.ShowDialog();
+        }
+
+        private void IssuedBooks_Click(object sender, RoutedEventArgs e)
+        {
+            IssuedBooks IssuedBooksT = new IssuedBooks
+            {
+                Owner = this
+            };
+            IssuedBooksT.ShowDialog();
+        }
+
+        private void Readers_Click(object sender, RoutedEventArgs e)
+        {
+            Readers ReadersT = new Readers
+            {
+                Owner = this
+            };
+            ReadersT.ShowDialog();
+        }
     }
 }
