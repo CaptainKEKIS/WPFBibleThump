@@ -1,0 +1,42 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFBibleThump"
+        xmlns:Model="clr-namespace:WPFBibleThump.Model" x:Class="WPFBibleThump.Window2"
+        mc:Ignorable="d"
+        Title="Window2" Height="450" Width="800" Loaded="Window_Loaded_1">
+    <Window.Resources>
+        <CollectionViewSource x:Key="читателиViewSource" d:DesignSource="{d:DesignInstance {x:Type Model:Читатели}, CreateList=True}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource читателиViewSource}">
+
+        <DataGrid x:Name="читателиDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="74,44,52,102" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn x:Name="дата_перерегистрацииColumn" Width="SizeToHeader" Header="Дата перерегистрации">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding Дата_перерегистрации, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn x:Name="дата_регистрацииColumn" Width="SizeToHeader" Header="Дата регистрации">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding Дата_регистрации, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn x:Name="имяColumn" Width="SizeToHeader" Header="Имя" Binding="{Binding Имя}"/>
+                <DataGridTextColumn x:Name="квартираColumn" Width="SizeToHeader" Header="Квартира" Binding="{Binding Квартира}"/>
+                <DataGridTextColumn x:Name="номер_домаColumn" Width="SizeToHeader" Header="Номер дома" Binding="{Binding Номер_дома}"/>
+                <DataGridTextColumn x:Name="номер_читательского_билетаColumn" Width="SizeToHeader" Header="Номер читательского билета" Binding="{Binding Номер_читательского_билета}"/>
+                <DataGridTextColumn x:Name="отчествоColumn" Width="SizeToHeader" Header="Отчество" Binding="{Binding Отчество}"/>
+                <DataGridTextColumn x:Name="телефонColumn" Width="SizeToHeader" Header="Телефон" Binding="{Binding Телефон}"/>
+                <DataGridTextColumn x:Name="фамилияColumn" Width="SizeToHeader" Header="Фамилия" Binding="{Binding Фамилия}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>

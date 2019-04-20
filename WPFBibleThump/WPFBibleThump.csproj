@@ -206,7 +206,11 @@
     <Compile Include="SysCatalogue.xaml.cs">
       <DependentUpon>SysCatalogue.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ReadersViewModel.cs" />
     <Compile Include="ViewModel\StreetsViewModel.cs" />
+    <Compile Include="Window2.xaml.cs">
+      <DependentUpon>Window2.xaml</DependentUpon>
+    </Compile>
     <Page Include="AuthorTheseus.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -276,6 +280,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Window2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -303,6 +311,18 @@
       <DependentUpon>BiblioModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\WPFBibleThump.Model.Авторы.datasource" />
+    <None Include="Properties\DataSources\WPFBibleThump.Model.Выданные_книги.datasource" />
+    <None Include="Properties\DataSources\WPFBibleThump.Model.Города.datasource" />
+    <None Include="Properties\DataSources\WPFBibleThump.Model.Издательства.datasource" />
+    <None Include="Properties\DataSources\WPFBibleThump.Model.Книги.datasource" />
+    <None Include="Properties\DataSources\WPFBibleThump.Model.Объекты.datasource" />
+    <None Include="Properties\DataSources\WPFBibleThump.Model.Пользователи.datasource" />
+    <None Include="Properties\DataSources\WPFBibleThump.Model.Пользователи_Объекты.datasource" />
+    <None Include="Properties\DataSources\WPFBibleThump.Model.Систематический_каталог.datasource" />
+    <None Include="Properties\DataSources\WPFBibleThump.Model.Улицы.datasource" />
+    <None Include="Properties\DataSources\WPFBibleThump.Model.Читатели.datasource" />
+    <None Include="Properties\DataSources\WPFBibleThump.Model.Экземпляры_книги.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

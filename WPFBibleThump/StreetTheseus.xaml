@@ -13,14 +13,16 @@
             <Setter Property="Height" Value="30" />
         </Style>
     </Window.Resources>
-    <Grid>
+    <DockPanel>
+        <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Bottom" Margin="5"/>
+        <Grid x:Name="StreetTGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="1">
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Streets}" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Foreground="#FFB2208A"/>
+                <DataGridTextColumn Binding="{Binding Название}" Foreground="#FFB2208A"/>
             </DataGrid.Columns>
         </DataGrid>
 
@@ -56,5 +58,6 @@
                 </Button.Background>
             </Button>
         </StackPanel>
-    </Grid>
+        </Grid>
+    </DockPanel>
 </Window>

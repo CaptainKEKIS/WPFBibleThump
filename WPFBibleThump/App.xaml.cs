@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using WPFBibleThump.Model;
 
 namespace WPFBibleThump
 {
@@ -13,5 +14,6 @@ namespace WPFBibleThump
     /// </summary>
     public partial class App : Application
     {
+        public static MOYABAZAEntities MOYABAZA = new MOYABAZAEntities();
     }
 }

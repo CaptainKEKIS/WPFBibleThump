@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
@@ -12,16 +10,16 @@ using WPFBibleThump.Model;
 
 namespace WPFBibleThump.ViewModel
 {
-    class StreetsViewModel
+    class ReadersViewModel
     {
         private string _searchText;
-        public ICollectionView Streets { get; set; }
+        public ICollectionView Readers { get; set; }
 
-        public StreetsViewModel()
+        public ReadersViewModel()
         {
-            App.MOYABAZA.Улицы.Load();
-            Streets = CollectionViewSource.GetDefaultView(App.MOYABAZA.Улицы.Local);
-            Streets.Filter = FilterFunction;
+            App.MOYABAZA.Читатели.Load();
+            Readers = CollectionViewSource.GetDefaultView(App.MOYABAZA.Читатели.Local);
+            Readers.Filter = FilterFunction;
         }
 
         public string SearchText
@@ -30,14 +28,14 @@ namespace WPFBibleThump.ViewModel
             set
             {
                 _searchText = value;
-                Streets.Refresh();
+                Readers.Refresh();
             }
         }
 
         bool FilterFunction(object o)
         {
-            Улицы ulica = o as Улицы;
-            if (String.IsNullOrEmpty(SearchText) || ulica.Название.StartsWith(SearchText.Trim(), StringComparison.OrdinalIgnoreCase))
+            Читатели readers = o as Читатели;
+            if (String.IsNullOrEmpty(SearchText) || readers.Фамилия.StartsWith(SearchText.Trim(), StringComparison.OrdinalIgnoreCase))
             {
                 return true;
             }
