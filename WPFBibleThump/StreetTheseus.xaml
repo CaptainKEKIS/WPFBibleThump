@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
         <DataGrid Grid.Row="1" ItemsSource="{Binding Streets}" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Название}" Foreground="#FFB2208A"/>
+                <DataGridTextColumn Binding="{Binding Название}" Foreground="#FFB2208A" Width="*" Header="Название"/>
             </DataGrid.Columns>
         </DataGrid>
 

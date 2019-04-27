@@ -206,6 +206,9 @@
     <Compile Include="SysCatalogue.xaml.cs">
       <DependentUpon>SysCatalogue.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AuthorsViewModel.cs" />
+    <Compile Include="ViewModel\BooksViewModel.cs" />
+    <Compile Include="ViewModel\CityViewModel.cs" />
     <Compile Include="ViewModel\ReadersViewModel.cs" />
     <Compile Include="ViewModel\StreetsViewModel.cs" />
     <Compile Include="Window2.xaml.cs">

@@ -1,13 +1,14 @@
-﻿<Window x:Class="WPFBibleThump.BooksTheseus"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFBibleThump"
+        xmlns:Model="clr-namespace:WPFBibleThump.Model" x:Class="WPFBibleThump.BooksTheseus"
         mc:Ignorable="d"
-        Title="BooksTheseus" Height="450" Width="800">
+        Title="BooksTheseus" Height="450" Width="800" Loaded="Window_Loaded">
     <Window.Resources>
-        <Style TargetType="Button">
+        <Style TargetType="{x:Type Button}">
             <Setter Property="Margin" Value="10 8 10 8" />
             <Setter Property="Width" Value="100" />
             <Setter Property="Height" Value="30" />
@@ -18,11 +19,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="1">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Foreground="#FFB2208A"/>
-            </DataGrid.Columns>
-        </DataGrid>
+
 
         <StackPanel HorizontalAlignment="Left"  Grid.Row="0" Orientation="Horizontal">
             <Button x:Name="createButton" Content="Создать" >
@@ -56,5 +53,15 @@
                 </Button.Background>
             </Button>
         </StackPanel>
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Books}" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="названиеColumn" Binding="{Binding Название}" Header="Название" Width="*"/>
+                <DataGridTextColumn x:Name="id_издательстваColumn" Binding="{Binding Издательства.Название}" Header="Издательство" Width="150"/>
+                <DataGridTextColumn x:Name="id_городаColumn" Binding="{Binding Города.Название}" Header="Город" Width="*"/>
+                <DataGridTextColumn x:Name="год_изданияColumn" Binding="{Binding Год_издания}" Header="Год издания" Width="90"/>
+                <DataGridTextColumn x:Name="уДКColumn" Binding="{Binding УДК}" Header="УДК" Width="*"/>
+                <DataGridTextColumn x:Name="количество_экземпляровColumn" Binding="{Binding Количество_экземпляров}" Header="Количество экземпляров" Width="155"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

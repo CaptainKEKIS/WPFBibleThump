@@ -13,48 +13,51 @@
             <Setter Property="Height" Value="30" />
         </Style>
     </Window.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <DataGrid Grid.Row="1">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Foreground="#FFB2208A"/>
-            </DataGrid.Columns>
-        </DataGrid>
+    <DockPanel>
+        <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Bottom" Margin="5"/>
+        <Grid x:Name="CityTGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <DataGrid Grid.Row="1" ItemsSource="{Binding Cities}" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Название}" Foreground="#FFB2208A" Header="Название" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
 
-        <StackPanel HorizontalAlignment="Left"  Grid.Row="0" Orientation="Horizontal">
-            <Button x:Name="createButton" Content="Создать" >
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                        <GradientStop Color="#FFF3F3F3" Offset="0"/>
-                        <GradientStop Color="#FFEBEBEB" Offset="0.326"/>
-                        <GradientStop Color="#FFDDDDDD" Offset="0.37"/>
-                        <GradientStop Color="#FF30B000" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button x:Name="changeButton" Content="Изменить" >
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                        <GradientStop Color="#FFF3F3F3" Offset="0"/>
-                        <GradientStop Color="#FFEBEBEB" Offset="0.374"/>
-                        <GradientStop Color="#FFDDDDDD" Offset="0.417"/>
-                        <GradientStop Color="#FF30B200" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button x:Name="deleteButton" Content="Удалить" >
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                        <GradientStop Color="#FFF3F3F3" Offset="0"/>
-                        <GradientStop Color="#FFEBEBEB" Offset="0.343"/>
-                        <GradientStop Color="#FFDDDDDD" Offset="0.365"/>
-                        <GradientStop Color="#FF3BD800" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-        </StackPanel>
-    </Grid>
+            <StackPanel HorizontalAlignment="Left"  Grid.Row="0" Orientation="Horizontal">
+                <Button x:Name="createButton" Content="Создать" >
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                            <GradientStop Color="#FFEBEBEB" Offset="0.326"/>
+                            <GradientStop Color="#FFDDDDDD" Offset="0.37"/>
+                            <GradientStop Color="#FF30B000" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="changeButton" Content="Изменить" >
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                            <GradientStop Color="#FFEBEBEB" Offset="0.374"/>
+                            <GradientStop Color="#FFDDDDDD" Offset="0.417"/>
+                            <GradientStop Color="#FF30B200" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="deleteButton" Content="Удалить" >
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                            <GradientStop Color="#FFEBEBEB" Offset="0.343"/>
+                            <GradientStop Color="#FFDDDDDD" Offset="0.365"/>
+                            <GradientStop Color="#FF3BD800" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
 </Window>
