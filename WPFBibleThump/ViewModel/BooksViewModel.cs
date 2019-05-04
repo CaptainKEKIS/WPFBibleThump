@@ -15,11 +15,19 @@ namespace WPFBibleThump.ViewModel
         private string _searchText;
         public ICollectionView Books { get; set; }
 
+        public RelayCommand AddCommand { get; }
+        public RelayCommand DeleteCommand { get; }
+
         public BooksViewModel()
         {
             App.MOYABAZA.Книги.Load();
             Books = CollectionViewSource.GetDefaultView(App.MOYABAZA.Книги.Local);
-            //Authors.Filter = FilterFunction;
+            Books.Filter = FilterFunction;
+
+            AddCommand = new RelayCommand((param) => { }, (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.W == 1) != 0);
+            DeleteCommand = new RelayCommand((param) => { },
+                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.D == 1) != 0 && param != null);
+            Books.Filter = FilterFunction;
         }
 
         public string SearchText
@@ -31,16 +39,18 @@ namespace WPFBibleThump.ViewModel
                 Books.Refresh();
             }
         }
-        /*
+        
         bool FilterFunction(object o)
         {
-            Авторы ulica = o as Авторы;
-            if (String.IsNullOrEmpty(SearchText) || ulica..StartsWith(SearchText.Trim(), StringComparison.OrdinalIgnoreCase))
+            Книги ulica = o as Книги;
+            if (String.IsNullOrEmpty(SearchText) ||
+                ulica.Название.StartsWith(SearchText.Trim(), StringComparison.OrdinalIgnoreCase) ||
+                ulica.Издательства.Название.StartsWith(SearchText.Trim(), StringComparison.OrdinalIgnoreCase))
             {
                 return true;
             }
             return false;
         }
-        */
+        
     }
 }

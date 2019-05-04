@@ -22,38 +22,12 @@
 
 
         <StackPanel HorizontalAlignment="Left"  Grid.Row="0" Orientation="Horizontal">
-            <Button x:Name="createButton" Content="Создать" >
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                        <GradientStop Color="#FFF3F3F3" Offset="0"/>
-                        <GradientStop Color="#FFEBEBEB" Offset="0.326"/>
-                        <GradientStop Color="#FFDDDDDD" Offset="0.37"/>
-                        <GradientStop Color="#FF30B000" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button x:Name="changeButton" Content="Изменить" >
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                        <GradientStop Color="#FFF3F3F3" Offset="0"/>
-                        <GradientStop Color="#FFEBEBEB" Offset="0.374"/>
-                        <GradientStop Color="#FFDDDDDD" Offset="0.417"/>
-                        <GradientStop Color="#FF30B200" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button x:Name="deleteButton" Content="Удалить" >
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                        <GradientStop Color="#FFF3F3F3" Offset="0"/>
-                        <GradientStop Color="#FFEBEBEB" Offset="0.343"/>
-                        <GradientStop Color="#FFDDDDDD" Offset="0.365"/>
-                        <GradientStop Color="#FF3BD800" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
+            <Button x:Name="createButton" Content="Создать" Command="{Binding AddCommand}" />
+            <Button x:Name="changeButton" Content="Изменить" />
+            <Button x:Name="deleteButton" Content="Удалить" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
+            <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
         </StackPanel>
-        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Books}" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
+        <DataGrid x:Name="fsdjkfjdsl" AutoGenerateColumns="False" ItemsSource="{Binding Books}" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="названиеColumn" Binding="{Binding Название}" Header="Название" Width="*"/>
                 <DataGridTextColumn x:Name="id_издательстваColumn" Binding="{Binding Издательства.Название}" Header="Издательство" Width="150"/>

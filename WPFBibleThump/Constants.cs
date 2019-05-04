@@ -10,5 +10,6 @@ namespace WPFBibleThump
     {
         public const string ApplicationName = "Biblio";
         public const string AuthorThesaurusName = "AuthorsTheseus";
+        public const string BooksThesaurusName = "BooksTheseus";
     }
 }
