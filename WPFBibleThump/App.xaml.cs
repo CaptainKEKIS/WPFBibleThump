@@ -15,5 +15,6 @@ namespace WPFBibleThump
     public partial class App : Application
     {
         public static MOYABAZAEntities MOYABAZA = new MOYABAZAEntities();
+        public static Пользователи ActiveUser { get; set; }
     }
 }

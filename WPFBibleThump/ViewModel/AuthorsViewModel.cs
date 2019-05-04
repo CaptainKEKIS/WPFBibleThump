@@ -15,11 +15,18 @@ namespace WPFBibleThump.ViewModel
         private string _searchText;
         public ICollectionView Authors { get; set; }
 
+        public RelayCommand AddCommand { get; }
+        public RelayCommand DeleteCommand { get; }
+
         public AuthorsViewModel()
         {
             App.MOYABAZA.Авторы.Load();
             Authors = CollectionViewSource.GetDefaultView(App.MOYABAZA.Авторы.Local);
-            //Authors.Filter = FilterFunction;
+
+            AddCommand = new RelayCommand((param) => { }, (param) =>  App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.AuthorThesaurusName && uo.W == 1) != 0 );
+            DeleteCommand = new RelayCommand((param) => { }, 
+                (param) =>  App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.AuthorThesaurusName && uo.D == 1) != 0 && param != null );
+            Authors.Filter = FilterFunction;
         }
 
         public string SearchText
@@ -31,16 +38,18 @@ namespace WPFBibleThump.ViewModel
                 Authors.Refresh();
             }
         }
-        /*
+        
         bool FilterFunction(object o)
         {
             Авторы ulica = o as Авторы;
-            if (String.IsNullOrEmpty(SearchText) || ulica..StartsWith(SearchText.Trim(), StringComparison.OrdinalIgnoreCase))
+            if (String.IsNullOrEmpty(SearchText) || 
+                ulica.Имя.StartsWith(SearchText.Trim(), StringComparison.OrdinalIgnoreCase)|| 
+                ulica.Фамилия.StartsWith(SearchText.Trim(), StringComparison.OrdinalIgnoreCase))
             {
                 return true;
             }
             return false;
         }
-        */
+        
     }
 }
