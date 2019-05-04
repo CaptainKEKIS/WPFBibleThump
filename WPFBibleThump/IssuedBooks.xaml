@@ -1,13 +1,14 @@
-﻿<Window x:Class="WPFBibleThump.IssuedBooks"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFBibleThump"
+        xmlns:Model="clr-namespace:WPFBibleThump.Model" x:Class="WPFBibleThump.IssuedBooks"
         mc:Ignorable="d"
-        Title="IssuedBooks" Height="450" Width="800">
+        Title="IssuedBooks" Height="457.627" Width="951.271" Loaded="Window_Loaded">
     <Window.Resources>
-        <Style TargetType="Button">
+        <Style TargetType="{x:Type Button}">
             <Setter Property="Margin" Value="10 8 10 8" />
             <Setter Property="Width" Value="100" />
             <Setter Property="Height" Value="30" />
@@ -18,12 +19,6 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="1">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Foreground="#FFB2208A"/>
-            </DataGrid.Columns>
-        </DataGrid>
-
         <StackPanel HorizontalAlignment="Left"  Grid.Row="0" Orientation="Horizontal">
             <Button x:Name="createButton" Content="Создать" >
                 <Button.Background>
@@ -56,5 +51,17 @@
                 </Button.Background>
             </Button>
         </StackPanel>
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding IssuedBooks}" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="ФЧитателя" Binding="{Binding Читатели.Фамилия}" Header="Фамилия" Width="Auto"/>
+                <DataGridTextColumn x:Name="ИЧитателя" Binding="{Binding Читатели.Имя}" Header="Имя" Width="Auto"/>
+                <DataGridTextColumn x:Name="ОЧитателя" Binding="{Binding Читатели.Отчество}" Header="Отчество" Width="Auto"/>
+                <DataGridTextColumn x:Name="НазваниеColumn" Binding="{Binding Экземпляры_книги.Книги.Название}" Header="Название книги" Width="*"/>
+                <DataGridTextColumn x:Name="инвентарный_номерColumn" Binding="{Binding Инвентарный_номер}" Header="Инвентарный номер" Width="Auto"/>
+                <DataGridTextColumn x:Name="дата_выдачиColumn" Binding="{Binding Дата_выдачи, StringFormat=dd.MM.yyyy}" Header="Дата выдачи" Width="Auto"/>
+                <DataGridTextColumn x:Name="дата_возвратаColumn" Binding="{Binding Дата_возврата, StringFormat=dd.MM.yyyy}" Header="Дата возврата" Width="Auto"/>
+                <DataGridTextColumn x:Name="код_УДКColumn" Binding="{Binding Код_УДК}" Header="Код УДК" Width="Auto"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

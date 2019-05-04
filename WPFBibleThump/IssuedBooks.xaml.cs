@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPFBibleThump.ViewModel;
 
 namespace WPFBibleThump
 {
@@ -22,6 +23,18 @@ namespace WPFBibleThump
         public IssuedBooks()
         {
             InitializeComponent();
+            DataContext = new IssuedBViewModel();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            //System.Windows.Data.CollectionViewSource выданные_книгиViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("выданные_книгиViewSource")));
+            // Загрузите данные, установив свойство CollectionViewSource.Source:
+            // выданные_книгиViewSource.Source = [универсальный источник данных]
+            //System.Windows.Data.CollectionViewSource выданные_книгиViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("выданные_книгиViewSource")));
+            // Загрузите данные, установив свойство CollectionViewSource.Source:
+            // выданные_книгиViewSource.Source = [универсальный источник данных]
         }
     }
 }

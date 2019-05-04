@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPFBibleThump.ViewModel;
 
 namespace WPFBibleThump
 {
@@ -22,6 +23,12 @@ namespace WPFBibleThump
         public PublishTheseus()
         {
             InitializeComponent();
+            DataContext = new PublishViewModel();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
