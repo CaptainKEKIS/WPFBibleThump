@@ -34,7 +34,7 @@ namespace WPFBibleThump
         {
             var t = ((ctrl.RenderTransform as TransformGroup).Children[2] as RotateTransform);
             var t2 = ((ctrl.RenderTransform as TransformGroup).Children[3] as TranslateTransform);
-            t.Angle += 10;
+            t.Angle += r.Next(-50,50);
             var nx = t2.X + r.Next(-40, 40);
             var ny = t2.Y + r.Next(-20, 20);
             if (!(nx > this.Width / 2 - btn.Width || nx < -this.Width / 2 + btn.Width))
@@ -45,6 +45,9 @@ namespace WPFBibleThump
             {
                 t2.Y = ny;
             }
+            int rnd = r.Next();
+            var bytes = BitConverter.GetBytes(rnd);
+            this.Background = new SolidColorBrush( Color.FromRgb(bytes[0], bytes[1], bytes[2]));
         }
 
         private void Dt_Tick(object sender, EventArgs e)
@@ -73,6 +76,16 @@ namespace WPFBibleThump
             {
                 MessageBox.Show("В данный момент приложение не работает.\nОбратитесь к системному администратору!", "Ошибка работы приложения", MessageBoxButton.OK);
             }
+        }
+
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void Window_PreviewKeyUp(object sender, KeyEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }
