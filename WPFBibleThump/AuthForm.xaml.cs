@@ -30,21 +30,28 @@ namespace WPFBibleThump
             dt.IsEnabled = true;
 
         }
-
-        private void Dt_Tick(object sender, EventArgs e)
+        void ChangeElementPosition( Control ctrl)
         {
-            var t =((btn.RenderTransform as TransformGroup).Children[2] as RotateTransform);
-            var t2 =((btn.RenderTransform as TransformGroup).Children[3] as TranslateTransform);
+            var t = ((ctrl.RenderTransform as TransformGroup).Children[2] as RotateTransform);
+            var t2 = ((ctrl.RenderTransform as TransformGroup).Children[3] as TranslateTransform);
             t.Angle += 10;
             var nx = t2.X + r.Next(-40, 40);
             var ny = t2.Y + r.Next(-20, 20);
-            if( !(nx > this.Width/2 -btn.Width || nx < -this.Width / 2 + btn.Width))
+            if (!(nx > this.Width / 2 - btn.Width || nx < -this.Width / 2 + btn.Width))
             {
                 t2.X = nx;
             }
-            if( !( ny > this.Height -btn.Height || ny < -this.Height/2+ btn.Height))
+            if (!(ny > this.Height - btn.Height || ny < -this.Height / 2 + btn.Height))
             {
                 t2.Y = ny;
+            }
+        }
+
+        private void Dt_Tick(object sender, EventArgs e)
+        {
+            foreach( var element in grid.Children)
+            {
+                ChangeElementPosition(element as Control);
             }
         }
 

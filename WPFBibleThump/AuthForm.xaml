@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WPFBibleThump"
         mc:Ignorable="d"
         Title="Авторизация" Height="200" Width="400" ResizeMode="NoResize">
-    <Grid>
+    <Grid x:Name="grid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"></RowDefinition>
@@ -20,10 +20,46 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition Width="50"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="1" Grid.Column="1"  Content="Логин:"/>
-        <TextBox Grid.Row="1" Grid.Column="2" x:Name="TBLogin"/>
-        <Label Grid.Row="2" Grid.Column="1"  Content="Пароль:"/>
-        <PasswordBox Grid.Row="2" Grid.Column="2" x:Name="PBPasswd"/>
+        <Label Grid.Row="1" Grid.Column="1"  Content="Логин:">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <TextBox Grid.Row="1" Grid.Column="2" x:Name="TBLogin" Background="Red">
+            <TextBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBox.RenderTransform>
+        </TextBox>
+        <Label Grid.Row="2" Grid.Column="1"  Content="Пароль:">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <PasswordBox Grid.Row="2" Grid.Column="2" x:Name="PBPasswd" Background="Blue">
+            <PasswordBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </PasswordBox.RenderTransform>
+        </PasswordBox>
         <Button x:Name="btn" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"  Content="Войти" Click="Button_Click" IsDefault="True" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
