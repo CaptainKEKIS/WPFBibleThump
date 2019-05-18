@@ -24,6 +24,6 @@
         <TextBox Grid.Row="1" Grid.Column="2" x:Name="TBLogin"/>
         <Label Grid.Row="2" Grid.Column="1"  Content="Пароль:"/>
         <PasswordBox Grid.Row="2" Grid.Column="2" x:Name="PBPasswd"/>
-        <Button Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"  Content="Войти" Click="Button_Click"/>
+        <Button Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"  Content="Войти" Click="Button_Click" IsDefault="True"/>
     </Grid>
 </Window>

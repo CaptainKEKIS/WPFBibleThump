@@ -16,15 +16,17 @@ namespace WPFBibleThump.ViewModel
         public ICollectionView Books { get; set; }
 
         public RelayCommand AddCommand { get; }
+        public RelayCommand ChangeCommand { get; }
         public RelayCommand DeleteCommand { get; }
 
         public BooksViewModel()
         {
             App.MOYABAZA.Книги.Load();
             Books = CollectionViewSource.GetDefaultView(App.MOYABAZA.Книги.Local);
-            Books.Filter = FilterFunction;
 
             AddCommand = new RelayCommand((param) => { }, (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.W == 1) != 0);
+            ChangeCommand = new RelayCommand((param) => { },
+                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.E == 1) != 0 && param != null);
             DeleteCommand = new RelayCommand((param) => { },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.D == 1) != 0 && param != null);
             Books.Filter = FilterFunction;

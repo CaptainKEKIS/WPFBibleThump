@@ -7,14 +7,7 @@
         xmlns:Model="clr-namespace:WPFBibleThump.Model" x:Class="WPFBibleThump.AuthorTheseus"
         mc:Ignorable="d"
       Title="AuthorTheseus" Height="450" Width="800" Loaded="Window_Loaded">
-    <Window.Resources>
-        <Style TargetType="{x:Type Button}">
-            <Setter Property="Margin" Value="10 8 10 8" />
-            <Setter Property="Width" Value="100" />
-            <Setter Property="Height" Value="30" />
-        </Style>
-        
-    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -23,11 +16,9 @@
 
 
         <StackPanel HorizontalAlignment="Left"  Grid.Row="0" Orientation="Horizontal">
-            <Button x:Name="createButton" Content="Создать" Command="{Binding AddCommand}" />
-            <Button x:Name="changeButton" Content="Изменить" />
+            <Button x:Name="createButton" Content="Создать" Command="{Binding AddCommand}"/>
+            <Button x:Name="changeButton" Content="Изменить" Command="{Binding ChangeCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
             <Button x:Name="deleteButton" Content="Удалить" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
-           
-
             <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
         </StackPanel>
         <DataGrid x:Name="fsdjkfjdsl"  AutoGenerateColumns="False" ItemsSource="{Binding Authors}" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">

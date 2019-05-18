@@ -7,51 +7,18 @@
         xmlns:Model="clr-namespace:WPFBibleThump.Model" x:Class="WPFBibleThump.IssuedBooks"
         mc:Ignorable="d"
         Title="IssuedBooks" Height="457.627" Width="951.271" Loaded="Window_Loaded">
-    <Window.Resources>
-        <Style TargetType="{x:Type Button}">
-            <Setter Property="Margin" Value="10 8 10 8" />
-            <Setter Property="Width" Value="100" />
-            <Setter Property="Height" Value="30" />
-        </Style>
-    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel HorizontalAlignment="Left"  Grid.Row="0" Orientation="Horizontal">
-            <Button x:Name="createButton" Content="Создать" >
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                        <GradientStop Color="#FFF3F3F3" Offset="0"/>
-                        <GradientStop Color="#FFEBEBEB" Offset="0.326"/>
-                        <GradientStop Color="#FFDDDDDD" Offset="0.37"/>
-                        <GradientStop Color="#FF30B000" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button x:Name="changeButton" Content="Изменить" >
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                        <GradientStop Color="#FFF3F3F3" Offset="0"/>
-                        <GradientStop Color="#FFEBEBEB" Offset="0.374"/>
-                        <GradientStop Color="#FFDDDDDD" Offset="0.417"/>
-                        <GradientStop Color="#FF30B200" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-            <Button x:Name="deleteButton" Content="Удалить" >
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                        <GradientStop Color="#FFF3F3F3" Offset="0"/>
-                        <GradientStop Color="#FFEBEBEB" Offset="0.343"/>
-                        <GradientStop Color="#FFDDDDDD" Offset="0.365"/>
-                        <GradientStop Color="#FF3BD800" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
+            <Button x:Name="createButton" Content="Создать" Command="{Binding AddCommand}" />
+            <Button x:Name="changeButton" Content="Изменить" Command="{Binding ChangeCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
+            <Button x:Name="deleteButton" Content="Удалить" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
         </StackPanel>
-        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding IssuedBooks}" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
+        <DataGrid ItemsSource="{Binding IssuedBooks}" x:Name="fsdjkfjdsl" AutoGenerateColumns="False" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="ФЧитателя" Binding="{Binding Читатели.Фамилия}" Header="Фамилия" Width="Auto"/>
                 <DataGridTextColumn x:Name="ИЧитателя" Binding="{Binding Читатели.Имя}" Header="Имя" Width="Auto"/>

@@ -16,6 +16,7 @@ namespace WPFBibleThump.ViewModel
         public ICollectionView Authors { get; set; }
 
         public RelayCommand AddCommand { get; }
+        public RelayCommand ChangeCommand { get; }
         public RelayCommand DeleteCommand { get; }
 
         public AuthorsViewModel()
@@ -24,8 +25,10 @@ namespace WPFBibleThump.ViewModel
             Authors = CollectionViewSource.GetDefaultView(App.MOYABAZA.Авторы.Local);
 
             AddCommand = new RelayCommand((param) => { }, (param) =>  App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.AuthorThesaurusName && uo.W == 1) != 0 );
+            ChangeCommand = new RelayCommand((param) => { }, 
+                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.AuthorThesaurusName && uo.E == 1) != 0 && param != null);
             DeleteCommand = new RelayCommand((param) => { }, 
-                (param) =>  App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.AuthorThesaurusName && uo.D == 1) != 0 && param != null );
+                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.AuthorThesaurusName && uo.D == 1) != 0 && param != null);
             Authors.Filter = FilterFunction;
         }
 

@@ -15,10 +15,20 @@ namespace WPFBibleThump.ViewModel
         private string _searchText;
         public ICollectionView Publishes { get; set; }
 
+        public RelayCommand AddCommand { get; }
+        public RelayCommand ChangeCommand { get; }
+        public RelayCommand DeleteCommand { get; }
+
         public PublishViewModel()
         {
             App.MOYABAZA.Издательства.Load();
             Publishes = CollectionViewSource.GetDefaultView(App.MOYABAZA.Издательства.Local);
+
+            AddCommand = new RelayCommand((param) => { }, (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.PublishThesaurusName && uo.W == 1) != 0);
+            ChangeCommand = new RelayCommand((param) => { },
+                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.PublishThesaurusName && uo.E == 1) != 0 && param != null);
+            DeleteCommand = new RelayCommand((param) => { },
+                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.PublishThesaurusName && uo.D == 1) != 0 && param != null);
             Publishes.Filter = FilterFunction;
         }
 

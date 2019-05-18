@@ -17,10 +17,20 @@ namespace WPFBibleThump.ViewModel
         private string _searchText;
         public ICollectionView Streets { get; set; }
 
+        public RelayCommand AddCommand { get; }
+        public RelayCommand ChangeCommand { get; }
+        public RelayCommand DeleteCommand { get; }
+
         public StreetsViewModel()
         {
             App.MOYABAZA.Улицы.Load();
             Streets = CollectionViewSource.GetDefaultView(App.MOYABAZA.Улицы.Local);
+
+            AddCommand = new RelayCommand((param) => { }, (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.StreetThesaurusName && uo.W == 1) != 0);
+            ChangeCommand = new RelayCommand((param) => { },
+                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.StreetThesaurusName && uo.E == 1) != 0 && param != null);
+            DeleteCommand = new RelayCommand((param) => { },
+                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.StreetThesaurusName && uo.D == 1) != 0 && param != null);
             Streets.Filter = FilterFunction;
         }
 

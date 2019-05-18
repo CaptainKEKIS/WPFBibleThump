@@ -23,6 +23,7 @@ namespace WPFBibleThump
         public MainWindow()
         {
             InitializeComponent();
+
         }
 
         private void CityTheseus_Click(object sender, RoutedEventArgs e)
@@ -31,7 +32,7 @@ namespace WPFBibleThump
             {
                 Owner = this
             };
-            cityT.ShowDialog();
+            cityT.Show();
         }
 
         private void StreetTheseus_Click(object sender, RoutedEventArgs e)
@@ -40,7 +41,7 @@ namespace WPFBibleThump
             {
                 Owner = this
             };
-            streetT.ShowDialog();
+            streetT.Show();
         }
 
         private void AuthorTheseus_Click(object sender, RoutedEventArgs e)
@@ -49,7 +50,7 @@ namespace WPFBibleThump
             {
                 Owner = this
             };
-            AuthorT.ShowDialog();
+            AuthorT.Show();
         }
 
         private void PublishTheseus_Click(object sender, RoutedEventArgs e)
@@ -58,7 +59,7 @@ namespace WPFBibleThump
             {
                 Owner = this
             };
-            PublishT.ShowDialog();
+            PublishT.Show();
         }
 
         private void SysCatalogue_Click(object sender, RoutedEventArgs e)
@@ -67,7 +68,7 @@ namespace WPFBibleThump
             {
                 Owner = this
             };
-            SysCatalogueT.ShowDialog();
+            SysCatalogueT.Show();
         }
 
         private void BooksTheseus_Click(object sender, RoutedEventArgs e)
@@ -76,7 +77,7 @@ namespace WPFBibleThump
             {
                 Owner = this
             };
-            BooksT.ShowDialog();
+            BooksT.Show();
         }
 
         private void IssuedBooks_Click(object sender, RoutedEventArgs e)
@@ -85,7 +86,7 @@ namespace WPFBibleThump
             {
                 Owner = this
             };
-            IssuedBooksT.ShowDialog();
+            IssuedBooksT.Show();
         }
 
         private void Readers_Click(object sender, RoutedEventArgs e)
@@ -94,7 +95,7 @@ namespace WPFBibleThump
             {
                 Owner = this
             };
-            ReadersT.ShowDialog();
+            ReadersT.Show();
         }
     }
 }
