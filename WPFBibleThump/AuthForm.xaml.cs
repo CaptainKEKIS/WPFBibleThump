@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,6 +21,29 @@ namespace WPFBibleThump
     /// </summary>
     public partial class AuthForm : Window
     {
+
+        private static readonly InterceptKeys.LowLevelKeyboardProc _proc = HookCallback;
+        private static IntPtr _hookID = IntPtr.Zero;
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+            _hookID = InterceptKeys.SetHook(_proc);
+        }
+
+        public static IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
+        {
+            if (nCode >= 0)
+            {
+                int vkCode = Marshal.ReadInt32(lParam);
+                System.Windows.Forms.Keys key = (System.Windows.Forms.Keys)vkCode;
+
+                if (key == System.Windows.Forms.Keys.LWin || key == System.Windows.Forms.Keys.RWin)
+                    return (IntPtr)1; // Handled.
+            }
+
+            return InterceptKeys.CallNextHookEx(_hookID, nCode, wParam, lParam);
+        }
+
         Random r = new Random();
         public AuthForm()
         {
