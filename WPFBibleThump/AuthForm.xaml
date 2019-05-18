@@ -24,6 +24,15 @@
         <TextBox Grid.Row="1" Grid.Column="2" x:Name="TBLogin"/>
         <Label Grid.Row="2" Grid.Column="1"  Content="Пароль:"/>
         <PasswordBox Grid.Row="2" Grid.Column="2" x:Name="PBPasswd"/>
-        <Button Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"  Content="Войти" Click="Button_Click" IsDefault="True"/>
+        <Button x:Name="btn" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"  Content="Войти" Click="Button_Click" IsDefault="True" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="180"/>
+                    <TranslateTransform X="10"/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
     </Grid>
 </Window>

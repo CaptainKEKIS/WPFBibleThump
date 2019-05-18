@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace WPFBibleThump
 {
@@ -19,9 +20,24 @@ namespace WPFBibleThump
     /// </summary>
     public partial class AuthForm : Window
     {
+        Random r = new Random();
         public AuthForm()
         {
             InitializeComponent();
+            DispatcherTimer dt = new DispatcherTimer();
+            dt.Interval = new TimeSpan(0, 0, 0, 0, 50);
+            dt.Tick += Dt_Tick;
+            dt.IsEnabled = true;
+
+        }
+
+        private void Dt_Tick(object sender, EventArgs e)
+        {
+            var t =((btn.RenderTransform as TransformGroup).Children[2] as RotateTransform);
+            var t2 =((btn.RenderTransform as TransformGroup).Children[3] as TranslateTransform);
+            t.Angle += 10;
+            t2.X += r.Next(-20, 20);
+            t2.Y += r.Next(-10, 10);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
