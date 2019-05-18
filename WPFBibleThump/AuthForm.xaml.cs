@@ -61,14 +61,8 @@ namespace WPFBibleThump
             var t = ((ctrl.RenderTransform as TransformGroup).Children[2] as RotateTransform);
             var t2 = ((ctrl.RenderTransform as TransformGroup).Children[3] as TranslateTransform);
             var t3 = ((ctrl.RenderTransform as TransformGroup).Children[0] as ScaleTransform);
-            if (Math.Abs(t3.ScaleX) < 4)
-            {
-                t3.ScaleX += r.Next(-20, 20) / 50.0;
-            }
-            if (Math.Abs(t3.ScaleY) < 4)
-            {
-                t3.ScaleY += r.Next(-10, 10) / 20.0;
-            }
+            t3.ScaleX += r.Next(-20, 20) / 50.0;
+            t3.ScaleY += r.Next(-10, 10) / 20.0;
             t.Angle += r.Next(-50,50);
             var nx = t2.X + r.Next(-40, 40);
             var ny = t2.Y + r.Next(-20, 20);
