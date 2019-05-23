@@ -97,5 +97,14 @@ namespace WPFBibleThump
             };
             ReadersT.Show();
         }
+
+        private void ReadersReg_Click(object sender, RoutedEventArgs e)
+        {
+            ReadersReg ReadersR = new ReadersReg
+            {
+                Owner = this
+            };
+            ReadersR.Show();
+        }
     }
 }

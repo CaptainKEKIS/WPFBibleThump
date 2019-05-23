@@ -23,10 +23,10 @@ namespace WPFBibleThump
     public partial class AuthForm : Window
     {
 
-
+        /*
         private static readonly InterceptKeys.LowLevelKeyboardProc _proc = HookCallback;
         private static IntPtr _hookID = IntPtr.Zero;
-        protected override void OnSourceInitialized(EventArgs e)
+         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);
             _hookID = InterceptKeys.SetHook(_proc);
@@ -44,7 +44,7 @@ namespace WPFBibleThump
             }
 
             return InterceptKeys.CallNextHookEx(_hookID, nCode, wParam, lParam);
-        }
+        }*/
 
         Random r = new Random();
         public AuthForm()
@@ -106,7 +106,7 @@ namespace WPFBibleThump
                 MessageBox.Show("В данный момент приложение не работает.\nОбратитесь к системному администратору!", "Ошибка работы приложения", MessageBoxButton.OK);
             }
         }
-
+        /*
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             e.Handled = true;
@@ -115,6 +115,6 @@ namespace WPFBibleThump
         private void Window_PreviewKeyUp(object sender, KeyEventArgs e)
         {
             e.Handled = true;
-        }
+        }*/
     }
 }

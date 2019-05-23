@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:WPFBibleThump"
         mc:Ignorable="d"
         Title="Авторизация" Height="400" Width="600" WindowStyle="None" ResizeMode="NoResize"  
-    WindowStartupLocation="CenterScreen" WindowState="Maximized" PreviewKeyDown="Window_PreviewKeyDown" PreviewKeyUp="Window_PreviewKeyUp">
+    WindowStartupLocation="CenterScreen" WindowState="Maximized" >
+    <!--PreviewKeyDown="Window_PreviewKeyDown" PreviewKeyUp="Window_PreviewKeyUp"-->
     <Grid x:Name="grid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
