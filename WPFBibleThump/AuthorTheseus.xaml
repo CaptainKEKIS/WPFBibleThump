@@ -17,16 +17,9 @@
 
         <StackPanel HorizontalAlignment="Left"  Grid.Row="0" Orientation="Horizontal">
             <Button x:Name="createButton" Content="Создать" Command="{Binding AddCommand}"/>
-            <Button x:Name="changeButton" Content="Изменить" Command="{Binding ChangeCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" RenderTransformOrigin="0.5,0.5" >
-                <Button.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="180.062"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Button.RenderTransform>
-            </Button>
+            <Button x:Name="changeButton" Content="Изменить" Command="{Binding ChangeCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
+
+
             <Button x:Name="deleteButton" Content="Удалить" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
             <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
         </StackPanel>

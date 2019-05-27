@@ -106,5 +106,10 @@ namespace WPFBibleThump
             };
             ReadersR.Show();
         }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
     }
 }

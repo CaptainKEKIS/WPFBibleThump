@@ -41,7 +41,7 @@
         <TextBox Grid.Column="1" Grid.Row="1" x:Name="SName"/>
         <TextBox Grid.Column="1" Grid.Row="2" x:Name="FName"/>
         <TextBox Grid.Column="1" Grid.Row="3" x:Name="TName"/>
-        <xctk:MaskedTextBox Grid.Column="1" Grid.Row="4" x:Name="MTBPhone" Mask="(000) 000-00-00" />
+        <TextBox Grid.Column="1" Grid.Row="4" x:Name="TBPhone" />
         <ComboBox Grid.Column="1" Grid.Row="5" x:Name="Street" IsEditable="True"/>
         <TextBox Grid.Column="1" Grid.Row="6" x:Name="HouseNumber"/>
         <TextBox Grid.Column="1" Grid.Row="7" x:Name="ApprtNumber"/>
