@@ -22,7 +22,6 @@ namespace WPFBibleThump
     /// </summary>
     public partial class AuthForm : Window
     {
-
         /*
         private static readonly InterceptKeys.LowLevelKeyboardProc _proc = HookCallback;
         private static IntPtr _hookID = IntPtr.Zero;
@@ -91,10 +90,12 @@ namespace WPFBibleThump
         {
             var User = App.MOYABAZA.Пользователи
                 .FirstOrDefault(s => s.Login == TBLogin.Text && s.Password == PBPasswd.Password);
-            if (User != null && 
+            if (
+                User != null && 
                 String.IsNullOrEmpty( User.Login ) == false && 
                 String.IsNullOrEmpty(User.Password) == false && 
-                User.Пользователи_Объекты.Count( uo => uo.Объекты.SName == Constants.ApplicationName && uo.R == 1) != 0 )
+                User.Пользователи_Объекты.Count( uo => uo.Объекты.SName == Constants.ApplicationName && uo.R == 1) != 0 
+                )
             {
                 App.ActiveUser = User;
                 MainWindow MWindow = new MainWindow();

@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "C:\Users\ifop0112003\source\repos\WpfBibleThump\WpfBibleThump\WPFBibleThump\WPFBibleThump\Model\BiblioModel.edmx" включено. 
+﻿// Создание кода T4 для модели "C:\Users\ifop0112003\Source\Repos\WPFBibleThump\WPFBibleThump\Model\BiblioModel.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.

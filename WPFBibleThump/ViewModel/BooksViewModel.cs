@@ -24,10 +24,11 @@ namespace WPFBibleThump.ViewModel
             App.MOYABAZA.Книги.Load();
             Books = CollectionViewSource.GetDefaultView(App.MOYABAZA.Книги.Local);
 
-            AddCommand = new RelayCommand((param) => { }, (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.W == 1) != 0);
+            AddCommand = new RelayCommand((param) => {  }, 
+                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.W == 1) != 0);
             ChangeCommand = new RelayCommand((param) => { },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.E == 1) != 0 && param != null);
-            DeleteCommand = new RelayCommand((param) => { },
+            DeleteCommand = new RelayCommand((param) => {  },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.D == 1) != 0 && param != null);
             Books.Filter = FilterFunction;
         }

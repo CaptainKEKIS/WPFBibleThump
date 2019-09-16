@@ -24,7 +24,8 @@ namespace WPFBibleThump.ViewModel
             App.MOYABAZA.Читатели.Load();
             Readers = CollectionViewSource.GetDefaultView(App.MOYABAZA.Читатели.Local);
 
-            AddCommand = new RelayCommand((param) => { }, (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.ReadersName && uo.W == 1) != 0);
+            AddCommand = new RelayCommand((param) => { }, 
+                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.ReadersName && uo.W == 1) != 0);
             ChangeCommand = new RelayCommand((param) => { },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.ReadersName && uo.E == 1) != 0 && param != null);
             DeleteCommand = new RelayCommand((param) => { },
