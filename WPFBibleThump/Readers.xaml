@@ -7,7 +7,6 @@
         xmlns:Model="clr-namespace:WPFBibleThump.Model" x:Class="WPFBibleThump.Readers"
         mc:Ignorable="d"
         Title="Readers" Height="450" Width="800" Loaded="Window_Loaded">
-    
     <Grid x:Name="ReadersGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

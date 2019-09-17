@@ -173,6 +173,9 @@
     </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="InterceptKeys.cs" />
+    <Compile Include="IssuingBooksForm.xaml.cs">
+      <DependentUpon>IssuingBooksForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\BiblioModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -258,6 +261,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="IssuedBooks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="IssuingBooksForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
