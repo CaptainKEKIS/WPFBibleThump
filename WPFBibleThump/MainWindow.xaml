@@ -30,6 +30,7 @@
         <MenuItem Header="Модули">
             <MenuItem Header="Читатели">
                 <MenuItem x:Name="ReadersReg" Header="Регистрация читателей" Click="ReadersReg_Click"/>
+                <MenuItem x:Name="IssuingBooks" Header="Регистрация читателей" Click="IssuingBooks_Click"/>
             </MenuItem>
         </MenuItem>
     </Menu>

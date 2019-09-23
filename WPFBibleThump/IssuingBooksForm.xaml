@@ -5,55 +5,50 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFBibleThump"
         mc:Ignorable="d"
-        Title="IssuingBooksForm" Height="450" Width="1230">
+        Title="IssuingBooksForm" Height="543.382" Width="1230">
     <Grid>
-        <Grid.ColumnDefinitions>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Grid.Row="0">
-            <Label Content="Pole dlya poiska:" Width="130" Height="30"/>
-            <TextBox Width="100" Height="20"/>
-            <Label Content="Номер чит. билета:" Width="130" Height="30"/>
-            <TextBox Width="100" Height="20"/>
-            <Label Content="Имя:" Width="40" Height="30"/>
-            <TextBox Width="100" Height="20"/>
-            <Label Content="Отчество:" Width="65" Height="30"/>
-            <TextBox Width="100" Height="20"/>
-            <Label Content="Фамилия:" Width="65" Height="30"/>
-            <TextBox Width="100" Height="20"/>
-            <Label Content="Дата регистрации:" Width="70" Height="30"/>
-            <TextBox Width="100" Height="20"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Grid.Row="1">
-            <Label Content="Телефон:" Width="65" Height="30"/>
-            <TextBox Width="100" Height="20"/>
-            <Label Content="Улица:" Width="55" Height="30"/>
-            <TextBox Width="100" Height="20"/>
-            <Label Content="Дом:" Width="45" Height="30"/>
-            <TextBox Width="100" Height="20"/>
-            <Label Content="Квартира:" Width="70" Height="30"/>
-            <TextBox Width="100" Height="20"/>
-            <Label Content="Дата перерегистрации:" Width="70" Height="30"/>
-            <TextBox Width="100" Height="20"/>
-            <Button Content="Выдать книгу"/>
-            <Label Content="Sdelat nije poisk knigi:" Width="150" Height="30"/>
-        </StackPanel>
-        <GridSplitter Grid.Row="2" Height="3" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-        <DockPanel Grid.Row="3">
-            <DataGrid>
+       
+        <DockPanel >
+            <Label DockPanel.Dock="Top" Content="Читатель"/>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" VerticalAlignment="Top">
+                <Label Content="Pole dlya poiska:" Width="130" Height="30"/>
+                <TextBox Width="100" Height="20"/>
+                <Label Content="Номер чит. билета:" Width="130" Height="30"/>
+                <TextBox Width="100" Height="20"/>
+                <Label Content="Имя:" Width="40" Height="30"/>
+                <TextBox Width="100" Height="20"/>
+                <Label Content="Отчество:" Width="65" Height="30"/>
+                <TextBox Width="100" Height="20"/>
+                <Label Content="Фамилия:" Width="65" Height="30"/>
+                <TextBox Width="100" Height="20"/>
+                <Label Content="Дата регистрации:" Width="70" Height="30"/>
+                <TextBox Width="100" Height="20"/>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" VerticalAlignment="Top">
+                <Label Content="Телефон:" Width="65" Height="30"/>
+                <TextBox Width="100" Height="20"/>
+                <Label Content="Улица:" Width="55" Height="30"/>
+                <TextBox Width="100" Height="20"/>
+                <Label Content="Дом:" Width="45" Height="30"/>
+                <TextBox Width="100" Height="20"/>
+                <Label Content="Квартира:" Width="70" Height="30"/>
+                <TextBox Width="100" Height="20"/>
+                <Label Content="Дата перерегистрации:" Width="70" Height="30"/>
+                <TextBox Width="100" Height="20"/>
+                <Button Content="Выдать книгу"/>
+                <Label Content="Sdelat nije poisk knigi:" Width="150" Height="30"/>
+            </StackPanel>
+            <Label DockPanel.Dock="Top" Content="Книга"/>
+            <DataGrid ItemsSource="{Binding IssuingBooks}" DockPanel.Dock="Top" Height="300" AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Инв. номер" Binding="{Binding Path=Title}" Width="auto" />
-                    <DataGridTextColumn Header="Название" Binding="{Binding Path=Title}" Width="auto" />
-                    <DataGridTextColumn Header="Дата выдачи" Binding="{Binding Path=Company}" Width="auto" />
-                    <DataGridTextColumn Header="Дата возврата" Binding="{Binding Path=Price}" Width="auto" />
-                    <DataGridTextColumn Header="Выдано (дней назад)" Binding="{Binding Path=Price}" Width="auto" />
+                    <DataGridTextColumn Header="Инв. номер" Binding="{Binding Path=Инвентарный_номер}" Width="auto" />
+                    <DataGridTextColumn Header="Название" Binding="{Binding Path=Экземпляры_книги.Книги.Название}" Width="auto" />
+                    <DataGridTextColumn Header="Дата выдачи" Binding="{Binding Path=Дата_выдачи}" Width="auto" />
+                    <DataGridTextColumn Header="Дата возврата" Binding="{Binding Path=Дата_возврата}" Width="auto" />
+                    <DataGridTextColumn Header="Выдано (дней назад)" Width="auto" />
                 </DataGrid.Columns>
             </DataGrid>
+            <Button HorizontalAlignment="Left" Content="Вернуть книгу" DockPanel.Dock="Top"/>
         </DockPanel>
     </Grid>
 </Window>

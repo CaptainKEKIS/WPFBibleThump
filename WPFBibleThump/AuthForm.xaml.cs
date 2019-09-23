@@ -45,46 +45,46 @@ namespace WPFBibleThump
             return InterceptKeys.CallNextHookEx(_hookID, nCode, wParam, lParam);
         }*/
 
-        Random r = new Random();
-        public AuthForm()
-        {
-            InitializeComponent();
-            DispatcherTimer dt = new DispatcherTimer();
-            dt.Interval = new TimeSpan(0, 0, 0, 0, 50);
-            dt.Tick += Dt_Tick;
-            dt.IsEnabled = true;
+        //Random r = new Random();
+        //public AuthForm()
+        //{
+        //    InitializeComponent();
+        //    DispatcherTimer dt = new DispatcherTimer();
+        //    dt.Interval = new TimeSpan(0, 0, 0, 0, 50);
+        //    dt.Tick += Dt_Tick;
+        //    dt.IsEnabled = true;
 
-        }
-        void ChangeElementPosition( Control ctrl)
-        {
-            var t = ((ctrl.RenderTransform as TransformGroup).Children[2] as RotateTransform);
-            var t2 = ((ctrl.RenderTransform as TransformGroup).Children[3] as TranslateTransform);
-            var t3 = ((ctrl.RenderTransform as TransformGroup).Children[0] as ScaleTransform);
-            t3.ScaleX += r.Next(-20, 20) / 50.0;
-            t3.ScaleY += r.Next(-10, 10) / 20.0;
-            t.Angle += r.Next(-50,50);
-            var nx = t2.X + r.Next(-40, 40);
-            var ny = t2.Y + r.Next(-20, 20);
-            if (!(nx > this.Width / 2 - btn.Width || nx < -this.Width / 2 + btn.Width))
-            {
-                t2.X = nx;
-            }
-            if (!(ny > this.Height - btn.Height || ny < -this.Height / 2 + btn.Height))
-            {
-                t2.Y = ny;
-            }
-            int rnd = r.Next();
-            var bytes = BitConverter.GetBytes(rnd);
-            this.Background = new SolidColorBrush( Color.FromRgb(bytes[0], bytes[1], bytes[2]));
-        }
+        //}
+        //void ChangeElementPosition( Control ctrl)
+        //{
+        //    var t = ((ctrl.RenderTransform as TransformGroup).Children[2] as RotateTransform);
+        //    var t2 = ((ctrl.RenderTransform as TransformGroup).Children[3] as TranslateTransform);
+        //    var t3 = ((ctrl.RenderTransform as TransformGroup).Children[0] as ScaleTransform);
+        //    t3.ScaleX += r.Next(-20, 20) / 50.0;
+        //    t3.ScaleY += r.Next(-10, 10) / 20.0;
+        //    t.Angle += r.Next(-50,50);
+        //    var nx = t2.X + r.Next(-40, 40);
+        //    var ny = t2.Y + r.Next(-20, 20);
+        //    if (!(nx > this.Width / 2 - btn.Width || nx < -this.Width / 2 + btn.Width))
+        //    {
+        //        t2.X = nx;
+        //    }
+        //    if (!(ny > this.Height - btn.Height || ny < -this.Height / 2 + btn.Height))
+        //    {
+        //        t2.Y = ny;
+        //    }
+        //    int rnd = r.Next();
+        //    var bytes = BitConverter.GetBytes(rnd);
+        //    this.Background = new SolidColorBrush( Color.FromRgb(bytes[0], bytes[1], bytes[2]));
+        //}
 
-        private void Dt_Tick(object sender, EventArgs e)
-        {
-            foreach( var element in grid.Children)
-            {
-                ChangeElementPosition(element as Control);
-            }
-        }
+        //private void Dt_Tick(object sender, EventArgs e)
+        //{
+        //    foreach( var element in grid.Children)
+        //    {
+        //        ChangeElementPosition(element as Control);
+        //    }
+        //}
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
