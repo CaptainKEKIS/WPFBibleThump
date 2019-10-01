@@ -26,7 +26,6 @@ namespace WPFBibleThump.ViewModel
             App.MOYABAZA.Читатели.Load();
             MOYABAZAEntities model = new MOYABAZAEntities();
             Readers = CollectionViewSource.GetDefaultView(model.Читатели.ToArray());
-
             AddCommand = new RelayCommand(
                 (param) => 
                 {

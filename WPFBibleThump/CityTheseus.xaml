@@ -8,13 +8,13 @@
         Title="CityTheseus" Height="450" Width="800">
     
     <DockPanel>
-        <TextBox DockPanel.Dock="Bottom" Margin="5"/>
+        <TextBox Text="{Binding SelectedCity}" DockPanel.Dock="Bottom" Margin="5"/>
         <Grid x:Name="CityTGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <DataGrid ItemsSource="{Binding Cities}" x:Name="fsdjkfjdsl" AutoGenerateColumns="False" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
+            <DataGrid ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity}" x:Name="fsdjkfjdsl" AutoGenerateColumns="False" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Название}" Foreground="#FFB2208A" Header="Название" Width="*"/>
                 </DataGrid.Columns>
