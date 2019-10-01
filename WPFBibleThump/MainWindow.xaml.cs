@@ -109,11 +109,11 @@ namespace WPFBibleThump
 
         private void IssuingBooks_Click(object sender, RoutedEventArgs e)
         {
-            IssuingBooksForm IssuingB = new IssuingBooksForm
-            {
-                Owner = this
-            };
-            IssuingB.Show();
+            //IssuingBooksForm IssuingB = new IssuingBooksForm
+            //{
+            //    Owner = this
+            //};
+            //IssuingB.Show();
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)

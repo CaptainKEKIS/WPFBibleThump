@@ -17,7 +17,7 @@
         <EntityTypeShape EntityType="MOYABAZAModel.Улицы" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MOYABAZAModel.Читатели" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MOYABAZAModel.Экземпляры_книги" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MOYABAZAModel.Выданные_книги" Width="1.5" PointX="7.5" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MOYABAZAModel.Выданные_книги" Width="1.875" PointX="7.5" PointY="1.625" IsExpanded="true" />
         <AssociationConnector Association="MOYABAZAModel.FK_Книги_Города" ManuallyRouted="false" />
         <AssociationConnector Association="MOYABAZAModel.FK_Книги_Издательства" ManuallyRouted="false" />
         <AssociationConnector Association="MOYABAZAModel.FK_Экземпляры_книги_Книги" ManuallyRouted="false" />

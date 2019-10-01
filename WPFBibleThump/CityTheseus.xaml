@@ -8,7 +8,7 @@
         Title="CityTheseus" Height="450" Width="800">
     
     <DockPanel>
-        <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Bottom" Margin="5"/>
+        <TextBox DockPanel.Dock="Bottom" Margin="5"/>
         <Grid x:Name="CityTGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -24,6 +24,8 @@
                 <Button x:Name="createButton" Content="Создать" Command="{Binding AddCommand}" />
                 <Button x:Name="changeButton" Content="Изменить" Command="{Binding ChangeCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
                 <Button x:Name="deleteButton" Content="Удалить" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
+                <Label Content="Поиск: "/>
+                <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Width="300" Margin="5"/>
             </StackPanel>
         </Grid>
     </DockPanel>
