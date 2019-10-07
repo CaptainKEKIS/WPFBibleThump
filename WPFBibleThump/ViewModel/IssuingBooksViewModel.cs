@@ -18,19 +18,21 @@ namespace WPFBibleThump.ViewModel
         private Выданные_книги _selectedBook;
         public ICollectionView Readers { get; set; }
         private Читатели _reader;
-        public RelayCommand AddCommand { get; }
+        public RelayCommand IssueBook { get; }
 
         public IssuingBooksViewModel(Читатели reader)
         {
             _reader = reader;
-            //App.MOYABAZA.Читатели.Load();
+            App.MOYABAZA.Читатели.Load();
+            MOYABAZAEntities model = new MOYABAZAEntities();
             //ObservableCollection<Читатели> Readers = new ObservableCollection<Читатели>(App.MOYABAZA.Читатели.Local.Where(s => s == _selectedReader));
-            AddCommand = new RelayCommand(
+            IssueBook = new RelayCommand(
                 (param) =>
                 {
-                    SelectedBook.Дата_возврата = DateTime.Parse("01.10.2019");
+                    model.Выданные_книги.FirstOrDefault(b => b.Инвентарный_номер == _selectedBook.Инвентарный_номер).Дата_возврата = DateTime.Now;
+                    model.SaveChanges();
                 },
-                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.ReadersName && uo.E == 1) != 0 && param != null);
+                (param) => /*App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.ReadersName && uo.E == 1) != 0 &&*/ param != null);
         }
 
         public string Name
@@ -42,7 +44,8 @@ namespace WPFBibleThump.ViewModel
                 OnPropertyChanged("Name");
             }
         }
-        public string ReaderNumber {
+        public string ReaderNumber
+        {
             get { return _reader.Номер_читательского_билета; }
             set
             {
@@ -51,7 +54,8 @@ namespace WPFBibleThump.ViewModel
             }
         }
 
-        public string SName {
+        public string SName
+        {
             get { return _reader.Фамилия; }
             set
             {
@@ -59,8 +63,9 @@ namespace WPFBibleThump.ViewModel
                 OnPropertyChanged("SName");
             }
         }
-        
-        public string TName {
+
+        public string TName
+        {
             get { return _reader.Отчество; }
             set
             {
@@ -69,7 +74,8 @@ namespace WPFBibleThump.ViewModel
             }
         }
 
-        public string MobileNumber {
+        public string MobileNumber
+        {
             get { return _reader.Телефон; }
             set
             {
@@ -78,16 +84,17 @@ namespace WPFBibleThump.ViewModel
             }
         }
 
-        public Улицы Street {
-            get { return _reader.Улицы; }
+        public string Street
+        {
+            get { return _reader.Улицы.Название; }
             set
             {
-                _reader.Улицы = value;
-                OnPropertyChanged("Street");
+
             }
         }
 
-        public string HouseNumber {
+        public string HouseNumber
+        {
             get { return _reader.Номер_дома; }
             set
             {
@@ -96,43 +103,62 @@ namespace WPFBibleThump.ViewModel
             }
         }
 
-        public string Квартира {
-            get { return _reader.Имя; }
+        public string Appartment
+        {
+            get { return _reader.Квартира; }
             set
             {
-                _reader.Имя = value;
-                OnPropertyChanged("Name");
+                _reader.Квартира = value;
+                OnPropertyChanged("Appartment");
             }
         }
 
-        public System.DateTime Дата_регистрации {
-            get { return _reader.Имя; }
+        public System.DateTime RegistrationTime
+        {
+            get { return _reader.Дата_регистрации; }
             set
             {
-                _reader.Имя = value;
-                OnPropertyChanged("Name");
+                _reader.Дата_регистрации = value;
+                OnPropertyChanged("RegistrationTime");
             }
         }
 
-        public Nullable<System.DateTime> Дата_перерегистрации {
-            get { return _reader.Имя; }
+        public Nullable<System.DateTime> ReRegistrationTime
+        {
+            get { return _reader.Дата_перерегистрации; }
             set
             {
-                _reader.Имя = value;
-                OnPropertyChanged("Name");
+                _reader.Дата_перерегистрации = value;
+                OnPropertyChanged("ReRegistrationTime");
             }
         }
+
         public ICollection<Выданные_книги> IssuedBooks
         {
             get { return _reader.Выданные_книги; }
         }
-
+        /*
+        public int IssuedDaysAgo
+        {
+            get { return ssuedDaysAgo; }
+            set
+            {
+                var books = _reader.Выданные_книги.ToArray();
+                foreach (var book in books)
+                {
+                    TimeSpan ssuedDaysAgo = book.Дата_выдачи.Date - DateTime.Today;
+                }
+                OnPropertyChanged("IssuedDaysAgo");
+            }
+        }
+        */
         public Выданные_книги SelectedBook
         {
             get { return _selectedBook; }
             set
             {
                 _selectedBook = value;
+                OnPropertyChanged("SelectedBook");
             }
         }
 

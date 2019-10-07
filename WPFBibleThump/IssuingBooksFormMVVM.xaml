@@ -11,27 +11,27 @@
             <Label DockPanel.Dock="Top" Content="Читатель:"/>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" VerticalAlignment="Top">
                 <Label Content="Номер чит. билета:" Width="Auto" Height="30"/>
-                <TextBox Text="{Binding Номер_читательского_билета}" Width="100" Height="20"/>
+                <TextBox Text="{Binding ReaderNumber}" Width="100" Height="20"/>
                 <Label Content="Имя:" Width="Auto" Height="30"/>
                 <TextBox Text="{Binding Name}" Width="100" Height="20"/>
                 <Label Content="Отчество:" Width="Auto" Height="30"/>
-                <TextBox Text="{Binding Отчество}" Width="100" Height="20"/>
+                <TextBox Text="{Binding TName}" Width="100" Height="20"/>
                 <Label Content="Фамилия:" Width="Auto" Height="30"/>
-                <TextBox Text="{Binding Фамилия}" Width="100" Height="20"/>
+                <TextBox Text="{Binding SName}" Width="100" Height="20"/>
                 <Label Content="Дата регистрации:" Width="Auto" Height="30"/>
-                <TextBox Text="{Binding Дата_регистрации}" Width="100" Height="20"/>
+                <TextBox Text="{Binding RegistrationTime}" Width="100" Height="20"/>
             </StackPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" VerticalAlignment="Top">
                 <Label Content="Телефон:" Width="Auto" Height="30"/>
-                <TextBox Text="{Binding Телефон}" Width="100" Height="20"/>
+                <TextBox Text="{Binding MobileNumber}" Width="100" Height="20"/>
                 <Label Content="Улица:" Width="Auto" Height="30"/>
-                <TextBox Text="{Binding Улицы.Название}" Width="100" Height="20"/>
+                <TextBox Text="{Binding Street}" Width="100" Height="20"/>
                 <Label Content="Дом:" Width="Auto" Height="30"/>
-                <TextBox Text="{Binding Номер_дома}" Width="100" Height="20"/>
+                <TextBox Text="{Binding HouseNumber}" Width="100" Height="20"/>
                 <Label Content="Квартира:" Width="Auto" Height="30"/>
-                <TextBox Text="{Binding Квартира}" Width="100" Height="20"/>
+                <TextBox Text="{Binding Appartment}" Width="100" Height="20"/>
                 <Label Content="Дата перерегистрации:" Width="Auto" Height="30"/>
-                <TextBox Text="{Binding Дата_перерегистрации}" Width="100" Height="20"/>
+                <TextBox Text="{Binding ReRegistrationTime}" Width="100" Height="20"/>
             </StackPanel>
             <Label DockPanel.Dock="Top" Content="Выданные книги:"/>
             <DataGrid SelectedItem="{Binding SelectedBook}" ItemsSource="{Binding IssuedBooks}" x:Name="IssuedBooksDataGrid" DockPanel.Dock="Top" Height="300" Width="Auto" AutoGenerateColumns="False" IsReadOnly="True">
@@ -40,10 +40,10 @@
                     <DataGridTextColumn Header="Название" Binding="{Binding Path=Экземпляры_книги.Книги.Название}" Width="*" />
                     <DataGridTextColumn Header="Дата выдачи" Binding="{Binding Path=Дата_выдачи}" Width="auto" />
                     <DataGridTextColumn Header="Дата возврата" Binding="{Binding Path=Дата_возврата}" Width="auto" />
-                    <DataGridTextColumn Header="Выдано (дней назад)" Width="auto" />
+                    <DataGridTextColumn Header="Выдано (дней назад)" Binding="{Binding Path=ssuedDaysAgo}" Width="auto" />
                 </DataGrid.Columns>
             </DataGrid>
-            <Button x:Name="ReturnBookButton" HorizontalAlignment="Left" Content="Вернуть книгу" DockPanel.Dock="Top"/>
+            <Button x:Name="ReturnBookButton" Command="{Binding IssueBook}" CommandParameter="{Binding ElementName=IssuedBooksDataGrid, Path=SelectedItem}" HorizontalAlignment="Left" Content="Вернуть книгу" DockPanel.Dock="Top"/>
         </DockPanel>
     </Grid>
 </Window>
