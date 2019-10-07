@@ -173,6 +173,9 @@
     </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="InterceptKeys.cs" />
+    <Compile Include="IssuingBooksFormMVVM.xaml.cs">
+      <DependentUpon>IssuingBooksFormMVVM.xaml</DependentUpon>
+    </Compile>
     <Compile Include="IssuingBooksForm.xaml.cs">
       <DependentUpon>IssuingBooksForm.xaml</DependentUpon>
     </Compile>
@@ -264,6 +267,10 @@
     <Page Include="IssuedBooks.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="IssuingBooksFormMVVM.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="IssuingBooksForm.xaml">
       <SubType>Designer</SubType>

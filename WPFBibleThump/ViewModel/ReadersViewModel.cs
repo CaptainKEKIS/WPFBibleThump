@@ -62,7 +62,7 @@ namespace WPFBibleThump.ViewModel
             IssueBookCommand = new RelayCommand(
                 (param) => 
                 {
-                    IssuingBooksForm issuingBooksForm = new IssuingBooksForm(SelectedReader);
+                    IssuingBooksFormMVVM issuingBooksForm = new IssuingBooksFormMVVM(SelectedReader);
                     issuingBooksForm.Show();
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.ReadersName && uo.E == 1) != 0 && param != null); // Возможно нужно добавить ещё уровень доступа
