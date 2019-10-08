@@ -42,7 +42,7 @@
         <TextBox Grid.Column="1" Grid.Row="2" x:Name="FName"/>
         <TextBox Grid.Column="1" Grid.Row="3" x:Name="TName"/>
         <TextBox Grid.Column="1" Grid.Row="4" x:Name="TBPhone" />
-        <ComboBox Grid.Column="1" Grid.Row="5" x:Name="Street" IsEditable="True"/>
+        <ComboBox ItemsSource="{Binding Path=Streets}" DisplayMemberPath="Название" SelectedValuePath="Id" Grid.Column="1" Grid.Row="5" x:Name="Street" IsEditable="true"/>
         <TextBox Grid.Column="1" Grid.Row="6" x:Name="HouseNumber"/>
         <TextBox Grid.Column="1" Grid.Row="7" x:Name="ApprtNumber"/>
         <DatePicker Grid.Column="1" Grid.Row="8" x:Name="RegDate"/>

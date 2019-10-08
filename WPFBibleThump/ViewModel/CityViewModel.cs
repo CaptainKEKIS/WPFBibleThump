@@ -15,7 +15,19 @@ namespace WPFBibleThump.ViewModel
     {
         private string _searchText;
         private Города _selectedCity;
-        public ICollectionView Cities { get; set; }
+        private ICollectionView _cities;
+        public ICollectionView Cities
+        {
+            get
+            {
+                return _cities;
+            }
+            set
+            {
+                _cities = value;
+                OnPropertyChanged();
+            }
+        }
 
         public RelayCommand AddCommand { get; }
         public RelayCommand ChangeCommand { get; }
@@ -28,26 +40,26 @@ namespace WPFBibleThump.ViewModel
             Cities = CollectionViewSource.GetDefaultView(model.Города.ToArray());
 
             AddCommand = new RelayCommand(
-                (param) => 
+                (param) =>
                 {
                     Города city = new Города
                     {
-                        Название = "Дефолт Сити"
+                        Название = SelectedCity.Название
                     };
                     model.Города.Add(city);
                     model.SaveChanges();
-                }, 
+                },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.CityThesaurusName && uo.W == 1) != 0);
 
             ChangeCommand = new RelayCommand(
-                (param) => 
+                (param) =>
                 {
 
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.CityThesaurusName && uo.E == 1) != 0 && param != null);
 
             DeleteCommand = new RelayCommand(
-                (param) => 
+                (param) =>
                 {
                     model.Города.Remove(_selectedCity);
                     model.SaveChanges();

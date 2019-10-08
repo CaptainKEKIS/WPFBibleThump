@@ -29,6 +29,7 @@ namespace WPFBibleThump.ViewModel
             AddCommand = new RelayCommand(
                 (param) => 
                 {
+                    /*
                     Читатели reader = new Читатели
                     {
                         Id_улицы = 1,
@@ -43,7 +44,9 @@ namespace WPFBibleThump.ViewModel
                     };
                     model.Читатели.Add(reader);
                     model.SaveChanges();
-                    Readers.Refresh();/////NE RABOTAET
+                    */
+                    ReadersReg readersReg = new ReadersReg();
+                    readersReg.Show();
                 }, 
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.ReadersName && uo.W == 1) != 0);
 

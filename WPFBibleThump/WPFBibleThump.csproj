@@ -246,6 +246,7 @@
     <Compile Include="ViewModel\IssuedBViewModel.cs" />
     <Compile Include="ViewModel\IssuingBooksViewModel.cs" />
     <Compile Include="ViewModel\PublishViewModel.cs" />
+    <Compile Include="ViewModel\ReadersRegViewModel.cs" />
     <Compile Include="ViewModel\ReadersViewModel.cs" />
     <Compile Include="ViewModel\StreetsViewModel.cs" />
     <Compile Include="ViewModel\SysCatViewModel.cs" />

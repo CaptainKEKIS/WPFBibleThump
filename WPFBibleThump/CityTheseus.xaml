@@ -8,7 +8,7 @@
         Title="CityTheseus" Height="450" Width="800">
     
     <DockPanel>
-        <TextBox Text="{Binding SelectedCity}" DockPanel.Dock="Bottom" Margin="5"/>
+        <TextBox Text="{Binding SelectedCity.Название}" DockPanel.Dock="Bottom" Margin="5"/>
         <Grid x:Name="CityTGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
