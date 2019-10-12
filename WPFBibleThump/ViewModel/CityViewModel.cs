@@ -15,19 +15,8 @@ namespace WPFBibleThump.ViewModel
     {
         private string _searchText;
         private Города _selectedCity;
-        private ICollectionView _cities;
-        public ICollectionView Cities
-        {
-            get
-            {
-                return _cities;
-            }
-            set
-            {
-                _cities = value;
-                OnPropertyChanged();
-            }
-        }
+        private bool _editMode;
+        public ICollectionView Cities { get; set; }
 
         public RelayCommand AddCommand { get; }
         public RelayCommand ChangeCommand { get; }
@@ -35,9 +24,9 @@ namespace WPFBibleThump.ViewModel
 
         public CityViewModel()
         {
-            App.MOYABAZA.Города.Load();
-            MOYABAZAEntities model = new MOYABAZAEntities();
-            Cities = CollectionViewSource.GetDefaultView(model.Города.ToArray());
+            MOYABAZAEntities model = App.MOYABAZA;
+            model.Города.Load();
+            Cities = CollectionViewSource.GetDefaultView(model.Города.Local);
 
             AddCommand = new RelayCommand(
                 (param) =>
@@ -46,7 +35,7 @@ namespace WPFBibleThump.ViewModel
                     {
                         Название = SelectedCity.Название
                     };
-                    model.Города.Add(city);
+                    model.Города.Local.Add(city);
                     model.SaveChanges();
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.CityThesaurusName && uo.W == 1) != 0);
@@ -54,14 +43,14 @@ namespace WPFBibleThump.ViewModel
             ChangeCommand = new RelayCommand(
                 (param) =>
                 {
-
+                    EditMode ^= true;
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.CityThesaurusName && uo.E == 1) != 0 && param != null);
 
             DeleteCommand = new RelayCommand(
                 (param) =>
                 {
-                    model.Города.Remove(_selectedCity);
+                    model.Города.Local.Remove(_selectedCity);
                     model.SaveChanges();
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.CityThesaurusName && uo.D == 1) != 0 && param != null);
@@ -75,6 +64,17 @@ namespace WPFBibleThump.ViewModel
             set
             {
                 _selectedCity = value;
+                EditMode = false;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool EditMode
+        {
+            get { return _editMode; }
+            set
+            {
+                _editMode = value;
                 OnPropertyChanged();
             }
         }

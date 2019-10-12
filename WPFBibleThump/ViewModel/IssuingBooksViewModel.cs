@@ -23,14 +23,14 @@ namespace WPFBibleThump.ViewModel
         public IssuingBooksViewModel(Читатели reader)
         {
             _reader = reader;
-            App.MOYABAZA.Читатели.Load();
-            MOYABAZAEntities model = new MOYABAZAEntities();
-            //ObservableCollection<Читатели> Readers = new ObservableCollection<Читатели>(App.MOYABAZA.Читатели.Local.Where(s => s == _selectedReader));
+            //MOYABAZAEntities model = App.MOYABAZA;
+            //model.Читатели.Load();
+
             IssueBook = new RelayCommand(
                 (param) =>
                 {
-                    model.Выданные_книги.FirstOrDefault(b => b.Инвентарный_номер == _selectedBook.Инвентарный_номер).Дата_возврата = DateTime.Now;
-                    model.SaveChanges();
+                    //model.Выданные_книги.Local.FirstOrDefault(b => b.Инвентарный_номер == _selectedBook.Инвентарный_номер).Дата_возврата = DateTime.Now;
+                    //model.SaveChanges();
                 },
                 (param) => /*App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.ReadersName && uo.E == 1) != 0 &&*/ param != null);
         }
@@ -41,7 +41,7 @@ namespace WPFBibleThump.ViewModel
             set
             {
                 _reader.Имя = value;
-                OnPropertyChanged("Name");
+                OnPropertyChanged();
             }
         }
         public string ReaderNumber
@@ -50,7 +50,7 @@ namespace WPFBibleThump.ViewModel
             set
             {
                 _reader.Номер_читательского_билета = value;
-                OnPropertyChanged("ReaderNumber");
+                OnPropertyChanged();
             }
         }
 
@@ -60,7 +60,7 @@ namespace WPFBibleThump.ViewModel
             set
             {
                 _reader.Фамилия = value;
-                OnPropertyChanged("SName");
+                OnPropertyChanged();
             }
         }
 
@@ -70,7 +70,7 @@ namespace WPFBibleThump.ViewModel
             set
             {
                 _reader.Отчество = value;
-                OnPropertyChanged("TName");
+                OnPropertyChanged();
             }
         }
 
@@ -80,7 +80,7 @@ namespace WPFBibleThump.ViewModel
             set
             {
                 _reader.Телефон = value;
-                OnPropertyChanged("MobileNumber");
+                OnPropertyChanged();
             }
         }
 
@@ -99,7 +99,7 @@ namespace WPFBibleThump.ViewModel
             set
             {
                 _reader.Номер_дома = value;
-                OnPropertyChanged("HouseNumber");
+                OnPropertyChanged();
             }
         }
 
@@ -109,7 +109,7 @@ namespace WPFBibleThump.ViewModel
             set
             {
                 _reader.Квартира = value;
-                OnPropertyChanged("Appartment");
+                OnPropertyChanged();
             }
         }
 
@@ -119,7 +119,7 @@ namespace WPFBibleThump.ViewModel
             set
             {
                 _reader.Дата_регистрации = value;
-                OnPropertyChanged("RegistrationTime");
+                OnPropertyChanged();
             }
         }
 
@@ -129,7 +129,7 @@ namespace WPFBibleThump.ViewModel
             set
             {
                 _reader.Дата_перерегистрации = value;
-                OnPropertyChanged("ReRegistrationTime");
+                OnPropertyChanged();
             }
         }
 
@@ -148,7 +148,7 @@ namespace WPFBibleThump.ViewModel
                 {
                     TimeSpan ssuedDaysAgo = book.Дата_выдачи.Date - DateTime.Today;
                 }
-                OnPropertyChanged("IssuedDaysAgo");
+                OnPropertyChanged();
             }
         }
         */
@@ -158,7 +158,7 @@ namespace WPFBibleThump.ViewModel
             set
             {
                 _selectedBook = value;
-                OnPropertyChanged("SelectedBook");
+                OnPropertyChanged();
             }
         }
 

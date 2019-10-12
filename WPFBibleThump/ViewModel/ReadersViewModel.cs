@@ -23,9 +23,10 @@ namespace WPFBibleThump.ViewModel
 
         public ReadersViewModel()
         {
-            App.MOYABAZA.Читатели.Load();
-            MOYABAZAEntities model = new MOYABAZAEntities();
-            Readers = CollectionViewSource.GetDefaultView(model.Читатели.ToArray());
+            MOYABAZAEntities model = App.MOYABAZA;
+            model.Читатели.Load();
+            Readers = CollectionViewSource.GetDefaultView(model.Читатели.Local);
+
             AddCommand = new RelayCommand(
                 (param) => 
                 {
@@ -58,7 +59,6 @@ namespace WPFBibleThump.ViewModel
                 {
                     model.Читатели.Remove(_selectedReader);
                     model.SaveChanges();
-                    Readers.Refresh(); /////NE RABOTAET
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.ReadersName && uo.D == 1) != 0 && param != null);
 
