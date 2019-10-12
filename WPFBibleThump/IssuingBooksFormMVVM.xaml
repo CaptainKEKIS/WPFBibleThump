@@ -40,7 +40,7 @@
                     <DataGridTextColumn Header="Название" Binding="{Binding Path=Экземпляры_книги.Книги.Название}" Width="*" />
                     <DataGridTextColumn Header="Дата выдачи" Binding="{Binding Path=Дата_выдачи}" Width="auto" />
                     <DataGridTextColumn Header="Дата возврата" Binding="{Binding Path=Дата_возврата}" Width="auto" />
-                    <DataGridTextColumn Header="Выдано (дней назад)" Binding="{Binding Path=ssuedDaysAgo}" Width="auto" />
+                    <DataGridTextColumn Header="Выдано (дней назад)" Binding="{Binding Path=Days}" Width="auto" />
                 </DataGrid.Columns>
             </DataGrid>
             <Button x:Name="ReturnBookButton" Command="{Binding IssueBook}" CommandParameter="{Binding ElementName=IssuedBooksDataGrid, Path=SelectedItem}" HorizontalAlignment="Left" Content="Вернуть книгу" DockPanel.Dock="Top"/>

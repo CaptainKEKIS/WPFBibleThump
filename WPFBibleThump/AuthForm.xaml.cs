@@ -88,8 +88,13 @@ namespace WPFBibleThump
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+#if DEBUG
+            var User = App.MOYABAZA.Пользователи
+    .FirstOrDefault(s => s.Login == "Admin" && s.Password == "Admin");
+#else
             var User = App.MOYABAZA.Пользователи
                 .FirstOrDefault(s => s.Login == TBLogin.Text && s.Password == PBPasswd.Password);
+#endif
             if (
                 User != null && 
                 String.IsNullOrEmpty( User.Login ) == false && 

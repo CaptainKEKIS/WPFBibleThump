@@ -23,14 +23,15 @@ namespace WPFBibleThump.ViewModel
         public IssuingBooksViewModel(Читатели reader)
         {
             _reader = reader;
-            //MOYABAZAEntities model = App.MOYABAZA;
-            //model.Читатели.Load();
+            MOYABAZAEntities model = App.MOYABAZA;
+            model.Читатели.Load();
 
             IssueBook = new RelayCommand(
                 (param) =>
                 {
-                    //model.Выданные_книги.Local.FirstOrDefault(b => b.Инвентарный_номер == _selectedBook.Инвентарный_номер).Дата_возврата = DateTime.Now;
-                    //model.SaveChanges();
+                    reader.Выданные_книги.FirstOrDefault(b => b.Инвентарный_номер == _selectedBook.Инвентарный_номер).Дата_возврата = DateTime.Now;
+                    model.SaveChanges();
+                    CollectionViewSource.GetDefaultView(reader.Выданные_книги).Refresh();
                 },
                 (param) => /*App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.ReadersName && uo.E == 1) != 0 &&*/ param != null);
         }

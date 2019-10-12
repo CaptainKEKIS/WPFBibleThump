@@ -194,6 +194,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BiblioModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\Extensions\Выдан_Книги.cs" />
     <Compile Include="Model\sysdiagrams.cs">
       <DependentUpon>BiblioModel.tt</DependentUpon>
     </Compile>
