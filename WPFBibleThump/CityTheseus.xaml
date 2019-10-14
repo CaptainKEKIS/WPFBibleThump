@@ -5,24 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFBibleThump"
         mc:Ignorable="d"
-        Title="CityTheseus" Height="450" Width="800">
+        Title="CityTheseus" Height="450" Width="800" Closing="Window_Closing">
     <DockPanel>
-        <TextBox x:Name="Edit_TextBox" Text="{Binding SelectedCity.Название}" DockPanel.Dock="Bottom" Margin="5" IsEnabled="{Binding EditMode}"/>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+            <TextBox x:Name="Edit_TextBox" Text="{Binding CityTextBox}"  Margin="5" IsEnabled="{Binding EditMode}" Width="400"/>
+            <Button x:Name="saveButton" Content="save" Command="{Binding AddCommand}"/>
+        </StackPanel>
+        
         <Grid x:Name="CityTGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <DataGrid ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity}" x:Name="fsdjkfjdsl" AutoGenerateColumns="False" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
+            <DataGrid ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity}" x:Name="fsdjkfjdsl" Grid.Row="1">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Название}" Foreground="#FFB2208A" Header="Название" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
 
             <StackPanel HorizontalAlignment="Left"  Grid.Row="0" Orientation="Horizontal">
-                <Button x:Name="createButton" Content="Создать" Command="{Binding AddCommand}" />
-                <Button x:Name="changeButton" Content="Изменить" Command="{Binding ChangeCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
-                <Button x:Name="deleteButton" Content="Удалить" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
+                <Button x:Name="createButton" Content="Добавление" Command="{Binding AddModeCommand}" Click="CreateButton_Click" />
+                <Button x:Name="changeButton" Content="Изменение" Command="{Binding ChangeCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
+                <Button x:Name="deleteButton" Content="Удаление" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
                 <Label Content="Поиск: "/>
                 <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Width="300" Margin="5"/>
             </StackPanel>

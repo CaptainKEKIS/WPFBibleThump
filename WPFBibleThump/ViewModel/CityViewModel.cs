@@ -17,12 +17,16 @@ namespace WPFBibleThump.ViewModel
     {
         private string _searchText;
         private Города _selectedCity;
+        private string _cityTextBox;
         private bool _editMode;
         public ICollectionView Cities { get; set; }
 
         public RelayCommand AddCommand { get; }
+        public RelayCommand AddModeCommand { get; }
         public RelayCommand ChangeCommand { get; }
         public RelayCommand DeleteCommand { get; }
+        public RelayCommand SaveCommand { get; }
+
 
         public CityViewModel()
         {
@@ -30,15 +34,21 @@ namespace WPFBibleThump.ViewModel
             model.Города.Load();
             Cities = CollectionViewSource.GetDefaultView(model.Города.Local);
 
+            AddModeCommand = new RelayCommand(
+                (param) =>
+                {
+                    SelectedCity = null;
+                    EditMode = true;
+                    //model.Города.Local.Add(city);
+                },
+                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.CityThesaurusName && uo.W == 1) != 0);
+
             AddCommand = new RelayCommand(
                 (param) =>
                 {
-                    Города city = new Города
-                    {
-                        Название = SelectedCity.Название
-                    };
+                    Города city = new Города();
+                    city.Название = CityTextBox;
                     model.Города.Local.Add(city);
-                    model.SaveChanges();
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.CityThesaurusName && uo.W == 1) != 0);
 
@@ -52,26 +62,40 @@ namespace WPFBibleThump.ViewModel
             DeleteCommand = new RelayCommand(
                 (param) =>
                 {
-                    var deletedCity = _selectedCity;
-                    
-                    try
+                    if (MessageBox.Show("Уверен?", "Назад дороги не будет", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes)
                     {
-                        if(deletedCity.Книги.Count != 0)
+                        var deletedCity = _selectedCity;
+
+                        try
                         {
-                            throw new DbUpdateException("В городе есть книги!!!!");
+                            if (deletedCity.Книги.Count != 0)
+                            {
+                                throw new DbUpdateException("В городе есть книги!!!!");
+                            }
+                            model.Города.Local.Remove(deletedCity);
+                            model.SaveChanges();
                         }
-                        model.Города.Local.Remove(deletedCity);
-                        model.SaveChanges();
-                    }
-                    catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
-                    {
-                        MessageBox.Show($"Произошла ошибка при удалении данных: {Environment.CommandLine}{ex.Message}", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                        model.Города.Local.Add(deletedCity);
-                        Cities.MoveCurrentTo(deletedCity);
-                        Cities.Refresh();
+                        catch (DbUpdateException ex)
+                        {
+                            MessageBox.Show($"Произошла ошибка при удалении данных: {Environment.CommandLine}{ex.Message}", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                            model.Города.Local.Add(deletedCity);
+                            Cities.MoveCurrentTo(deletedCity);
+                            Cities.Refresh();
+                        }
                     }
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.CityThesaurusName && uo.D == 1) != 0 && param != null);
+
+            SaveCommand = new RelayCommand(
+                (param) =>
+                {
+                    if (model.ChangeTracker.HasChanges())
+                    {
+                        MessageBox.Show("Est nesohranennie dannie");
+                    }
+                    model.SaveChanges();
+                },
+                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.CityThesaurusName && uo.E == 1) != 0);
 
             Cities.Filter = FilterFunction;
         }
@@ -83,6 +107,21 @@ namespace WPFBibleThump.ViewModel
             {
                 _selectedCity = value;
                 EditMode = false;
+                if (_selectedCity != null)
+                {
+                    CityTextBox = _selectedCity.Название;
+                }
+                else { CityTextBox = null; }
+                OnPropertyChanged();
+            }
+        }
+
+        public string CityTextBox
+        {
+            get { return _cityTextBox; }
+            set
+            {
+                _cityTextBox = value;
                 OnPropertyChanged();
             }
         }

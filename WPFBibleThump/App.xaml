@@ -43,5 +43,11 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+        </Style>
     </Application.Resources>
 </Application>

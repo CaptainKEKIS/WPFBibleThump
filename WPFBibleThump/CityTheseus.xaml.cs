@@ -25,5 +25,16 @@ namespace WPFBibleThump
             InitializeComponent();
             DataContext = new CityViewModel();
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        {
+            Edit_TextBox.IsEnabled = true;
+            Edit_TextBox.Focus();
+        }
     }
 }
