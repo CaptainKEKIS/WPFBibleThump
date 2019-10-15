@@ -18,12 +18,12 @@ namespace WPFBibleThump.ViewModel
         private string _searchText;
         private Города _selectedCity;
         private string _cityTextBox;
-        private bool _editMode;
+        private bool _editAllowed;
         public ICollectionView Cities { get; set; }
 
         public RelayCommand AddCommand { get; }
         public RelayCommand AddModeCommand { get; }
-        public RelayCommand ChangeCommand { get; }
+        public RelayCommand ChangeModeCommand { get; }
         public RelayCommand DeleteCommand { get; }
         public RelayCommand SaveCommand { get; }
 
@@ -38,26 +38,65 @@ namespace WPFBibleThump.ViewModel
                 (param) =>
                 {
                     SelectedCity = null;
-                    EditMode = true;
+                    EditAllowed = true;
                     //model.Города.Local.Add(city);
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.CityThesaurusName && uo.W == 1) != 0);
-
-            AddCommand = new RelayCommand(
+            
+            ChangeModeCommand = new RelayCommand(
                 (param) =>
                 {
-                    Города city = new Города();
-                    city.Название = CityTextBox;
-                    model.Города.Local.Add(city);
-                },
-                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.CityThesaurusName && uo.W == 1) != 0);
-
-            ChangeCommand = new RelayCommand(
-                (param) =>
-                {
-                    EditMode ^= true;
+                    EditAllowed ^= true;
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.CityThesaurusName && uo.E == 1) != 0 && param != null);
+
+            SaveCommand = new RelayCommand(
+                (param) =>
+                {
+                    if (SelectedCity != null)
+                    {
+                        if (CityTextBox != null)    //Изменение существующего города
+                        {
+                            try
+                            {
+                                SelectedCity.Название = CityTextBox;
+                                model.SaveChanges();
+                                Cities.Refresh();
+                            }
+                            catch (Exception e)
+                            {
+                                MessageBox.Show($"Такой город уже существует! \n {e.Message}");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Название не может быть пустым!");
+                        }
+                    }
+                    else
+                    {
+                        if (CityTextBox != null)    //Добавление нового города
+                        {
+                            Города city = new Города();
+                            try
+                            {
+                                city.Название = CityTextBox;
+                                model.Города.Local.Add(city);
+                                model.SaveChanges();
+                            }
+                            catch (DbUpdateException e)
+                            {
+                                model.Города.Local.Remove(city);
+                                MessageBox.Show($"Такой город уже существует! \n {e.Message}");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Название не может быть пустым!");
+                        }
+                    }
+                },
+                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.CityThesaurusName && uo.E == 1) != 0);
 
             DeleteCommand = new RelayCommand(
                 (param) =>
@@ -85,18 +124,6 @@ namespace WPFBibleThump.ViewModel
                     }
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.CityThesaurusName && uo.D == 1) != 0 && param != null);
-
-            SaveCommand = new RelayCommand(
-                (param) =>
-                {
-                    if (model.ChangeTracker.HasChanges())
-                    {
-                        MessageBox.Show("Est nesohranennie dannie");
-                    }
-                    model.SaveChanges();
-                },
-                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.CityThesaurusName && uo.E == 1) != 0);
-
             Cities.Filter = FilterFunction;
         }
 
@@ -106,7 +133,7 @@ namespace WPFBibleThump.ViewModel
             set
             {
                 _selectedCity = value;
-                EditMode = false;
+                EditAllowed = false;
                 if (_selectedCity != null)
                 {
                     CityTextBox = _selectedCity.Название;
@@ -126,12 +153,12 @@ namespace WPFBibleThump.ViewModel
             }
         }
 
-        public bool EditMode
+        public bool EditAllowed
         {
-            get { return _editMode; }
+            get { return _editAllowed; }
             set
             {
-                _editMode = value;
+                _editAllowed = value;
                 OnPropertyChanged();
             }
         }

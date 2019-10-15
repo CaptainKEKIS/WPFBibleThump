@@ -100,7 +100,7 @@
           <Key>
             <PropertyRef Name="Код" />
           </Key>
-          <Property Name="Код" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Код" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Код родителя" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Название" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
@@ -342,14 +342,6 @@
           <Property Name="Название" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Книги" Relationship="Self.FK_Книги_Города" FromRole="Города" ToRole="Книги" />
         </EntityType>
-        <EntityType Name="Издательства">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Название" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Книги" Relationship="Self.FK_Книги_Издательства" FromRole="Издательства" ToRole="Книги" />
-        </EntityType>
         <EntityType Name="Книги">
           <Key>
             <PropertyRef Name="Id" />
@@ -362,9 +354,9 @@
           <Property Name="УДК" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Количество_экземпляров" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Города" Relationship="Self.FK_Книги_Города" FromRole="Книги" ToRole="Города" />
-          <NavigationProperty Name="Издательства" Relationship="Self.FK_Книги_Издательства" FromRole="Книги" ToRole="Издательства" />
           <NavigationProperty Name="Экземпляры_книги" Relationship="Self.FK_Экземпляры_книги_Книги" FromRole="Книги" ToRole="Экземпляры_книги" />
           <NavigationProperty Name="Авторы" Relationship="Self.КнигиАвторы" FromRole="Книги" ToRole="Авторы" />
+          <NavigationProperty Name="Издательства" Relationship="MOYABAZAModel.FK_Книги_Издательства" FromRole="Книги" ToRole="Издательства" />
         </EntityType>
         <EntityType Name="Объекты">
           <Key>
@@ -401,7 +393,7 @@
           <Key>
             <PropertyRef Name="Код" />
           </Key>
-          <Property Name="Код" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Код" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Код_родителя" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Название" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
@@ -462,18 +454,6 @@
             </Principal>
             <Dependent Role="Книги">
               <PropertyRef Name="Id_города" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Книги_Издательства">
-          <End Role="Издательства" Type="Self.Издательства" Multiplicity="1" />
-          <End Role="Книги" Type="Self.Книги" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Издательства">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Книги">
-              <PropertyRef Name="Id_издательства" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -557,7 +537,6 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Авторы" EntityType="Self.Авторы" />
           <EntitySet Name="Города" EntityType="Self.Города" />
-          <EntitySet Name="Издательства" EntityType="Self.Издательства" />
           <EntitySet Name="Книги" EntityType="Self.Книги" />
           <EntitySet Name="Объекты" EntityType="Self.Объекты" />
           <EntitySet Name="Пользователи" EntityType="Self.Пользователи" />
@@ -569,10 +548,6 @@
           <EntitySet Name="Выданные_книги" EntityType="Self.Выданные_книги" />
           <AssociationSet Name="FK_Книги_Города" Association="Self.FK_Книги_Города">
             <End Role="Города" EntitySet="Города" />
-            <End Role="Книги" EntitySet="Книги" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Книги_Издательства" Association="Self.FK_Книги_Издательства">
-            <End Role="Издательства" EntitySet="Издательства" />
             <End Role="Книги" EntitySet="Книги" />
           </AssociationSet>
           <AssociationSet Name="FK_Экземпляры_книги_Книги" Association="Self.FK_Экземпляры_книги_Книги">
@@ -603,7 +578,32 @@
             <End Role="Авторы" EntitySet="Авторы" />
             <End Role="Книги" EntitySet="Книги" />
           </AssociationSet>
+          <EntitySet Name="Издательства" EntityType="MOYABAZAModel.Издательства" />
+          <AssociationSet Name="FK_Книги_Издательства" Association="MOYABAZAModel.FK_Книги_Издательства">
+            <End Role="Издательства" EntitySet="Издательства" />
+            <End Role="Книги" EntitySet="Книги" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Издательства">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Книги" Relationship="MOYABAZAModel.FK_Книги_Издательства" FromRole="Издательства" ToRole="Книги" />
+        </EntityType>
+        <Association Name="FK_Книги_Издательства">
+          <End Type="MOYABAZAModel.Издательства" Role="Издательства" Multiplicity="1" />
+          <End Type="MOYABAZAModel.Книги" Role="Книги" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Издательства">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Книги">
+              <PropertyRef Name="Id_издательства" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -634,14 +634,6 @@
           <EntitySetMapping Name="Города">
             <EntityTypeMapping TypeName="MOYABAZAModel.Города">
               <MappingFragment StoreEntitySet="Города">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Название" ColumnName="Название" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Издательства">
-            <EntityTypeMapping TypeName="MOYABAZAModel.Издательства">
-              <MappingFragment StoreEntitySet="Издательства">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Название" ColumnName="Название" />
               </MappingFragment>
@@ -751,6 +743,14 @@
               <ScalarProperty Name="Id" ColumnName="Id_Книги" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Издательства">
+            <EntityTypeMapping TypeName="MOYABAZAModel.Издательства">
+              <MappingFragment StoreEntitySet="Издательства">
+                <ScalarProperty Name="Название" ColumnName="Название" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

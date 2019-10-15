@@ -47,8 +47,6 @@ public partial class Книги
 
     public virtual Города Города { get; set; }
 
-    public virtual Издательства Издательства { get; set; }
-
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Экземпляры_книги> Экземпляры_книги { get; set; }
@@ -56,6 +54,8 @@ public partial class Книги
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Авторы> Авторы { get; set; }
+
+    public virtual Издательства Издательства { get; set; }
 
 }
 

@@ -38,8 +38,6 @@ public partial class MOYABAZAEntities : DbContext
 
     public virtual DbSet<Города> Города { get; set; }
 
-    public virtual DbSet<Издательства> Издательства { get; set; }
-
     public virtual DbSet<Книги> Книги { get; set; }
 
     public virtual DbSet<Объекты> Объекты { get; set; }
@@ -57,6 +55,8 @@ public partial class MOYABAZAEntities : DbContext
     public virtual DbSet<Экземпляры_книги> Экземпляры_книги { get; set; }
 
     public virtual DbSet<Выданные_книги> Выданные_книги { get; set; }
+
+    public virtual DbSet<Издательства> Издательства { get; set; }
 
 }
 

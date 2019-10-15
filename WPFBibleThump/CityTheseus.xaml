@@ -8,8 +8,8 @@
         Title="CityTheseus" Height="450" Width="800" Closing="Window_Closing">
     <DockPanel>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
-            <TextBox x:Name="Edit_TextBox" Text="{Binding CityTextBox}"  Margin="5" IsEnabled="{Binding EditMode}" Width="400"/>
-            <Button x:Name="saveButton" Content="save" Command="{Binding AddCommand}"/>
+            <TextBox x:Name="Edit_TextBox" Text="{Binding CityTextBox}"  Margin="5" IsEnabled="{Binding EditAllowed}" Width="400"/>
+            <Button x:Name="funcButton" Content="Сохранить" Command="{Binding SaveCommand}"/>
         </StackPanel>
         
         <Grid x:Name="CityTGrid">
@@ -25,7 +25,7 @@
 
             <StackPanel HorizontalAlignment="Left"  Grid.Row="0" Orientation="Horizontal">
                 <Button x:Name="createButton" Content="Добавление" Command="{Binding AddModeCommand}" Click="CreateButton_Click" />
-                <Button x:Name="changeButton" Content="Изменение" Command="{Binding ChangeCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
+                <Button x:Name="changeButton" Content="Изменение" Command="{Binding ChangeModeCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
                 <Button x:Name="deleteButton" Content="Удаление" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
                 <Label Content="Поиск: "/>
                 <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Width="300" Margin="5"/>
