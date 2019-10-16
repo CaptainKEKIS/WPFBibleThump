@@ -38,8 +38,8 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Инв. номер" Binding="{Binding Path=Инвентарный_номер}" Width="auto" />
                     <DataGridTextColumn Header="Название" Binding="{Binding Path=Экземпляры_книги.Книги.Название}" Width="*" />
-                    <DataGridTextColumn Header="Дата выдачи" Binding="{Binding Path=Дата_выдачи}" Width="auto" />
-                    <DataGridTextColumn Header="Дата возврата" Binding="{Binding Path=Дата_возврата}" Width="auto" />
+                    <DataGridTextColumn Header="Дата выдачи" Binding="{Binding Path=Дата_выдачи, StringFormat=dd.MM.yyyy}" Width="auto" />
+                    <DataGridTextColumn Header="Дата возврата" Binding="{Binding Path=Дата_возврата, StringFormat=dd.MM.yyyy}" Width="auto" />
                     <DataGridTextColumn Header="Выдано (дней назад)" Binding="{Binding Path=Days}" Width="auto" />
                 </DataGrid.Columns>
             </DataGrid>

@@ -18,11 +18,18 @@ namespace WPFBibleThump.Model
     public partial class Выданные_книги
     {
 
-        public int Days
+        public string Days
         {
             get
             {
-                return (int)((DateTime.Now - Дата_выдачи).TotalDays);
+                if(Дата_возврата == null)
+                {
+                    return Convert.ToString((int)((DateTime.Now - Дата_выдачи).TotalDays));
+                }
+                else
+                {
+                    return "Возвращено";
+                }
             }
         }
 

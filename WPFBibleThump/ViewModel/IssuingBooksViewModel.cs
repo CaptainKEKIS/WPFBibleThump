@@ -23,14 +23,25 @@ namespace WPFBibleThump.ViewModel
         public IssuingBooksViewModel(Читатели reader)
         {
             _reader = reader;
+            Выданные_книги issuedBook;
             MOYABAZAEntities model = App.MOYABAZA;
             model.Читатели.Load();
 
             IssueBook = new RelayCommand(
                 (param) =>
                 {
-                    reader.Выданные_книги.FirstOrDefault(b => b.Инвентарный_номер == _selectedBook.Инвентарный_номер).Дата_возврата = DateTime.Now;
-                    model.SaveChanges();
+                    issuedBook = reader.Выданные_книги.FirstOrDefault(b => b.Инвентарный_номер == _selectedBook.Инвентарный_номер);
+                    if(issuedBook.Дата_возврата != null)
+                    {
+                        DatePick datePick = new DatePick();
+                        datePick.ShowDialog();
+                        issuedBook.Дата_возврата = DateTime.Now;
+                        model.SaveChanges();
+                    }
+                    else
+                    {
+
+                    }
                     CollectionViewSource.GetDefaultView(reader.Выданные_книги).Refresh();
                 },
                 (param) => /*App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.ReadersName && uo.E == 1) != 0 &&*/ param != null);
@@ -114,7 +125,7 @@ namespace WPFBibleThump.ViewModel
             }
         }
 
-        public System.DateTime RegistrationTime
+        public DateTime RegistrationTime
         {
             get { return _reader.Дата_регистрации; }
             set
