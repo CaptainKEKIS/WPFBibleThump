@@ -31,9 +31,8 @@ namespace WPFBibleThump
 
         }
 
-        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        private void addButton_Click(object sender, RoutedEventArgs e)
         {
-            Edit_TextBox.IsEnabled = true;
             Edit_TextBox.Focus();
         }
     }

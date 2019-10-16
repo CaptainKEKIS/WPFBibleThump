@@ -62,6 +62,7 @@ namespace WPFBibleThump.ViewModel
                                 SelectedCity.Название = CityTextBox;
                                 model.SaveChanges();
                                 Cities.Refresh();
+                                EditAllowed = false;
                             }
                             catch (Exception e)
                             {
@@ -83,6 +84,8 @@ namespace WPFBibleThump.ViewModel
                                 city.Название = CityTextBox;
                                 model.Города.Local.Add(city);
                                 model.SaveChanges();
+                                EditAllowed = false;
+                                CityTextBox = String.Empty;
                             }
                             catch (DbUpdateException e)
                             {

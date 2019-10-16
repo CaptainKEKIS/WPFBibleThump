@@ -24,7 +24,7 @@
             </DataGrid>
 
             <StackPanel HorizontalAlignment="Left"  Grid.Row="0" Orientation="Horizontal">
-                <Button x:Name="createButton" Content="Добавление" Command="{Binding AddModeCommand}" Click="CreateButton_Click" />
+                <Button x:Name="addButton" Content="Добавление" Command="{Binding AddModeCommand}" Click="addButton_Click" />
                 <Button x:Name="changeButton" Content="Изменение" Command="{Binding ChangeModeCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
                 <Button x:Name="deleteButton" Content="Удаление" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
                 <Label Content="Поиск: "/>
