@@ -9,7 +9,7 @@
     <DockPanel>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
             <TextBox x:Name="Edit_TextBox" Text="{Binding CityTextBox}"  Margin="5" IsEnabled="{Binding EditAllowed}" Width="400"/>
-            <Button x:Name="funcButton" Content="Сохранить" Command="{Binding SaveCommand}"/>
+            <Button x:Name="funcButton" Content="Сохранить" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=Edit_TextBox, Path=IsEnabled}"/>
         </StackPanel>
         
         <Grid x:Name="CityTGrid">

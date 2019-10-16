@@ -99,7 +99,7 @@ namespace WPFBibleThump.ViewModel
                         }
                     }
                 },
-                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.CityThesaurusName && uo.E == 1) != 0);
+                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.CityThesaurusName && (uo.E == 1 || uo.R == 1)) != 0 && Convert.ToBoolean(param) == true);
 
             DeleteCommand = new RelayCommand(
                 (param) =>
