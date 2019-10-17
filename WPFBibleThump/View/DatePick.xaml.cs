@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPFBibleThump.Model;
+using WPFBibleThump.ViewModel;
 
 namespace WPFBibleThump
 {
@@ -19,9 +21,10 @@ namespace WPFBibleThump
     /// </summary>
     public partial class DatePick : Window
     {
-        public DatePick()
+        public DatePick(Читатели reader)
         {
             InitializeComponent();
+            DataContext = new IssuingBooksViewModel(reader);
         }
     }
 }
