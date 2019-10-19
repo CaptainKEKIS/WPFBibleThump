@@ -42,7 +42,7 @@
                     <DataGridTemplateColumn Header="Дата возврата">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <DatePicker SelectedDate="{Binding Path=Дата_возврата, UpdateSourceTrigger=LostFocus}"/>
+                                <DatePicker x:Name="DP" SelectedDate="{Binding Path=Дата_возврата, UpdateSourceTrigger=LostFocus}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

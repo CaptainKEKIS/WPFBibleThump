@@ -25,7 +25,6 @@ namespace WPFBibleThump
         {
             InitializeComponent();
             DataContext = new IssuingBooksViewModel(reader);
-            //TODO: Добавить редактирование выданных книг(добавление даты возврата). Понять как это всё вообще сохранить.
         }
     }
 }

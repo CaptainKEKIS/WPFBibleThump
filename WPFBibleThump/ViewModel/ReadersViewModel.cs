@@ -30,22 +30,6 @@ namespace WPFBibleThump.ViewModel
             AddCommand = new RelayCommand(
                 (param) => 
                 {
-                    /*
-                    Читатели reader = new Читатели
-                    {
-                        Id_улицы = 1,
-                        Фамилия = "qew",
-                        Имя = "saddsa",
-                        Отчество = "sadasdaaaaaa",
-                        Дата_регистрации = DateTime.Parse("19.09.2018"),
-                        Квартира = "2",
-                        Номер_дома = "3",
-                        Номер_читательского_билета = "0000009",
-                        Телефон = "+7952215555"
-                    };
-                    model.Читатели.Add(reader);
-                    model.SaveChanges();
-                    */
                     ReadersReg readersReg = new ReadersReg();
                     readersReg.ShowDialog();
                 }, 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
@@ -12,8 +13,12 @@ namespace WPFBibleThump.ViewModel
 {
     class ReadersRegViewModel
     {
+        public ICollectionView Streets
+        {
+            get;
+            set;
+        }
         private string _searchText;
-        public ICollectionView Streets { get; set; }
 
         public RelayCommand AddCommand { get; }
         public RelayCommand ChangeCommand { get; }
@@ -21,10 +26,11 @@ namespace WPFBibleThump.ViewModel
 
         public ReadersRegViewModel()
         {
-            App.MOYABAZA.Улицы.Load();
-            Streets = CollectionViewSource.GetDefaultView(App.MOYABAZA.Улицы.Local);
-
+            //App.MOYABAZA.Улицы.Load();
+            Streets = CollectionViewSource.GetDefaultView(App.MOYABAZA.Улицы.ToArray());
             AddCommand = new RelayCommand((param) => { }, (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.AuthorThesaurusName && uo.W == 1) != 0);
+
+            Streets.Filter = FilterFunction;
         }
 
         public string SearchText
@@ -39,13 +45,14 @@ namespace WPFBibleThump.ViewModel
 
         bool FilterFunction(object o)
         {
-            Улицы ulica = o as Улицы;
-            if (String.IsNullOrEmpty(SearchText) ||
-                ulica.Название.StartsWith(SearchText.Trim(), StringComparison.OrdinalIgnoreCase))
+            Улицы streets = o as Улицы;
+            string Name = streets.Название;
+            if (String.IsNullOrEmpty(SearchText) || streets.Название.StartsWith(SearchText.Trim(), StringComparison.OrdinalIgnoreCase))
             {
                 return true;
             }
             return false;
         }
+
     }
 }

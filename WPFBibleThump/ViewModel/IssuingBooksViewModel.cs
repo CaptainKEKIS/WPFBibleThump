@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using WPFBibleThump.Model;
 
@@ -27,8 +28,15 @@ namespace WPFBibleThump.ViewModel
             IssueBook = new RelayCommand(
                 (param) =>
                 {
-                    App.MOYABAZA.SaveChanges();
-                    CollectionViewSource.GetDefaultView(reader.Выданные_книги).Refresh();
+                    //if(App.MOYABAZA.Читатели.FirstOrDefault(r => r == _reader).Выданные_книги.FirstOrDefault(b => b.Инвентарный_номер == _selectedBook.Инвентарный_номер).Дата_выдачи > _selectedBook.Дата_возврата)
+                    //{
+                    //    MessageBox.Show($"Дата возврата не может быть меньше даты выдачи!!!!!!!! \n({_selectedBook.Экземпляры_книги.Книги.Название})");
+                    //}
+                    //else
+                    //{
+                        App.MOYABAZA.SaveChanges();
+                    //}
+                    CollectionViewSource.GetDefaultView(_reader.Выданные_книги).Refresh();
                 },
                 (param) => /*App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.ReadersName && uo.E == 1) != 0 &&*/ param != null);
         }

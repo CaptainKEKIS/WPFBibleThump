@@ -35,5 +35,15 @@ namespace WPFBibleThump
         {
             Edit_TextBox.Focus();
         }
+
+        private void Edit_TextBox_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if((sender as TextBox).IsEnabled)
+            {
+                TextBox textBox = (sender as TextBox);
+                textBox.Focus();
+                textBox.CaretIndex = textBox.Text.Count();
+            }
+        }
     }
 }

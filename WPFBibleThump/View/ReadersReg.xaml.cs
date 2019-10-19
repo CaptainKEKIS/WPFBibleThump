@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPFBibleThump.ViewModel;
 
 namespace WPFBibleThump
 {
@@ -22,6 +23,18 @@ namespace WPFBibleThump
         public ReadersReg()
         {
             InitializeComponent();
+            DataContext = new ReadersRegViewModel();
+        }
+
+        private void Street_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+        }
+
+        private void Street_GotFocus(object sender, RoutedEventArgs e)
+        {
+         //   MessageBox.Show("fdsfsd");
+            (sender as ComboBox).IsDropDownOpen = true;
+
         }
     }
 }

@@ -14,14 +14,14 @@
                <PropertyUISetting Name="Читатели.Улицы">
                   <ControlSettings>
                      <ControlSetting ArtifactName="Microsoft:System.Windows:WPF">
-                        <BindableControlInfo Name="ComboBox" Type="System.Windows.Controls.ComboBox" AssemblyName="PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+                        <BindableControlInfo Name="[Нет]" Type="Microsoft.VSDesigner.Data.BindManager.NoneControlPlaceHolder" />
                      </ControlSetting>
                   </ControlSettings>
                </PropertyUISetting>
                <PropertyUISetting Name="Id">
                   <ControlSettings>
                      <ControlSetting ArtifactName="Microsoft:System.Windows:WPF">
-                        <BindableControlInfo Name="TextBox" Type="System.Windows.Controls.TextBox" AssemblyName="PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+                        <BindableControlInfo Name="[Нет]" Type="Microsoft.VSDesigner.Data.BindManager.NoneControlPlaceHolder" />
                      </ControlSetting>
                   </ControlSettings>
                </PropertyUISetting>
@@ -33,14 +33,18 @@
          <TypeUISetting>
             <PropertyUISettings>
                <PropertyUISetting Name="Id">
-                  <ControlSettings><ControlSetting ArtifactName="Microsoft:System.Windows:WPF" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+                  <ControlSettings>
+                     <ControlSetting ArtifactName="Microsoft:System.Windows:WPF">
                         <BindableControlInfo Name="[Нет]" Type="Microsoft.VSDesigner.Data.BindManager.NoneControlPlaceHolder" />
-                     </ControlSetting></ControlSettings>
+                     </ControlSetting>
+                  </ControlSettings>
                </PropertyUISetting>
                <PropertyUISetting Name="Id_читателя">
-                  <ControlSettings><ControlSetting ArtifactName="Microsoft:System.Windows:WPF" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+                  <ControlSettings>
+                     <ControlSetting ArtifactName="Microsoft:System.Windows:WPF">
                         <BindableControlInfo Name="[Нет]" Type="Microsoft.VSDesigner.Data.BindManager.NoneControlPlaceHolder" />
-                     </ControlSetting></ControlSettings>
+                     </ControlSetting>
+                  </ControlSettings>
                </PropertyUISetting>
             </PropertyUISettings>
          </TypeUISetting>

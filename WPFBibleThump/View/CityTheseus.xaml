@@ -8,7 +8,7 @@
         Title="CityTheseus" Height="450" Width="800" Closing="Window_Closing">
     <DockPanel>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
-            <TextBox x:Name="Edit_TextBox" Text="{Binding CityTextBox}"  Margin="5" IsEnabled="{Binding EditAllowed}" Width="400"/>
+            <TextBox x:Name="Edit_TextBox" Text="{Binding CityTextBox}"  Margin="5" IsEnabled="{Binding EditAllowed}" Width="400" IsEnabledChanged="Edit_TextBox_IsEnabledChanged"/>
             <Button x:Name="funcButton" Content="Сохранить" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=Edit_TextBox, Path=IsEnabled}"/>
         </StackPanel>
         

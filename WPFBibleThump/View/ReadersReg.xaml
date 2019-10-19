@@ -1,10 +1,11 @@
-﻿<Window x:Class="WPFBibleThump.ReadersReg"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:WPFBibleThump"
+        xmlns:Model="clr-namespace:WPFBibleThump.Model" x:Class="WPFBibleThump.ReadersReg"
         mc:Ignorable="d"
         Title="Регистрация читателей" Height="462.712" Width="800">
     <Grid>
@@ -41,13 +42,15 @@
         <TextBox Grid.Column="1" Grid.Row="1" x:Name="SName"/>
         <TextBox Grid.Column="1" Grid.Row="2" x:Name="FName"/>
         <TextBox Grid.Column="1" Grid.Row="3" x:Name="TName"/>
-        <TextBox Grid.Column="1" Grid.Row="4" x:Name="TBPhone" />
-        <ComboBox ItemsSource="{Binding Path=Streets}" DisplayMemberPath="Название" SelectedValuePath="Id" Grid.Column="1" Grid.Row="5" x:Name="Street" IsEditable="true"/>
+        <TextBox Grid.Column="1" Grid.Row="4" x:Name="TBPhone"/>
+        <!--<ComboBox ItemsSource="{Binding Streets}" SelectedItem="{Binding Улицы}" DisplayMemberPath="Название" Grid.Column="1" Grid.Row="5" x:Name="Street" IsEditable="true"/>-->
+        <ComboBox ItemsSource="{Binding Streets}" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" GotFocus="Street_GotFocus" SelectedItem="{Binding Улицы}" DisplayMemberPath="Название" Grid.Column="1" Grid.Row="5" x:Name="Street" IsEditable="true" IsTextSearchEnabled="False" StaysOpenOnEdit="True"/>
+        
         <TextBox Grid.Column="1" Grid.Row="6" x:Name="HouseNumber"/>
         <TextBox Grid.Column="1" Grid.Row="7" x:Name="ApprtNumber"/>
         <DatePicker Grid.Column="1" Grid.Row="8" x:Name="RegDate"/>
         <DatePicker Grid.Column="1" Grid.Row="9" x:Name="ReRegDate"/>
 
-        <Button Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" x:Name="RegButton" Width="200" Height="50">Зарегестрировать</Button>
+        <Button Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" x:Name="RegButton" Width="200" Height="50" Content="Зарегестрировать"/>
     </Grid>
 </Window>
