@@ -27,7 +27,7 @@
                 <DataGridTextColumn x:Name="имяColumn" Binding="{Binding Имя}" Header="Имя" Width="*"/>
                 <DataGridTextColumn x:Name="отчествоColumn" Binding="{Binding Отчество}" Header="Отчество" Width="*"/>
                 <DataGridTextColumn x:Name="дата_регистрацииColumn" Binding="{Binding Дата_регистрации, StringFormat=dd.MM.yyyy}" Header="Регистрация" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="Дата_перерегистрацииColumn" Binding="{Binding Дата_перерегистрации, StringFormat=dd.MM.yyyy}" Header="Перерегистрация" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="Дата_перерегистрацииColumn" Binding="{Binding Дата_перерегистрации, StringFormat=dd.MM.yyyy, TargetNullValue=-}" Header="Перерегистрация" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="телефонColumn" Binding="{Binding Телефон}" Header="Телефон" Width="auto"/>
             </DataGrid.Columns>
         </DataGrid>

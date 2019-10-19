@@ -24,7 +24,11 @@ public partial class Выданные_книги
 
     public System.DateTime Дата_выдачи { get; set; }
 
-    public Nullable<System.DateTime> Дата_возврата { get; set; }
+    public Nullable<System.DateTime> Дата_возврата
+        {
+            get;
+            set;
+        }
 
     public string Код_УДК { get; set; }
 

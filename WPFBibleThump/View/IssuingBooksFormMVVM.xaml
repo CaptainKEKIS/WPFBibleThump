@@ -11,27 +11,27 @@
             <Label DockPanel.Dock="Top" Content="Читатель:"/>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" VerticalAlignment="Top">
                 <Label Content="Номер чит. билета:" Width="Auto" Height="30"/>
-                <TextBox Text="{Binding ReaderNumber}" Width="100" Height="20"/>
-                <Label Content="Имя:" Width="Auto" Height="30"/>
-                <TextBox Text="{Binding Name}" Width="100" Height="20"/>
-                <Label Content="Отчество:" Width="Auto" Height="30"/>
-                <TextBox Text="{Binding TName}" Width="100" Height="20"/>
+                <TextBlock Text="{Binding ReaderNumber}" Width="100" Height="20"/>
                 <Label Content="Фамилия:" Width="Auto" Height="30"/>
-                <TextBox Text="{Binding SName}" Width="100" Height="20"/>
+                <TextBlock Text="{Binding SName}" Width="120" Height="20"/>
+                <Label Content="Имя:" Width="Auto" Height="30"/>
+                <TextBlock Text="{Binding Name}" Width="120" Height="20"/>
+                <Label Content="Отчество:" Width="Auto" Height="30"/>
+                <TextBlock Text="{Binding TName}" Width="120" Height="20"/>
                 <Label Content="Дата регистрации:" Width="Auto" Height="30"/>
-                <TextBox Text="{Binding RegistrationTime}" Width="100" Height="20"/>
+                <TextBlock Text="{Binding RegistrationTime, StringFormat=dd.MM.yyyy}" Width="100" Height="20"/>
             </StackPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" VerticalAlignment="Top">
                 <Label Content="Телефон:" Width="Auto" Height="30"/>
-                <TextBox Text="{Binding MobileNumber}" Width="100" Height="20"/>
+                <TextBlock Text="{Binding MobileNumber}" Width="120" Height="20"/>
                 <Label Content="Улица:" Width="Auto" Height="30"/>
-                <TextBox Text="{Binding Street}" Width="100" Height="20"/>
+                <TextBlock Text="{Binding Street}" Width="200" Height="20"/>
                 <Label Content="Дом:" Width="Auto" Height="30"/>
-                <TextBox Text="{Binding HouseNumber}" Width="100" Height="20"/>
+                <TextBlock Text="{Binding HouseNumber}" Width="100" Height="20"/>
                 <Label Content="Квартира:" Width="Auto" Height="30"/>
-                <TextBox Text="{Binding Appartment}" Width="100" Height="20"/>
+                <TextBlock Text="{Binding Appartment}" Width="100" Height="20"/>
                 <Label Content="Дата перерегистрации:" Width="Auto" Height="30"/>
-                <TextBox Text="{Binding ReRegistrationTime}" Width="100" Height="20"/>
+                <TextBlock Text="{Binding ReRegistrationTime, StringFormat=dd.MM.yyyy, TargetNullValue=-}" Width="100" Height="20"/>
             </StackPanel>
             <Label DockPanel.Dock="Top" Content="Выданные книги:"/>
             <DataGrid SelectedItem="{Binding SelectedBook}" ItemsSource="{Binding IssuedBooks}" x:Name="IssuedBooksDataGrid" DockPanel.Dock="Top" Height="300" Width="Auto" AutoGenerateColumns="False" IsReadOnly="True">
@@ -39,7 +39,13 @@
                     <DataGridTextColumn Header="Инв. номер" Binding="{Binding Path=Инвентарный_номер}" Width="auto" />
                     <DataGridTextColumn Header="Название" Binding="{Binding Path=Экземпляры_книги.Книги.Название}" Width="*" />
                     <DataGridTextColumn Header="Дата выдачи" Binding="{Binding Path=Дата_выдачи, StringFormat=dd.MM.yyyy}" Width="auto" />
-                    <DataGridTextColumn Header="Дата возврата" Binding="{Binding Path=Дата_возврата, StringFormat=dd.MM.yyyy}" Width="auto" />
+                    <DataGridTemplateColumn Header="Дата возврата">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DatePicker SelectedDate="{Binding Path=Дата_возврата, UpdateSourceTrigger=LostFocus}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTextColumn Header="Выдано (дней назад)" Binding="{Binding Path=Days}" Width="auto" />
                 </DataGrid.Columns>
             </DataGrid>

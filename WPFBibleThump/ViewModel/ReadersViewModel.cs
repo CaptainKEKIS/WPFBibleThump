@@ -47,7 +47,7 @@ namespace WPFBibleThump.ViewModel
                     model.SaveChanges();
                     */
                     ReadersReg readersReg = new ReadersReg();
-                    readersReg.Show();
+                    readersReg.ShowDialog();
                 }, 
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.ReadersName && uo.W == 1) != 0);
 
@@ -66,7 +66,7 @@ namespace WPFBibleThump.ViewModel
                 (param) => 
                 {
                     IssuingBooksFormMVVM issuingBooksForm = new IssuingBooksFormMVVM(SelectedReader);
-                    issuingBooksForm.Show();
+                    issuingBooksForm.ShowDialog();
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.ReadersName && uo.E == 1) != 0 && param != null); // Возможно нужно добавить ещё уровень доступа
 

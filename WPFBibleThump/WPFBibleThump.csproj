@@ -187,9 +187,6 @@
       <DependentUpon>AuthForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Constants.cs" />
-    <Compile Include="View\DatePick.xaml.cs">
-      <DependentUpon>DatePick.xaml</DependentUpon>
-    </Compile>
     <Compile Include="InterceptKeys.cs" />
     <Compile Include="View\IssuingBooksFormMVVM.xaml.cs">
       <DependentUpon>IssuingBooksFormMVVM.xaml</DependentUpon>
@@ -281,10 +278,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\BooksTheseus.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\DatePick.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
