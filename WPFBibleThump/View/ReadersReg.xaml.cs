@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPFBibleThump.Model;
 using WPFBibleThump.ViewModel;
 
 namespace WPFBibleThump
@@ -20,10 +21,10 @@ namespace WPFBibleThump
     /// </summary>
     public partial class ReadersReg : Window
     {
-        public ReadersReg()
+        public ReadersReg(MOYABAZAEntities model, Читатели reader)
         {
             InitializeComponent();
-            DataContext = new ReadersRegViewModel();
+            DataContext = new ReadersRegViewModel(model, reader);
         }
 
         private void Street_MouseDown(object sender, MouseButtonEventArgs e)

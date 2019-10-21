@@ -38,18 +38,17 @@
         <Label VerticalAlignment="Center" Grid.Column="0" Grid.Row="8" Content="Дата регистрации"/>
         <Label VerticalAlignment="Center" Grid.Column="0" Grid.Row="9" Content="Дата перерегистрации"/>
 
-        <TextBox Grid.Column="1" Grid.Row="0" x:Name="RTicket"/>
-        <TextBox Grid.Column="1" Grid.Row="1" x:Name="SName"/>
-        <TextBox Grid.Column="1" Grid.Row="2" x:Name="FName"/>
-        <TextBox Grid.Column="1" Grid.Row="3" x:Name="TName"/>
-        <TextBox Grid.Column="1" Grid.Row="4" x:Name="TBPhone"/>
-        <!--<ComboBox ItemsSource="{Binding Streets}" SelectedItem="{Binding Улицы}" DisplayMemberPath="Название" Grid.Column="1" Grid.Row="5" x:Name="Street" IsEditable="true"/>-->
+        <TextBox Text="{Binding ReaderNumber}" Grid.Column="1" Grid.Row="0" x:Name="RTicket"/>
+        <TextBox Text="{Binding SName}" Grid.Column="1" Grid.Row="1" x:Name="SName"/>
+        <TextBox Text="{Binding Name}" Grid.Column="1" Grid.Row="2" x:Name="FName"/>
+        <TextBox Text="{Binding TName}" Grid.Column="1" Grid.Row="3" x:Name="TName"/>
+        <TextBox Text="{Binding MobileNumber}" Grid.Column="1" Grid.Row="4" x:Name="TBPhone"/>
         <ComboBox ItemsSource="{Binding Streets}" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" GotFocus="Street_GotFocus" SelectedItem="{Binding Улицы}" DisplayMemberPath="Название" Grid.Column="1" Grid.Row="5" x:Name="Street" IsEditable="true" IsTextSearchEnabled="False" StaysOpenOnEdit="True"/>
-        
-        <TextBox Grid.Column="1" Grid.Row="6" x:Name="HouseNumber"/>
-        <TextBox Grid.Column="1" Grid.Row="7" x:Name="ApprtNumber"/>
-        <DatePicker Grid.Column="1" Grid.Row="8" x:Name="RegDate"/>
-        <DatePicker Grid.Column="1" Grid.Row="9" x:Name="ReRegDate"/>
+
+        <TextBox Text="{Binding HouseNumber}" Grid.Column="1" Grid.Row="6" x:Name="HouseNumber"/>
+        <TextBox Text="{Binding Appartment}" Grid.Column="1" Grid.Row="7" x:Name="ApprtNumber"/>
+        <DatePicker SelectedDate="{Binding RegistrationTime}" Grid.Column="1" Grid.Row="8" x:Name="RegDate"/>
+        <DatePicker SelectedDate="{Binding ReRegistrationTime}" Grid.Column="1" Grid.Row="9" x:Name="ReRegDate"/>
 
         <Button Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" x:Name="RegButton" Width="200" Height="50" Content="Зарегестрировать"/>
     </Grid>

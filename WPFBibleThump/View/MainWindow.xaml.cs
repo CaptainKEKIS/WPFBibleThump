@@ -100,11 +100,11 @@ namespace WPFBibleThump
 
         private void ReadersReg_Click(object sender, RoutedEventArgs e)
         {
-            ReadersReg ReadersR = new ReadersReg
-            {
-                Owner = this
-            };
-            ReadersR.Show();
+            //ReadersReg ReadersR = new ReadersReg
+            //{
+            //    Owner = this
+            //};
+            //ReadersR.Show();
         }
 
         private void IssuingBooks_Click(object sender, RoutedEventArgs e)

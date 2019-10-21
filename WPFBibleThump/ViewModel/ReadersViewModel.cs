@@ -28,18 +28,24 @@ namespace WPFBibleThump.ViewModel
             Readers = CollectionViewSource.GetDefaultView(model.Читатели.Local);
 
             AddCommand = new RelayCommand(
-                (param) => 
+                (param) =>
                 {
-                    ReadersReg readersReg = new ReadersReg();
+                    Читатели reader = new Читатели();
+                    ReadersReg readersReg = new ReadersReg(model, reader);
                     readersReg.ShowDialog();
-                }, 
+                },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.ReadersName && uo.W == 1) != 0);
 
-            ChangeCommand = new RelayCommand((param) => { },
+            ChangeCommand = new RelayCommand(
+                (param) =>
+                {
+                    ReadersReg readersReg = new ReadersReg(model, _selectedReader);
+                    readersReg.ShowDialog();
+                },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.ReadersName && uo.E == 1) != 0 && param != null);
 
             DeleteCommand = new RelayCommand(
-                (param) => 
+                (param) =>
                 {
                     model.Читатели.Remove(_selectedReader);
                     model.SaveChanges();
@@ -47,7 +53,7 @@ namespace WPFBibleThump.ViewModel
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.ReadersName && uo.D == 1) != 0 && param != null);
 
             IssueBookCommand = new RelayCommand(
-                (param) => 
+                (param) =>
                 {
                     IssuingBooksFormMVVM issuingBooksForm = new IssuingBooksFormMVVM(SelectedReader);
                     issuingBooksForm.ShowDialog();
@@ -80,8 +86,8 @@ namespace WPFBibleThump.ViewModel
         {
             Читатели readers = o as Читатели;
             string FIO = readers.Фамилия + " " + readers.Имя + " " + readers.Отчество;
-            if (String.IsNullOrEmpty(SearchText) 
-                || readers.Номер_читательского_билета.StartsWith(SearchText.Trim(), StringComparison.OrdinalIgnoreCase) 
+            if (String.IsNullOrEmpty(SearchText)
+                || readers.Номер_читательского_билета.StartsWith(SearchText.Trim(), StringComparison.OrdinalIgnoreCase)
                 || FIO.StartsWith(SearchText.Trim(), StringComparison.OrdinalIgnoreCase)
                 )
             {
