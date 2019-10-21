@@ -110,19 +110,20 @@ namespace WPFBibleThump.ViewModel
 
                         try
                         {
-                            if (deletedCity.Книги.Count != 0)
-                            {
-                                throw new DbUpdateException("В городе есть книги!!!!");
-                            }
+                            //if (deletedCity.Книги.Count != 0)
+                            //{
+                            //    throw new DbUpdateException("В городе есть книги!!!!");
+                            //}
                             model.Города.Local.Remove(deletedCity);
                             model.SaveChanges();
                         }
                         catch (DbUpdateException ex)
                         {
-                            MessageBox.Show($"Произошла ошибка при удалении данных: {Environment.CommandLine}{ex.Message}", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                            
                             model.Города.Local.Add(deletedCity);
                             Cities.MoveCurrentTo(deletedCity);
                             Cities.Refresh();
+                            MessageBox.Show($"Произошла ошибка при удалении данных: {Environment.CommandLine}{ex.Message}", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                 },

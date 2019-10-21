@@ -24,6 +24,7 @@ namespace WPFBibleThump
         public ReadersReg(MOYABAZAEntities model, Читатели reader)
         {
             InitializeComponent();
+            RegDate.SelectedDate = DateTime.Now;
             DataContext = new ReadersRegViewModel(model, reader);
         }
 
@@ -36,6 +37,19 @@ namespace WPFBibleThump
          //   MessageBox.Show("fdsfsd");
             (sender as ComboBox).IsDropDownOpen = true;
 
+        }
+
+        private void RegButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (RTicket.Text == String.Empty || SName.Text == String.Empty || FName.Text == String.Empty || TName.Text == String.Empty || TBPhone.Text == String.Empty ||
+                   Street.Text == String.Empty || HouseNumber.Text == String.Empty || ApprtNumber.Text == String.Empty)
+            {
+                MessageBox.Show("Не все поля заплнены!");
+            }
+            else
+            {
+                DialogResult = true;
+            }
         }
     }
 }

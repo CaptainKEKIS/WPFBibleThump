@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using WPFBibleThump.Model;
 
@@ -33,6 +35,20 @@ namespace WPFBibleThump.ViewModel
                     Читатели reader = new Читатели();
                     ReadersReg readersReg = new ReadersReg(model, reader);
                     readersReg.ShowDialog();
+                    if(readersReg.DialogResult == true)
+                    {
+                        model.Читатели.Local.Add(reader);
+                        try
+                        {
+                            model.SaveChanges();
+                        }
+                        catch (DbUpdateException e)
+                        {
+                            model.Читатели.Local.Remove(reader);
+                            MessageBox.Show($"Такой reader уже существует! \n {e.Message}");
+                        }
+                        Readers.Refresh();
+                    }
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.ReadersName && uo.W == 1) != 0);
 
@@ -41,6 +57,15 @@ namespace WPFBibleThump.ViewModel
                 {
                     ReadersReg readersReg = new ReadersReg(model, _selectedReader);
                     readersReg.ShowDialog();
+                    if(readersReg.DialogResult == true)
+                    {
+                        model.SaveChanges();
+                        Readers.Refresh();
+                    }
+                    else
+                    {
+                        model.Entry(_selectedReader).State = EntityState.Unchanged;
+                    }
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.ReadersName && uo.E == 1) != 0 && param != null);
 

@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using WPFBibleThump.Model;
 
@@ -34,7 +35,7 @@ namespace WPFBibleThump.ViewModel
             AddCommand = new RelayCommand(
                 (param) =>
                 {
-
+                    
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.AuthorThesaurusName && uo.W == 1) != 0);
 
@@ -106,12 +107,12 @@ namespace WPFBibleThump.ViewModel
             }
         }
 
-        public string Street
+        public Улицы Street
         {
-            get { return _reader.Улицы.Название; }
+            get { return _reader.Улицы; }
             set
             {
-
+                _reader.Улицы = value;
             }
         }
 
