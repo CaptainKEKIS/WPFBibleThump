@@ -59,7 +59,15 @@ namespace WPFBibleThump.ViewModel
                     readersReg.ShowDialog();
                     if(readersReg.DialogResult == true)
                     {
-                        model.SaveChanges();
+                        try
+                        {
+                            model.SaveChanges();
+                        }
+                        catch (DbUpdateException e)
+                        {
+                            model.Entry(_selectedReader).State = EntityState.Unchanged;
+                            MessageBox.Show($"Такой reader уже существует! \n {e.Message}");
+                        }
                         Readers.Refresh();
                     }
                     else
