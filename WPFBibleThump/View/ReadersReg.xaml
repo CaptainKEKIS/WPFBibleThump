@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:WPFBibleThump"
         xmlns:Model="clr-namespace:WPFBibleThump.Model" x:Class="WPFBibleThump.ReadersReg"
         mc:Ignorable="d"
-        Title="Регистрация читателей" Height="462.712" Width="800">
+        Title="{Binding Title}" Height="470" Width="800" MinHeight="470" MinWidth="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition MaxHeight="35" MinHeight="35"/>
@@ -20,7 +20,7 @@
             <RowDefinition MaxHeight="35" MinHeight="35"/>
             <RowDefinition MaxHeight="42" MinHeight="42"/>
             <RowDefinition MaxHeight="42" MinHeight="42"/>
-            <RowDefinition MaxHeight="70" MinHeight="70"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -49,7 +49,9 @@
         <TextBox Text="{Binding Appartment}" Grid.Column="1" Grid.Row="7" x:Name="ApprtNumber"/>
         <DatePicker SelectedDate="{Binding RegistrationTime}" Grid.Column="1" Grid.Row="8" x:Name="RegDate"/>
         <DatePicker SelectedDate="{Binding ReRegistrationTime}" Grid.Column="1" Grid.Row="9" x:Name="ReRegDate"/>
-
-        <Button Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" x:Name="RegButton" Width="200" Height="50" Content="Зарегестрировать" Click="RegButton_Click"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" Orientation="Horizontal" >
+            <Button x:Name="RegButton" Width="200" Height="50" Content="{Binding ButtonText}" Click="RegButton_Click"/>
+            <Button x:Name="CancelButton" Width="200" Height="50" Content="Отмена" Click="CancelButton_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

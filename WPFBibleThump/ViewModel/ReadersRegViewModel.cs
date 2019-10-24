@@ -21,6 +21,8 @@ namespace WPFBibleThump.ViewModel
         }
         private string _searchText;
         private Читатели _reader;
+        private string _buttonText;
+        private string _title;
 
         public RelayCommand AddCommand { get; }
         public RelayCommand ChangeCommand { get; }
@@ -31,7 +33,17 @@ namespace WPFBibleThump.ViewModel
             //App.MOYABAZA.Улицы.Load();
             _reader = reader;
             Streets = CollectionViewSource.GetDefaultView(App.MOYABAZA.Улицы.ToArray());
-
+            if(reader.Номер_читательского_билета == null)
+            {
+                Title = "Регистрация читателя";
+                ButtonText = "Зарегистрировать";
+                RegistrationTime = DateTime.Now;
+            }
+            else
+            {
+                Title = "Изменение читателя";
+                ButtonText = "Изменить";
+            }
             AddCommand = new RelayCommand(
                 (param) =>
                 {
@@ -61,6 +73,24 @@ namespace WPFBibleThump.ViewModel
                 return true;
             }
             return false;
+        }
+
+        public string Title
+        {
+            get { return _title; }
+            set
+            {
+                _title = value;
+            }
+        }
+
+        public string ButtonText
+        {
+            get { return _buttonText; }
+            set
+            {
+                _buttonText = value;
+            }
         }
 
         public string Name
