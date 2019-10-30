@@ -26,9 +26,19 @@ namespace WPFBibleThump
             DataContext = new PublishViewModel();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void addButton_Click(object sender, RoutedEventArgs e)
         {
+            Edit_TextBox.Focus();
+        }
 
+        private void Edit_TextBox_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if ((sender as TextBox).IsEnabled)
+            {
+                TextBox textBox = (sender as TextBox);
+                textBox.Focus();
+                textBox.CaretIndex = textBox.Text.Count();
+            }
         }
     }
 }

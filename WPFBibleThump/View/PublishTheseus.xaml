@@ -5,24 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFBibleThump"
         mc:Ignorable="d"
-        Title="PublishTheseus" Height="450" Width="800">
+        Title="Справочник издательств" Height="450" Width="800">
     
     <DockPanel>
-        <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Bottom" Margin="5"/>
-        <Grid x:Name="PublishTGrid">
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+            <TextBox x:Name="Edit_TextBox" Text="{Binding PublishTextBox}"  Margin="5" IsEnabled="{Binding EditAllowed}" Width="400" IsEnabledChanged="Edit_TextBox_IsEnabledChanged"/>
+            <Button x:Name="funcButton" Content="Сохранить" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=Edit_TextBox, Path=IsEnabled}"/>
+        </StackPanel>
+        <Grid x:Name="PublishTGrid" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <DataGrid ItemsSource="{Binding Publishes}" x:Name="fsdjkfjdsl" AutoGenerateColumns="False" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
+            <DataGrid ItemsSource="{Binding Publishes}" SelectedItem="{Binding SelectedPublish}" x:Name="fsdjkfjdsl" Grid.Row="1">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Название}" Foreground="#FFB2208A" Header="Название" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel HorizontalAlignment="Left"  Grid.Row="0" Orientation="Horizontal">
-                <Button x:Name="createButton" Content="Создать" Command="{Binding AddCommand}" />
-                <Button x:Name="changeButton" Content="Изменить" Command="{Binding ChangeCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
-                <Button x:Name="deleteButton" Content="Удалить" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
+                <Button x:Name="addButton" Content="Добавление" Command="{Binding AddModeCommand}" Click="addButton_Click" />
+                <Button x:Name="changeButton" Content="Изменение" Command="{Binding ChangeModeCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
+                <Button x:Name="deleteButton" Content="Удаление" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
+                <Label Content="Поиск: " VerticalContentAlignment="Center"/>
+                <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Width="300" Margin="5"/>
             </StackPanel>
         </Grid>
     </DockPanel>

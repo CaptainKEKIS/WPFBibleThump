@@ -14,10 +14,10 @@ using WPFBibleThump.Model;
 
 namespace WPFBibleThump.ViewModel
 {
-    class StreetsViewModel
+    class StreetsViewModel : INotifyPropertyChanged
     {
         private string _searchText;
-        private Города _selectedStreet;
+        private Улицы _selectedStreet;
         private string _streetTextBox;
         private bool _editAllowed;
         public ICollectionView Streets { get; set; }
@@ -112,28 +112,28 @@ namespace WPFBibleThump.ViewModel
 
                         try
                         {
-                            if (deletedStreet.Книги.Count != 0)
+                            if (deletedStreet.Читатели.Count != 0)
                             {
-                                throw new DbUpdateException("В городе есть книги!!!!");
+                                throw new DbUpdateException("В улице есть читатели!!!!");
                             }
-                            model.Города.Local.Remove(deletedStreet);
+                            model.Улицы.Local.Remove(deletedStreet);
                             model.SaveChanges();
                         }
                         catch (DbUpdateException ex)
                         {
 
-                            model.Города.Local.Add(deletedStreet);
+                            model.Улицы.Local.Add(deletedStreet);
                             Streets.MoveCurrentTo(deletedStreet);
                             Streets.Refresh();
                             MessageBox.Show($"Произошла ошибка при удалении данных: {Environment.CommandLine}{ex.Message}", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                 },
-                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.CityThesaurusName && uo.D == 1) != 0 && param != null);
+                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.StreetThesaurusName && uo.D == 1) != 0 && param != null);
             Streets.Filter = FilterFunction;
         }
 
-        public Города SelectedStreet
+        public Улицы SelectedStreet
         {
             get { return _selectedStreet; }
             set

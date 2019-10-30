@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFBibleThump"
         mc:Ignorable="d"
-        Title="StreetTheseus" Height="450" Width="800">
+        Title="Справочник улиц" Height="450" Width="800">
 
     <DockPanel>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
@@ -17,17 +17,17 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <DataGrid ItemsSource="{Binding Streets}" x:Name="fsdjkfjdsl" AutoGenerateColumns="False" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
+            <DataGrid ItemsSource="{Binding Streets}" SelectedItem="{Binding SelectedStreet}" x:Name="fsdjkfjdsl" Grid.Row="1">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Название}" Foreground="#FFB2208A" Width="*" Header="Название"/>
                 </DataGrid.Columns>
             </DataGrid>
 
             <StackPanel HorizontalAlignment="Left"  Grid.Row="0" Orientation="Horizontal">
-                <Button x:Name="createButton" Content="Добавление" Command="{Binding AddCommand}" Click="addButton_Click"/>
-                <Button x:Name="changeButton" Content="Изменение" Command="{Binding ChangeCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
+                <Button x:Name="createButton" Content="Добавление" Command="{Binding AddModeCommand}" Click="addButton_Click"/>
+                <Button x:Name="changeButton" Content="Изменение" Command="{Binding ChangeModeCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
                 <Button x:Name="deleteButton" Content="Удаление" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
-                <Label Content="Поиск: "/>
+                <Label Content="Поиск: " VerticalContentAlignment="Center"/>
                 <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Width="300" Margin="5"/>
             </StackPanel>
         </Grid>

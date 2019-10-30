@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFBibleThump"
         mc:Ignorable="d"
-        Title="CityTheseus" Height="450" Width="800">
+        Title="Справочник городов" Height="450" Width="800">
     <DockPanel>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
             <TextBox x:Name="Edit_TextBox" Text="{Binding CityTextBox}"  Margin="5" IsEnabled="{Binding EditAllowed}" Width="400" IsEnabledChanged="Edit_TextBox_IsEnabledChanged"/>
@@ -27,7 +27,7 @@
                 <Button x:Name="addButton" Content="Добавление" Command="{Binding AddModeCommand}" Click="addButton_Click" />
                 <Button x:Name="changeButton" Content="Изменение" Command="{Binding ChangeModeCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
                 <Button x:Name="deleteButton" Content="Удаление" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
-                <Label Content="Поиск: "/>
+                <Label Content="Поиск: " VerticalContentAlignment="Center"/>
                 <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Width="300" Margin="5"/>
             </StackPanel>
         </Grid>

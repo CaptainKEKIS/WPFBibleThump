@@ -120,7 +120,6 @@ namespace WPFBibleThump.ViewModel
                         }
                         catch (DbUpdateException ex)
                         {
-
                             model.Города.Local.Add(deletedCity);
                             Cities.MoveCurrentTo(deletedCity);
                             Cities.Refresh();

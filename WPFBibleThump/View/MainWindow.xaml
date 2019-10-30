@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFBibleThump"
         mc:Ignorable="d"
-        Title="MainWindow" MinHeight="80" MaxHeight="80" Width="500" MinWidth="300" ShowInTaskbar="False" WindowState="Maximized" >
+        Title="MainWindow" MinHeight="75" MaxHeight="75" Width="500" MinWidth="300" WindowState="Maximized" SizeToContent="Height">
     <Window.Resources>
         <Style TargetType="MenuItem">
             <Setter Property="Margin" Value="5"/>
         </Style>
     </Window.Resources>
     <DockPanel >
-        <Menu DockPanel.Dock="Top" HorizontalAlignment="Stretch" Padding="10,0,0,0" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True">
+        <Menu DockPanel.Dock="Top" HorizontalAlignment="Stretch" Padding="10,0,0,0" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}">
             <MenuItem Header="Файл" FontSize="16">
                 <MenuItem Header="Параметры"/>
                 <MenuItem x:Name="Exit" Header="Выход" Click="Exit_Click"/>
