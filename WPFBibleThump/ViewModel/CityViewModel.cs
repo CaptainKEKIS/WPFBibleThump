@@ -42,7 +42,7 @@ namespace WPFBibleThump.ViewModel
                     //model.Города.Local.Add(city);
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.CityThesaurusName && uo.W == 1) != 0);
-            
+
             ChangeModeCommand = new RelayCommand(
                 (param) =>
                 {
@@ -55,7 +55,7 @@ namespace WPFBibleThump.ViewModel
                 {
                     if (SelectedCity != null)
                     {
-                        if (CityTextBox != null)    //Изменение существующего города
+                        if (CityTextBox != String.Empty)    //Изменение существующего города
                         {
                             try
                             {
@@ -72,11 +72,12 @@ namespace WPFBibleThump.ViewModel
                         else
                         {
                             MessageBox.Show("Название не может быть пустым!");
+                            CityTextBox = SelectedCity.Название;
                         }
                     }
                     else
                     {
-                        if (CityTextBox != null)    //Добавление нового города
+                        if (CityTextBox != String.Empty)    //Добавление нового города
                         {
                             Города city = new Города();
                             try
@@ -110,16 +111,16 @@ namespace WPFBibleThump.ViewModel
 
                         try
                         {
-                            //if (deletedCity.Книги.Count != 0)
-                            //{
-                            //    throw new DbUpdateException("В городе есть книги!!!!");
-                            //}
+                            if (deletedCity.Книги.Count != 0)
+                            {
+                                throw new DbUpdateException("В городе есть книги!!!!");
+                            }
                             model.Города.Local.Remove(deletedCity);
                             model.SaveChanges();
                         }
                         catch (DbUpdateException ex)
                         {
-                            
+
                             model.Города.Local.Add(deletedCity);
                             Cities.MoveCurrentTo(deletedCity);
                             Cities.Refresh();

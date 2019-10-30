@@ -5,33 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFBibleThump"
         mc:Ignorable="d"
-        Title="MainWindow" Height="30" Width="500" WindowStyle="None" ResizeMode="NoResize">
+        Title="MainWindow" MinHeight="80" MaxHeight="80" Width="500" MinWidth="300" ShowInTaskbar="False" WindowState="Maximized" >
     <Window.Resources>
         <Style TargetType="MenuItem">
             <Setter Property="Margin" Value="5"/>
         </Style>
     </Window.Resources>
-
-    <Menu HorizontalAlignment="Stretch" VerticalAlignment="Top">
-        <MenuItem Header="Файл">
-            <MenuItem Header="Параметры"/>
-            <MenuItem x:Name="Exit" Header="Выход" Click="Exit_Click"/>
-        </MenuItem>
-        <MenuItem Header="Справочники">
-            <MenuItem x:Name="CityTheseus" Header="Города" Click="CityTheseus_Click"/>
-            <MenuItem x:Name="StreetTheseus" Header="Улицы" Click="StreetTheseus_Click"/>
-            <MenuItem x:Name="AuthorTheseus" Header="Авторы" Click="AuthorTheseus_Click"/>
-            <MenuItem x:Name="PublishTheseus" Header="Издательства" Click="PublishTheseus_Click"/>
-            <MenuItem x:Name="SysCatalogue" Header="Системный каталог" Click="SysCatalogue_Click"/>
-            <MenuItem x:Name="BooksTheseus" Header="Книги" Click="BooksTheseus_Click"/>
-            <MenuItem x:Name="IssuedBooks" Header="Выданные книги" Click="IssuedBooks_Click"/>
-            <MenuItem x:Name="Readers" Header="Читатели" Click="Readers_Click"/>
-        </MenuItem>
-        <MenuItem Header="Модули">
-            <MenuItem Header="Читатели">
-                <MenuItem x:Name="ReadersReg" Header="Регистрация читателей" Click="ReadersReg_Click"/>
-                <MenuItem x:Name="IssuingBooks" Header="Регистрация читателей" Click="IssuingBooks_Click"/>
+    <DockPanel >
+        <Menu DockPanel.Dock="Top" HorizontalAlignment="Stretch" Padding="10,0,0,0" ScrollViewer.CanContentScroll="True" UseLayoutRounding="True">
+            <MenuItem Header="Файл" FontSize="16">
+                <MenuItem Header="Параметры"/>
+                <MenuItem x:Name="Exit" Header="Выход" Click="Exit_Click"/>
             </MenuItem>
-        </MenuItem>
-    </Menu>
+            <MenuItem Header="Справочники" FontSize="16">
+                <MenuItem x:Name="CityTheseus" Header="Города" Click="CityTheseus_Click"/>
+                <MenuItem x:Name="StreetTheseus" Header="Улицы" Click="StreetTheseus_Click"/>
+                <MenuItem x:Name="AuthorTheseus" Header="Авторы" Click="AuthorTheseus_Click"/>
+                <MenuItem x:Name="PublishTheseus" Header="Издательства" Click="PublishTheseus_Click"/>
+                <MenuItem x:Name="SysCatalogue" Header="Системный каталог" Click="SysCatalogue_Click"/>
+                <MenuItem x:Name="BooksTheseus" Header="Книги" Click="BooksTheseus_Click"/>
+                <MenuItem x:Name="IssuedBooks" Header="Выданные книги" Click="IssuedBooks_Click"/>
+                <MenuItem x:Name="Readers" Header="Читатели" Click="Readers_Click"/>
+            </MenuItem>
+            <MenuItem Header="Модули" FontSize="16">
+                <MenuItem Header="Читатели">
+                    <MenuItem x:Name="ReadersReg" Header="Регистрация читателей" Click="ReadersReg_Click"/>
+                    <MenuItem x:Name="IssuingBooks" Header="Регистрация читателей" Click="IssuingBooks_Click"/>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+    </DockPanel>
 </Window>
