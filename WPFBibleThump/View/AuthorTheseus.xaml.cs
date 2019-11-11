@@ -27,12 +27,14 @@ namespace WPFBibleThump
             DataContext = new AuthorsViewModel();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void SName_TextBox_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-
-            //System.Windows.Data.CollectionViewSource авторыViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("авторыViewSource")));
-            // Загрузите данные, установив свойство CollectionViewSource.Source:
-            // авторыViewSource.Source = [универсальный источник данных]
+            if ((sender as TextBox).IsEnabled)
+            {
+                TextBox textBox = (sender as TextBox);
+                textBox.Focus();
+                textBox.CaretIndex = textBox.Text.Count();
+            }
         }
     }
 }

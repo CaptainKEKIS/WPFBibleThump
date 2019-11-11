@@ -21,7 +21,7 @@
             <Button x:Name="deleteButton" Content="Удалить" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
             <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
         </StackPanel>
-        <DataGrid ItemsSource="{Binding Books}" x:Name="fsdjkfjdsl" AutoGenerateColumns="False" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
+        <DataGrid ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}" x:Name="fsdjkfjdsl" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="названиеColumn" Binding="{Binding Название}" Header="Название" Width="*"/>
                 <DataGridTextColumn x:Name="id_издательстваColumn" Binding="{Binding Издательства.Название}" Header="Издательство" Width="150"/>

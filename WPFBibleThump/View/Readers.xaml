@@ -20,7 +20,7 @@
             <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
             <Button x:Name="IssueBook" Content="Вернуть книгу" Command="{Binding IssueBookCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
         </StackPanel>
-        <DataGrid SelectedItem="{Binding SelectedReader}" ItemsSource="{Binding Readers}" x:Name="fsdjkfjdsl" AutoGenerateColumns="False" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True" SelectionMode="Single">
+        <DataGrid SelectedItem="{Binding SelectedReader}" ItemsSource="{Binding Readers}" x:Name="fsdjkfjdsl" AutoGenerateColumns="False" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="номер_читательского_билетаColumn" Binding="{Binding Номер_читательского_билета}" Header="Номер билета" Width="auto"/>
                 <DataGridTextColumn x:Name="фамилияColumn" Binding="{Binding Фамилия}" Header="Фамилия" Width="*"/>

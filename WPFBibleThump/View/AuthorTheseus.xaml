@@ -6,29 +6,39 @@
         xmlns:local="clr-namespace:WPFBibleThump"
         xmlns:Model="clr-namespace:WPFBibleThump.Model" x:Class="WPFBibleThump.AuthorTheseus"
         mc:Ignorable="d"
-      Title="AuthorTheseus" Height="450" Width="800" Loaded="Window_Loaded">
-
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
-
-        <StackPanel HorizontalAlignment="Left"  Grid.Row="0" Orientation="Horizontal">
-            <Button x:Name="createButton" Content="Создать" Command="{Binding AddCommand}"/>
-            <Button x:Name="changeButton" Content="Изменить" Command="{Binding ChangeCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
-
-
-            <Button x:Name="deleteButton" Content="Удалить" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
-            <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+      Title="AuthorTheseus" Height="450" Width="800">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+            <Label Content="Фамилия"/>
+            <TextBox x:Name="SName_TextBox" Text="{Binding SName}"  Margin="5" IsEnabled="{Binding EditAllowed}" Width="150" IsEnabledChanged="SName_TextBox_IsEnabledChanged"/>
+            <Label Content="Имя" />
+            <TextBox x:Name="FName_TextBox" Text="{Binding FName}"  Margin="5" IsEnabled="{Binding EditAllowed}" Width="150"/>
+            <Label Content="Отчество" />
+            <TextBox x:Name="TName_TextBox" Text="{Binding TName}"  Margin="5" IsEnabled="{Binding EditAllowed}" Width="150"/>
+            <Button x:Name="funcButton" Content="Сохранить" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=SName_TextBox, Path=IsEnabled}"/>
         </StackPanel>
-        <DataGrid x:Name="fsdjkfjdsl"  AutoGenerateColumns="False" ItemsSource="{Binding Authors}" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="фамилияColumn" Width="*" Header="Фамилия" Binding="{Binding Фамилия}"/>
-                <DataGridTextColumn x:Name="имяColumn" Width="*" Header="Имя" Binding="{Binding Имя}"/>
-                <DataGridTextColumn x:Name="отчествоColumn" Width="*" Header="Отчество" Binding="{Binding Отчество}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel HorizontalAlignment="Left"  Grid.Row="0" Orientation="Horizontal">
+                <Button x:Name="addButton" Content="Добавление" Command="{Binding AddModeCommand}" />
+                <Button x:Name="changeButton" Content="Изменение" Command="{Binding ChangeModeCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
+                <Button x:Name="deleteButton" Content="Удаление" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />
+                <Label Content="Поиск: "/>
+                <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Width="300" Margin="5"/>
+            </StackPanel>
+
+            <DataGrid x:Name="fsdjkfjdsl" SelectedItem="{Binding SelectedAuthor}" ItemsSource="{Binding Authors}" Grid.Row="1" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="фамилияColumn" Width="*" Header="Фамилия" Binding="{Binding Фамилия}"/>
+                    <DataGridTextColumn x:Name="имяColumn" Width="*" Header="Имя" Binding="{Binding Имя}"/>
+                    <DataGridTextColumn x:Name="отчествоColumn" Width="*" Header="Отчество" Binding="{Binding Отчество}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </DockPanel>
 </Window>

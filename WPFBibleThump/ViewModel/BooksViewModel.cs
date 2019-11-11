@@ -13,6 +13,7 @@ namespace WPFBibleThump.ViewModel
     class BooksViewModel
     {
         private string _searchText;
+        private Книги _selectedBook;
         public ICollectionView Books { get; set; }
 
         public RelayCommand AddCommand { get; }
@@ -21,14 +22,59 @@ namespace WPFBibleThump.ViewModel
 
         public BooksViewModel()
         {
-            App.MOYABAZA.Книги.Load();
-            Books = CollectionViewSource.GetDefaultView(App.MOYABAZA.Книги.Local);
+            MOYABAZAEntities model = App.MOYABAZA;
+            model.Книги.Load();
+            Books = CollectionViewSource.GetDefaultView(model.Книги.Local);
 
-            AddCommand = new RelayCommand((param) => {  }, 
+            AddCommand = new RelayCommand((param) =>
+            {
+                Читатели reader = new Читатели();
+                ReadersReg readersReg = new ReadersReg(model, reader);
+                readersReg.ShowDialog();
+                if (readersReg.DialogResult == true)
+                {
+                    model.Читатели.Local.Add(reader);
+                    try
+                    {
+                        model.SaveChanges();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        model.Читатели.Local.Remove(reader);
+                        MessageBox.Show($"Такой reader уже существует! \n {e.Message}");
+                    }
+                    Readers.Refresh();
+                }
+            },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.W == 1) != 0);
-            ChangeCommand = new RelayCommand((param) => { },
+            ChangeCommand = new RelayCommand((param) =>
+            {
+                ReadersReg readersReg = new ReadersReg(model, _selectedReader);
+                readersReg.ShowDialog();
+                if (readersReg.DialogResult == true)
+                {
+                    try
+                    {
+                        model.SaveChanges();
+                    }
+                    catch (DbUpdateException e)
+                    {
+                        model.Entry(_selectedReader).State = EntityState.Unchanged;
+                        MessageBox.Show($"Такой reader уже существует! \n {e.Message}");
+                    }
+                    Readers.Refresh();
+                }
+                else
+                {
+                    model.Entry(_selectedReader).State = EntityState.Unchanged;
+                }
+            },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.E == 1) != 0 && param != null);
-            DeleteCommand = new RelayCommand((param) => {  },
+            DeleteCommand = new RelayCommand((param) =>
+            {
+                model.Читатели.Remove(_selectedReader);
+                model.SaveChanges();
+            },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.D == 1) != 0 && param != null);
             Books.Filter = FilterFunction;
         }
@@ -42,7 +88,7 @@ namespace WPFBibleThump.ViewModel
                 Books.Refresh();
             }
         }
-        
+
         bool FilterFunction(object o)
         {
             Книги ulica = o as Книги;
@@ -54,6 +100,6 @@ namespace WPFBibleThump.ViewModel
             }
             return false;
         }
-        
+
     }
 }
