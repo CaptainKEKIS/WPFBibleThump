@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using WPFBibleThump.Model;
+using WPFBibleThump.View;
 
 namespace WPFBibleThump.ViewModel
 {
@@ -28,28 +31,29 @@ namespace WPFBibleThump.ViewModel
 
             AddCommand = new RelayCommand((param) =>
             {
-                Читатели reader = new Читатели();
-                ReadersReg readersReg = new ReadersReg(model, reader);
+                Книги book = new Книги();
+                BooksReg readersReg = new BooksReg(model, book);
                 readersReg.ShowDialog();
                 if (readersReg.DialogResult == true)
                 {
-                    model.Читатели.Local.Add(reader);
+                    model.Книги.Local.Add(book);
                     try
                     {
                         model.SaveChanges();
                     }
                     catch (DbUpdateException e)
                     {
-                        model.Читатели.Local.Remove(reader);
-                        MessageBox.Show($"Такой reader уже существует! \n {e.Message}");
+                        model.Книги.Local.Remove(book);
+                        MessageBox.Show($"Такой книга уже существует! \n {e.Message}");
                     }
-                    Readers.Refresh();
+                    Books.Refresh();
                 }
             },
-                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.W == 1) != 0);
+            (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.W == 1) != 0);
+
             ChangeCommand = new RelayCommand((param) =>
             {
-                ReadersReg readersReg = new ReadersReg(model, _selectedReader);
+                BooksReg readersReg = new BooksReg(model, _selectedBook);
                 readersReg.ShowDialog();
                 if (readersReg.DialogResult == true)
                 {
@@ -59,24 +63,54 @@ namespace WPFBibleThump.ViewModel
                     }
                     catch (DbUpdateException e)
                     {
-                        model.Entry(_selectedReader).State = EntityState.Unchanged;
-                        MessageBox.Show($"Такой reader уже существует! \n {e.Message}");
+                        model.Entry(_selectedBook).State = EntityState.Unchanged;
+                        MessageBox.Show($"Такой book уже существует! \n {e.Message}");
                     }
-                    Readers.Refresh();
+                    Books.Refresh();
                 }
                 else
                 {
-                    model.Entry(_selectedReader).State = EntityState.Unchanged;
+                    model.Entry(_selectedBook).State = EntityState.Unchanged;
                 }
             },
-                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.E == 1) != 0 && param != null);
+            (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.E == 1) != 0 && param != null);
+
             DeleteCommand = new RelayCommand((param) =>
             {
-                model.Читатели.Remove(_selectedReader);
-                model.SaveChanges();
+                if (MessageBox.Show("Уверен?", "Назад дороги не будет", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes)
+                {
+                    var deletedBook = _selectedBook;
+
+                    try
+                    {
+                        if (deletedBook.Экземпляры_книги.Count != 0)
+                        {
+                            throw new DbUpdateException("У книги есть экземпляры!!!!");
+                        }
+                        model.Книги.Local.Remove(deletedBook);
+                        model.SaveChanges();
+                    }
+                    catch (DbUpdateException ex)
+                    {
+                        model.Книги.Local.Add(deletedBook);
+                        Books.MoveCurrentTo(deletedBook);
+                        Books.Refresh();
+                        MessageBox.Show($"Произошла ошибка при удалении данных: {Environment.CommandLine}{ex.Message}", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
             },
-                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.D == 1) != 0 && param != null);
+            (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.D == 1) != 0 && param != null);
+
             Books.Filter = FilterFunction;
+        }
+
+        public Книги SelectedBook
+        {
+            get { return _selectedBook; }
+            set
+            {
+                _selectedBook = value;
+            }
         }
 
         public string SearchText
@@ -91,10 +125,10 @@ namespace WPFBibleThump.ViewModel
 
         bool FilterFunction(object o)
         {
-            Книги ulica = o as Книги;
+            Книги book = o as Книги;
             if (String.IsNullOrEmpty(SearchText) ||
-                ulica.Название.StartsWith(SearchText.Trim(), StringComparison.OrdinalIgnoreCase) ||
-                ulica.Издательства.Название.StartsWith(SearchText.Trim(), StringComparison.OrdinalIgnoreCase))
+                book.Название.StartsWith(SearchText.Trim(), StringComparison.OrdinalIgnoreCase) ||
+                book.Издательства.Название.StartsWith(SearchText.Trim(), StringComparison.OrdinalIgnoreCase))
             {
                 return true;
             }

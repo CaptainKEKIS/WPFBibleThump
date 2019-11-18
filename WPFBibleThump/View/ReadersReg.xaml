@@ -50,8 +50,8 @@
         <DatePicker SelectedDate="{Binding RegistrationTime}" Grid.Column="1" Grid.Row="8" x:Name="RegDate"/>
         <DatePicker SelectedDate="{Binding ReRegistrationTime}" Grid.Column="1" Grid.Row="9" x:Name="ReRegDate"/>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" Orientation="Horizontal" >
-            <Button x:Name="RegButton" Width="200" Height="50" Content="{Binding ButtonText}" Click="RegButton_Click"/>
-            <Button x:Name="CancelButton" Width="200" Height="50" Content="Отмена" Click="CancelButton_Click"/>
+            <Button x:Name="RegButton" Width="150" Height="40" Content="{Binding ButtonText}" Click="RegButton_Click"/>
+            <Button x:Name="CancelButton" Width="150" Height="40" Content="Отмена" Click="CancelButton_Click"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -180,6 +180,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\BooksRegViewModel.cs" />
     <Compile Include="View\AddWindow.xaml.cs">
       <DependentUpon>AddWindow.xaml</DependentUpon>
     </Compile>
@@ -188,6 +189,9 @@
     </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="InterceptKeys.cs" />
+    <Compile Include="View\BooksReg.xaml.cs">
+      <DependentUpon>BooksReg.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\IssuingBooksFormMVVM.xaml.cs">
       <DependentUpon>IssuingBooksFormMVVM.xaml</DependentUpon>
     </Compile>
@@ -274,6 +278,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AuthorTheseus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BooksReg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

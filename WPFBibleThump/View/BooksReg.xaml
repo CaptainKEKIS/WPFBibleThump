@@ -1,0 +1,82 @@
+﻿<Window x:Class="WPFBibleThump.View.BooksReg"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFBibleThump"
+        mc:Ignorable="d"
+        Title="BooksReg" Height="720" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition MaxHeight="35" MinHeight="35"/>
+            <RowDefinition MaxHeight="35" MinHeight="35"/>
+            <RowDefinition MaxHeight="35" MinHeight="35"/>
+            <RowDefinition MaxHeight="35" MinHeight="35"/>
+            <RowDefinition MaxHeight="35" MinHeight="35"/>
+            <RowDefinition MaxHeight="35" MinHeight="35"/>
+            <RowDefinition MaxHeight="46" MinHeight="46"/>
+            <RowDefinition MaxHeight="46" MinHeight="110"/>
+            <RowDefinition MaxHeight="46" MinHeight="46"/>
+            <RowDefinition MaxHeight="50" MinHeight="200"/>
+            <RowDefinition MaxHeight="50" MinHeight="67"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Label VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Content="Название"/>
+        <Label VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Content="Издательство"/>
+        <Label VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Content="Город"/>
+        <Label VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" Content="Год издания"/>
+        <Label VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Content="УДК"/>
+        <Label VerticalAlignment="Center" Grid.Column="0" Grid.Row="5" Content="Количество экземпляров"/>
+        <Label VerticalAlignment="Center" Grid.Column="0" Grid.Row="6" Content="Авторы (Сделать каждого автора в отдельном комбобоксе, добавлять комбобоксы по кнопке +"/>
+        <Label VerticalAlignment="Center" Grid.Column="0" Grid.Row="8" Content="Экземпляры книги"/>
+
+        <TextBox Text="{Binding Name}" Grid.Column="1" Grid.Row="0" x:Name="Name"/>
+        <ComboBox ItemsSource="{Binding Publishes}" DisplayMemberPath="Название" SelectedItem="{Binding Publish}" Grid.Column="1" Grid.Row="1" x:Name="Publish"/>
+        <ComboBox ItemsSource="{Binding Cities}" DisplayMemberPath="Название" SelectedItem="{Binding City}" Grid.Column="1" Grid.Row="2" x:Name="City"/>
+        <TextBox Text="{Binding PublishingYear}" Grid.Column="1" Grid.Row="3" x:Name="PublishingYear"/>
+        <TextBox Text="{Binding UDK}" Grid.Column="1" Grid.Row="4" x:Name="UDK"/>
+        <TextBox Text="{Binding CopiesNumber}" Grid.Column="1" Grid.Row="5" x:Name="CopiesNumber"/>
+        <StackPanel Grid.Column="1" Grid.Row="6" Orientation="Horizontal">
+            <ComboBox ItemsSource="{Binding Authors}"  GotFocus="Author_GotFocus" SelectedItem="{Binding SelectedAuthor}" Width="460" x:Name="Author" IsEditable="true" IsTextSearchEnabled="False" StaysOpenOnEdit="True" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} {1} {2}">
+                                    <Binding Path="Фамилия"/>
+                                    <Binding Path="Имя"/>
+                                    <Binding Path="Отчество"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button Content="Добавить" HorizontalContentAlignment="Center"/>
+        </StackPanel>
+        <DataGrid ItemsSource="{Binding Author}" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" x:Name="DGAuthors">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Фамилия}" Header="Фамилия" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Имя}" Header="Имя" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Отчество}" Header="Отчество" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Column="1" Grid.Row="8" Orientation="Horizontal" >
+            <TextBox Text="{Binding BookCopy}" x:Name="BookCopy" Width="460" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <Button Content="Добавить" HorizontalContentAlignment="Center"/>
+        </StackPanel>
+        <DataGrid ItemsSource="{Binding BookCopies}" Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2" x:Name="BookCopies">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Инвентарный_номер}" Header="Инвентарный номер" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" Orientation="Horizontal" >
+            <Button x:Name="RegButton" Width="150" Height="40" Content="{Binding ButtonText}" Click="RegButton_Click"/>
+            <Button x:Name="CancelButton" Width="150" Height="40" Content="Отмена" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
