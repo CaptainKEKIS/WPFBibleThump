@@ -41,7 +41,7 @@
         <TextBox Text="{Binding UDK}" Grid.Column="1" Grid.Row="4" x:Name="UDK"/>
         <TextBox Text="{Binding CopiesNumber}" Grid.Column="1" Grid.Row="5" x:Name="CopiesNumber"/>
         <StackPanel Grid.Column="1" Grid.Row="6" Orientation="Horizontal">
-            <ComboBox ItemsSource="{Binding Authors}"  GotFocus="Author_GotFocus" SelectedItem="{Binding SelectedAuthor}" Width="460" x:Name="Author" IsEditable="true" IsTextSearchEnabled="False" StaysOpenOnEdit="True" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
+            <ComboBox ItemsSource="{Binding Authors}"  GotFocus="Author_GotFocus" SelectedItem="{Binding SelectedAuthor}" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Width="460" x:Name="Author" IsEditable="true" IsTextSearchEnabled="False" StaysOpenOnEdit="True" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock>

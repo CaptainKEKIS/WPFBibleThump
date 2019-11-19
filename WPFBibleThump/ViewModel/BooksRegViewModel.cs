@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using WPFBibleThump.Model;
 
 namespace WPFBibleThump.ViewModel
 {
-    class BooksRegViewModel
+    class BooksRegViewModel : INotifyPropertyChanged
     {
         public ICollectionView Authors
         {
@@ -26,29 +28,21 @@ namespace WPFBibleThump.ViewModel
             get;
             set;
         }
-        //public ICollectionView BookCopies
-        //{
-        //    get;
-        //    set;
-        //}
         private string _searchText;
         private Книги _book;
         public Авторы _selectedAuthor;
         private string _buttonText;
         private string _title;
 
-        public RelayCommand AddCommand { get; }
-        public RelayCommand ChangeCommand { get; }
-        public RelayCommand DeleteCommand { get; }
+        public RelayCommand AuthorAddCommand { get; }
+        public RelayCommand CopyAddCommand { get; }
 
         public BooksRegViewModel(MOYABAZAEntities model, Книги book)
         {
-            //App.MOYABAZA.Улицы.Load();
             _book = book;
             Authors = CollectionViewSource.GetDefaultView(App.MOYABAZA.Авторы.ToArray());
             Cities = CollectionViewSource.GetDefaultView(App.MOYABAZA.Города.ToArray());
             Publishes = CollectionViewSource.GetDefaultView(App.MOYABAZA.Издательства.ToArray());
-            //BookCopies = CollectionViewSource.GetDefaultView(App.MOYABAZA.Экземпляры_книги.Where(x=>x.Id_книги == _book.Id).ToArray());
             if (book.Название == null)
             {
                 Title = "Добавление книги";
@@ -59,14 +53,30 @@ namespace WPFBibleThump.ViewModel
                 Title = "Изменение книги";
                 ButtonText = "Изменить";
             }
-            AddCommand = new RelayCommand(
+            AuthorAddCommand = new RelayCommand(
                 (param) =>
                 {
-
+                    Author.Add(SelectedAuthor);
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.W == 1) != 0);
 
-            //Authors.Filter = FilterFunction;
+            CopyAddCommand = new RelayCommand(
+                (param) =>
+                {
+                    if (!book.Экземпляры_книги.Contains(BookCopy))
+                    {
+                        ICollection<Экземпляры_книги> ek;
+                        ek.Add(BookCopy);
+                        BookCopies = ek;
+                    }
+                    else
+                    {
+                        MessageBox.Show("экземпляр книги с таким инвнтарным номером уже существует!");
+                    }
+                },
+                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.W == 1) != 0);
+
+            Authors.Filter = FilterFunction;
         }
 
         public string SearchText
@@ -168,6 +178,7 @@ namespace WPFBibleThump.ViewModel
             set
             {
                 _book.Авторы = value;
+                OnPropertyChanged();
             }
         }
         
@@ -177,6 +188,7 @@ namespace WPFBibleThump.ViewModel
             set
             {
                 _book.Экземпляры_книги = value;
+                OnPropertyChanged();
             }
         }
 
@@ -187,6 +199,15 @@ namespace WPFBibleThump.ViewModel
             {
                 _selectedAuthor = value;
             }
+        }
+
+        public Экземпляры_книги BookCopy { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }
