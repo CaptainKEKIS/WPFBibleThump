@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFBibleThump"
         mc:Ignorable="d"
-        Title="BooksReg" Height="720" Width="800">
+        Title="BooksReg" Height="920" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition MaxHeight="35" MinHeight="35"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition MaxHeight="35" MinHeight="35"/>
             <RowDefinition MaxHeight="35" MinHeight="35"/>
             <RowDefinition MaxHeight="35" MinHeight="35"/>
@@ -40,25 +40,11 @@
         <TextBox Text="{Binding PublishingYear}" Grid.Column="1" Grid.Row="3" x:Name="PublishingYear"/>
         <TextBox Text="{Binding UDK}" Grid.Column="1" Grid.Row="4" x:Name="UDK"/>
         <TextBox Text="{Binding CopiesNumber}" Grid.Column="1" Grid.Row="5" x:Name="CopiesNumber"/>
-        <StackPanel Grid.Column="1" Grid.Row="6" Orientation="Horizontal">
-            <ComboBox ItemsSource="{Binding Authors}"  GotFocus="Author_GotFocus" SelectedItem="{Binding SelectedAuthor}" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Width="460" x:Name="Author" IsEditable="true" IsTextSearchEnabled="False" StaysOpenOnEdit="True" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock>
-                            <TextBlock.Text>
-                                <MultiBinding StringFormat="{}{0} {1} {2}">
-                                    <Binding Path="Фамилия"/>
-                                    <Binding Path="Имя"/>
-                                    <Binding Path="Отчество"/>
-                                </MultiBinding>
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <Button Content="Добавить" HorizontalContentAlignment="Center"/>
-        </StackPanel>
-        <DataGrid ItemsSource="{Binding Author}" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" x:Name="DGAuthors">
+        <DockPanel Grid.Column="1" Grid.Row="6" >
+            <Button Content="Добавить" HorizontalContentAlignment="Center" Command="{Binding AuthorAddCommand}" DockPanel.Dock="Right"/>
+            <ComboBox ItemsSource="{Binding Authors}" DisplayMemberPath="FullName" SelectedItem="{Binding SelectedAuthor}" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  x:Name="Author" IsEditable="true" IsTextSearchEnabled="False" StaysOpenOnEdit="True"/>
+        </DockPanel>
+        <DataGrid ItemsSource="{Binding SelectedBookAuthors}" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" x:Name="DGAuthors">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Фамилия}" Header="Фамилия" Width="*"/>
                 <DataGridTextColumn Binding="{Binding Имя}" Header="Имя" Width="*"/>
@@ -67,11 +53,11 @@
         </DataGrid>
         <StackPanel Grid.Column="1" Grid.Row="8" Orientation="Horizontal" >
             <TextBox Text="{Binding BookCopy}" x:Name="BookCopy" Width="460" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-            <Button Content="Добавить" HorizontalContentAlignment="Center"/>
+            <Button Content="Добавить" Command="{Binding CopyAddCommand}" HorizontalContentAlignment="Center"/>
         </StackPanel>
         <DataGrid ItemsSource="{Binding BookCopies}" Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2" x:Name="BookCopies">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Инвентарный_номер}" Header="Инвентарный номер" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Инвентарный_номер, StringFormat={}{00000}}" Header="Инвентарный номер" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" Orientation="Horizontal" >

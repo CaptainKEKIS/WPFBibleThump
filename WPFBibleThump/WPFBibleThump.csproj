@@ -180,6 +180,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Extensions\Авторы_ext.cs" />
+    <Compile Include="Model\Extensions\Экземпляры_книги_ext.cs" />
     <Compile Include="ViewModel\BooksRegViewModel.cs" />
     <Compile Include="View\AddWindow.xaml.cs">
       <DependentUpon>AddWindow.xaml</DependentUpon>
@@ -388,6 +390,7 @@
     <EntityDeploy Include="Model\BiblioModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BiblioModel.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EntityDeploy>
     <None Include="Model\BiblioModel.edmx.diagram">
       <DependentUpon>BiblioModel.edmx</DependentUpon>

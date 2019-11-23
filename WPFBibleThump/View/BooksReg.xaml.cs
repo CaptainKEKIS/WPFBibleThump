@@ -20,8 +20,10 @@ namespace WPFBibleThump.View
         private void Author_GotFocus(object sender, RoutedEventArgs e)
         {
             //   MessageBox.Show("fdsfsd");
-            (sender as ComboBox).IsDropDownOpen = true;
-
+            if ((sender as ComboBox).IsDropDownOpen == false)
+            {
+                (sender as ComboBox).IsDropDownOpen = true;
+            }
         }
 
         private void RegButton_Click(object sender, RoutedEventArgs e)

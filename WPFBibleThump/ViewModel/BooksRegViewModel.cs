@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -28,9 +30,20 @@ namespace WPFBibleThump.ViewModel
             get;
             set;
         }
+
+        public string BookCopy
+        {
+            get => _bookCopy;
+            set
+            {
+                _bookCopy = value;
+            }
+        }
+
         private string _searchText;
         private Книги _book;
-        public Авторы _selectedAuthor;
+        private Авторы _selectedAuthor;
+        private string _bookCopy;
         private string _buttonText;
         private string _title;
 
@@ -56,23 +69,37 @@ namespace WPFBibleThump.ViewModel
             AuthorAddCommand = new RelayCommand(
                 (param) =>
                 {
-                    Author.Add(SelectedAuthor);
+                    if (SelectedBookAuthors.Contains(SelectedAuthor))
+                    {
+
+                    }
+                    else if (SelectedAuthor == null)
+                    {
+                    }
+                    else
+                    {
+                        SelectedBookAuthors.Add(SelectedAuthor);
+                    }
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.W == 1) != 0);
 
             CopyAddCommand = new RelayCommand(
                 (param) =>
                 {
-                    if (!book.Экземпляры_книги.Contains(BookCopy))
+               /* if (BookCopies.Where(x => x.Инвентарный_номер == BookCopy).FirstOrDefault() != null)
                     {
-                        ICollection<Экземпляры_книги> ek;
-                        ek.Add(BookCopy);
-                        BookCopies = ek;
+                        MessageBox.Show("Этот инвентарный номер уже добавлен!");
+                    }
+                    else if (BookCopy == null)
+                    {
+                        MessageBox.Show("Инвентарный номер не может быть пустым!");
                     }
                     else
                     {
-                        MessageBox.Show("экземпляр книги с таким инвнтарным номером уже существует!");
-                    }
+                        var Copy = new Экземпляры_книги();
+                        Copy.Инвентарный_номер = BookCopy;
+                        BookCopies.Add(Copy);
+                    }*/
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.W == 1) != 0);
 
@@ -93,6 +120,7 @@ namespace WPFBibleThump.ViewModel
         {
             Авторы authors = o as Авторы;
             if (String.IsNullOrEmpty(SearchText) ||
+                authors.FullName.Equals(SearchText) ||
                 authors.Имя.StartsWith(SearchText.Trim(), StringComparison.OrdinalIgnoreCase) ||
                 authors.Фамилия.StartsWith(SearchText.Trim(), StringComparison.OrdinalIgnoreCase))
             {
@@ -172,23 +200,60 @@ namespace WPFBibleThump.ViewModel
             }
         }
 
-        public ICollection<Авторы> Author
+        private ICollection<Авторы> _selectedBookAuthors = null;
+        public ICollection<Авторы> SelectedBookAuthors
         {
-            get { return _book.Авторы; }
-            set
+            get
             {
-                _book.Авторы = value;
-                OnPropertyChanged();
+                if (_selectedBookAuthors == null)
+                {
+                    var selectedBookAuthors = new ObservableCollection<Авторы>(_book.Авторы);
+                    selectedBookAuthors.CollectionChanged += SelectedBookAuthors_CollectionChanged;
+                    _selectedBookAuthors = selectedBookAuthors;
+                }
+                return _selectedBookAuthors;
+            }
+
+        }
+
+        private void SelectedBookAuthors_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                _book.Авторы.Remove(e.OldItems[0] as Авторы);
+            }
+            else
+            {
+                _book.Авторы.Add(e.NewItems[0] as Авторы);
             }
         }
-        
+
+        private ICollection<Экземпляры_книги> _bookCopies = null;
         public ICollection<Экземпляры_книги> BookCopies
         {
-            get { return _book.Экземпляры_книги; }
-            set
+            get
             {
-                _book.Экземпляры_книги = value;
-                OnPropertyChanged();
+                if (_bookCopies == null)
+                {
+                    var bookCopies = new ObservableCollection<Экземпляры_книги>(_book.Экземпляры_книги);
+                    bookCopies.CollectionChanged += BookCopies_CollectionChanged;
+                    _bookCopies = bookCopies;
+                }
+
+                return _bookCopies;
+            }
+
+        }
+
+        private void BookCopies_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                _book.Экземпляры_книги.Remove(e.OldItems[0] as Экземпляры_книги);
+            }
+            else
+            {
+                _book.Экземпляры_книги.Add(e.NewItems[0] as Экземпляры_книги);
             }
         }
 
@@ -201,7 +266,6 @@ namespace WPFBibleThump.ViewModel
             }
         }
 
-        public Экземпляры_книги BookCopy { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged([CallerMemberName] string prop = "")
