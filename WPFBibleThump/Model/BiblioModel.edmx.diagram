@@ -6,27 +6,27 @@
     <edmx:Diagrams>
       <Diagram DiagramId="e2dd38366a5a4a6ab3f0c8954b35def7" Name="Diagram1">
         <EntityTypeShape EntityType="MOYABAZAModel.sysdiagrams" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MOYABAZAModel.Авторы" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MOYABAZAModel.Города" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MOYABAZAModel.Книги" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MOYABAZAModel.Авторы" Width="1.5" PointX="2.875" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MOYABAZAModel.Города" Width="1.5" PointX="1.625" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MOYABAZAModel.Объекты" Width="1.5" PointX="7.75" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MOYABAZAModel.Пользователи" Width="1.5" PointX="9.875" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MOYABAZAModel.Пользователи_Объекты" Width="1.5" PointX="10" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MOYABAZAModel.Систематический_каталог" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MOYABAZAModel.Систематический_каталог" Width="1.5" PointX="1.25" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MOYABAZAModel.Улицы" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MOYABAZAModel.Читатели" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MOYABAZAModel.Экземпляры_книги" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MOYABAZAModel.Выданные_книги" Width="1.875" PointX="7.5" PointY="1.625" IsExpanded="true" />
-        <AssociationConnector Association="MOYABAZAModel.FK_Книги_Города" ManuallyRouted="false" />
-        <AssociationConnector Association="MOYABAZAModel.FK_Экземпляры_книги_Книги" ManuallyRouted="false" />
         <AssociationConnector Association="MOYABAZAModel.FK_Пользователи_Объекты_Объекты" ManuallyRouted="false" />
         <AssociationConnector Association="MOYABAZAModel.FK_Пользователи_Объекты_Пользователи" ManuallyRouted="false" />
         <AssociationConnector Association="MOYABAZAModel.FK_Читатели_Улицы" ManuallyRouted="false" />
-        <AssociationConnector Association="MOYABAZAModel.FK_Выданные_книги_Читатели" ManuallyRouted="false" />
-        <AssociationConnector Association="MOYABAZAModel.FK_Выданные_книги_Экземпляры_книги" ManuallyRouted="false" />
-        <AssociationConnector Association="MOYABAZAModel.КнигиАвторы" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="MOYABAZAModel.Издательства" Width="1.5" PointX="0.75" PointY="4.375" />
+        <EntityTypeShape EntityType="MOYABAZAModel.Издательства" Width="1.5" PointX="3.25" PointY="4.625" />
+        <EntityTypeShape EntityType="MOYABAZAModel.Выданные_книги" Width="1.5" PointX="12.75" PointY="4.375" />
+        <EntityTypeShape EntityType="MOYABAZAModel.Книги" Width="1.5" PointX="5.25" PointY="1.375" />
+        <EntityTypeShape EntityType="MOYABAZAModel.Экземпляры_книги" Width="1.5" PointX="7.5" PointY="2" />
+        <AssociationConnector Association="MOYABAZAModel.FK_Выданные_книги_Читатели" />
+        <AssociationConnector Association="MOYABAZAModel.FK_Выданные_книги_Экземпляры_книги" />
+        <AssociationConnector Association="MOYABAZAModel.FK_Книги_Города" />
         <AssociationConnector Association="MOYABAZAModel.FK_Книги_Издательства" />
+        <AssociationConnector Association="MOYABAZAModel.FK_Экземпляры_книги_Книги" />
+        <AssociationConnector Association="MOYABAZAModel.КнигиАвторы" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

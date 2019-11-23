@@ -71,10 +71,11 @@ namespace WPFBibleThump.ViewModel
                 {
                     if (SelectedBookAuthors.Contains(SelectedAuthor))
                     {
-
+                        MessageBox.Show("Этот автор уже добавлен!");
                     }
                     else if (SelectedAuthor == null)
                     {
+                        MessageBox.Show("Автор не найден!");
                     }
                     else
                     {
@@ -193,10 +194,10 @@ namespace WPFBibleThump.ViewModel
 
         public int CopiesNumber
         {
-            get { return _book.Количество_экземпляров; }
+            get { return 1; }
             set
             {
-                _book.Количество_экземпляров = value;
+                
             }
         }
 
