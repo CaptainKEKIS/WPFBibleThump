@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using WPFBibleThump.Model;
-using WPFBibleThump.View;
+using WPFBibleThump.View; 
 
 namespace WPFBibleThump.ViewModel
 {
@@ -70,7 +70,11 @@ namespace WPFBibleThump.ViewModel
                 }
                 else
                 {
+                    //model.Entry(_selectedBook).Collection(p => p.Авторы).Load();
+                   
+                    ((IObjectContextAdapter)model).ObjectContext.Refresh(System.Data.Entity.Core.Objects.RefreshMode.ClientWins, _selectedBook.Авторы);
                     model.Entry(_selectedBook).State = EntityState.Unchanged;
+
                 }
             },
             (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.E == 1) != 0 && param != null);

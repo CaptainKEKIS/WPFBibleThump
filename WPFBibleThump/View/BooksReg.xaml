@@ -57,7 +57,7 @@
         </StackPanel>
         <DataGrid ItemsSource="{Binding BookCopies}" Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2" x:Name="BookCopies">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Инвентарный_номер, StringFormat={}{00000}}" Header="Инвентарный номер" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Инвентарный_номер, StringFormat={}{0:00000000}}" Header="Инвентарный номер" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" Orientation="Horizontal" >
