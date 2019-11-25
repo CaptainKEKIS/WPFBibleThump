@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
+using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using WPFBibleThump.Model;
-using WPFBibleThump.View; 
+using WPFBibleThump.View;
 
 namespace WPFBibleThump.ViewModel
 {
@@ -70,10 +71,41 @@ namespace WPFBibleThump.ViewModel
                 }
                 else
                 {
-                    //model.Entry(_selectedBook).Collection(p => p.Авторы).Load();
-                   
-                    ((IObjectContextAdapter)model).ObjectContext.Refresh(System.Data.Entity.Core.Objects.RefreshMode.ClientWins, _selectedBook.Авторы);
-                    model.Entry(_selectedBook).State = EntityState.Unchanged;
+                    model.ChangeTracker.DetectChanges();
+                    var objectContext = ((IObjectContextAdapter)model).ObjectContext;
+                    var addedRelations = objectContext
+                        .ObjectStateManager
+                        .GetObjectStateEntries(EntityState.Added)
+                        .Where(e => e.IsRelationship)
+                        .Select(
+                           e => new
+                           {
+                               B = objectContext.GetObjectByKey((EntityKey)e.CurrentValues[1]),
+                               A = objectContext.GetObjectByKey((EntityKey)e.CurrentValues[0])
+                           });
+                    foreach (var r in addedRelations)
+                    {
+                        objectContext
+                        .ObjectStateManager
+                        .ChangeRelationshipState<Книги>(r.B as Книги, r.A, (b2) => b2.Авторы, EntityState.Detached);
+                    }
+
+                    var removedRelations = objectContext
+                        .ObjectStateManager
+                        .GetObjectStateEntries(EntityState.Deleted)
+                        .Where(e => e.IsRelationship)
+                        .Select(
+                           e => new
+                           {
+                               B = objectContext.GetObjectByKey((EntityKey)e.OriginalValues[1]),
+                               A = objectContext.GetObjectByKey((EntityKey)e.OriginalValues[0])
+                           });
+                    foreach (var r in removedRelations)
+                    {
+                        objectContext
+                            .ObjectStateManager
+                            .ChangeRelationshipState<Книги>(r.B as Книги, r.A, (b2) => b2.Авторы, EntityState.Unchanged);
+                    }
 
                 }
             },

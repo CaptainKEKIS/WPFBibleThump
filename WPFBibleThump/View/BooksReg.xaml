@@ -41,20 +41,21 @@
         <TextBox Text="{Binding UDK}" Grid.Column="1" Grid.Row="4" x:Name="UDK"/>
         <TextBox Text="{Binding CopiesNumber}" Grid.Column="1" Grid.Row="5" x:Name="CopiesNumber"/>
         <DockPanel Grid.Column="1" Grid.Row="6" >
-            <Button Content="Добавить" HorizontalContentAlignment="Center" Command="{Binding AuthorAddCommand}" DockPanel.Dock="Right"/>
+            <Button Content="Удалить" Command="{Binding AuthorDeleteCommand}" DockPanel.Dock="Right"/>
+            <Button Content="Добавить" Command="{Binding AuthorAddCommand}" DockPanel.Dock="Right"/>
             <ComboBox ItemsSource="{Binding Authors}" DisplayMemberPath="FullName" SelectedItem="{Binding SelectedAuthor}" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  x:Name="Author" IsEditable="true" IsTextSearchEnabled="False" StaysOpenOnEdit="True"/>
         </DockPanel>
-        <DataGrid ItemsSource="{Binding SelectedBookAuthors}" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" x:Name="DGAuthors">
+        <DataGrid ItemsSource="{Binding SelectedBookAuthors}" SelectedItem="{Binding DataGridSelectedAuthor}" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" x:Name="DGAuthors">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Фамилия}" Header="Фамилия" Width="*"/>
                 <DataGridTextColumn Binding="{Binding Имя}" Header="Имя" Width="*"/>
                 <DataGridTextColumn Binding="{Binding Отчество}" Header="Отчество" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Column="1" Grid.Row="8" Orientation="Horizontal" >
-            <TextBox Text="{Binding BookCopy}" x:Name="BookCopy" Width="460" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-            <Button Content="Добавить" Command="{Binding CopyAddCommand}" HorizontalContentAlignment="Center"/>
-        </StackPanel>
+        <DockPanel Grid.Column="1" Grid.Row="8">
+            <Button Content="Добавить" Command="{Binding CopyAddCommand}" DockPanel.Dock="Right"/>
+            <TextBox Text="{Binding BookCopy}" x:Name="BookCopy" Width="460"/>
+        </DockPanel>
         <DataGrid ItemsSource="{Binding BookCopies}" Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2" x:Name="BookCopies">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Инвентарный_номер, StringFormat={}{0:00000000}}" Header="Инвентарный номер" Width="*"/>

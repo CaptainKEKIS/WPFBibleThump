@@ -43,12 +43,15 @@ namespace WPFBibleThump.ViewModel
         private string _searchText;
         private Книги _book;
         private Авторы _selectedAuthor;
+        private Авторы _dataGridSelectedAuthor;
         private string _bookCopy;
         private string _buttonText;
         private string _title;
 
         public RelayCommand AuthorAddCommand { get; }
+        public RelayCommand AuthorDeleteCommand { get; }
         public RelayCommand CopyAddCommand { get; }
+        public RelayCommand CopyDeleteCommand { get; }
 
         public BooksRegViewModel(MOYABAZAEntities model, Книги book)
         {
@@ -66,6 +69,7 @@ namespace WPFBibleThump.ViewModel
                 Title = "Изменение книги";
                 ButtonText = "Изменить";
             }
+
             AuthorAddCommand = new RelayCommand(
                 (param) =>
                 {
@@ -84,9 +88,36 @@ namespace WPFBibleThump.ViewModel
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.W == 1) != 0);
 
+
+            AuthorDeleteCommand = new RelayCommand(
+                (param) =>
+                {
+                    if (DataGridSelectedAuthor == null)
+                    {
+                        MessageBox.Show("Автор не выбран!");
+                    }
+                    else
+                    {
+                        SelectedBookAuthors.Remove(DataGridSelectedAuthor);
+                    }
+                },
+                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.W == 1) != 0);
+
+
             CopyAddCommand = new RelayCommand(
                 (param) =>
                 {
+                    var maxInvNumber = model.Экземпляры_книги.Max(b => b.Инвентарный_номер);
+                    int newInvNumbersCount = 0;
+                    int.TryParse(BookCopy, out newInvNumbersCount);
+                    for(int i = maxInvNumber; i < maxInvNumber + newInvNumbersCount; i++)
+                    {
+                        var Copy = new Экземпляры_книги();
+                        Copy.Инвентарный_номер = i + 1;
+                        BookCopies.Add(Copy);
+                    }
+                    
+
                /* if (BookCopies.Where(x => x.Инвентарный_номер == BookCopy).FirstOrDefault() != null)
                     {
                         MessageBox.Show("Этот инвентарный номер уже добавлен!");
@@ -264,6 +295,15 @@ namespace WPFBibleThump.ViewModel
             set
             {
                 _selectedAuthor = value;
+            }
+        }
+
+        public Авторы DataGridSelectedAuthor
+        {
+            get { return _dataGridSelectedAuthor; }
+            set
+            {
+                _dataGridSelectedAuthor = value;
             }
         }
 
