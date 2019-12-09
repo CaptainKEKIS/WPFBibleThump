@@ -22,6 +22,7 @@ namespace WPFBibleThump.Model
     
         public int Инвентарный_номер { get; set; }
         public int Id_книги { get; set; }
+        public bool Архивировано { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Выданные_книги> Выданные_книги { get; set; }

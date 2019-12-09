@@ -106,7 +106,7 @@ namespace WPFBibleThump.ViewModel
                             .ObjectStateManager
                             .ChangeRelationshipState<Книги>(r.B as Книги, r.A, (b2) => b2.Авторы, EntityState.Unchanged);
                     }
-
+                    //TODO: Исправить удаление экземпляра книги по кнопке отмена
                 }
             },
             (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.E == 1) != 0 && param != null);

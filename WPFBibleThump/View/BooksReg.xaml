@@ -30,7 +30,6 @@
         <Label VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Content="Город"/>
         <Label VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" Content="Год издания"/>
         <Label VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Content="УДК"/>
-        <Label VerticalAlignment="Center" Grid.Column="0" Grid.Row="5" Content="Количество экземпляров"/>
         <Label VerticalAlignment="Center" Grid.Column="0" Grid.Row="6" Content="Авторы (Сделать каждого автора в отдельном комбобоксе, добавлять комбобоксы по кнопке +"/>
         <Label VerticalAlignment="Center" Grid.Column="0" Grid.Row="8" Content="Экземпляры книги"/>
 
@@ -39,7 +38,6 @@
         <ComboBox ItemsSource="{Binding Cities}" DisplayMemberPath="Название" SelectedItem="{Binding City}" Grid.Column="1" Grid.Row="2" x:Name="City"/>
         <TextBox Text="{Binding PublishingYear}" Grid.Column="1" Grid.Row="3" x:Name="PublishingYear"/>
         <TextBox Text="{Binding UDK}" Grid.Column="1" Grid.Row="4" x:Name="UDK"/>
-        <TextBox Text="{Binding CopiesNumber}" Grid.Column="1" Grid.Row="5" x:Name="CopiesNumber"/>
         <DockPanel Grid.Column="1" Grid.Row="6" >
             <Button Content="Удалить" Command="{Binding AuthorDeleteCommand}" DockPanel.Dock="Right"/>
             <Button Content="Добавить" Command="{Binding AuthorAddCommand}" DockPanel.Dock="Right"/>
@@ -53,10 +51,11 @@
             </DataGrid.Columns>
         </DataGrid>
         <DockPanel Grid.Column="1" Grid.Row="8">
+            <Button Content="Удалить" Command="{Binding CopyDeleteCommand}" DockPanel.Dock="Right"/>
             <Button Content="Добавить" Command="{Binding CopyAddCommand}" DockPanel.Dock="Right"/>
             <TextBox Text="{Binding BookCopy}" x:Name="BookCopy" Width="460"/>
         </DockPanel>
-        <DataGrid ItemsSource="{Binding BookCopies}" Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2" x:Name="BookCopies">
+        <DataGrid ItemsSource="{Binding BookCopies}" SelectedItem="{Binding DataGridSelectedCopy}" Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2" x:Name="BookCopies">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Инвентарный_номер, StringFormat={}{0:00000000}}" Header="Инвентарный номер" Width="*"/>
             </DataGrid.Columns>

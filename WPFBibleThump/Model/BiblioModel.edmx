@@ -132,6 +132,7 @@
           </Key>
           <Property Name="Инвентарный номер" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id_книги" Type="int" Nullable="false" />
+          <Property Name="Архивировано" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_Выданные книги_Читатели">
           <End Role="Читатели" Type="Self.Читатели" Multiplicity="1" />
@@ -467,13 +468,8 @@
           <EntitySet Name="Издательства" EntityType="MOYABAZAModel.Издательства" />
           <EntitySet Name="Выданные_книги" EntityType="MOYABAZAModel.Выданные_книги" />
           <EntitySet Name="Книги" EntityType="MOYABAZAModel.Книги" />
-          <EntitySet Name="Экземпляры_книги" EntityType="MOYABAZAModel.Экземпляры_книги" />
           <AssociationSet Name="FK_Выданные_книги_Читатели" Association="MOYABAZAModel.FK_Выданные_книги_Читатели">
             <End Role="Читатели" EntitySet="Читатели" />
-            <End Role="Выданные_книги" EntitySet="Выданные_книги" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Выданные_книги_Экземпляры_книги" Association="MOYABAZAModel.FK_Выданные_книги_Экземпляры_книги">
-            <End Role="Экземпляры_книги" EntitySet="Экземпляры_книги" />
             <End Role="Выданные_книги" EntitySet="Выданные_книги" />
           </AssociationSet>
           <AssociationSet Name="FK_Книги_Города" Association="MOYABAZAModel.FK_Книги_Города">
@@ -484,13 +480,18 @@
             <End Role="Издательства" EntitySet="Издательства" />
             <End Role="Книги" EntitySet="Книги" />
           </AssociationSet>
-          <AssociationSet Name="FK_Экземпляры_книги_Книги" Association="MOYABAZAModel.FK_Экземпляры_книги_Книги">
-            <End Role="Книги" EntitySet="Книги" />
-            <End Role="Экземпляры_книги" EntitySet="Экземпляры_книги" />
-          </AssociationSet>
           <AssociationSet Name="КнигиАвторы" Association="MOYABAZAModel.КнигиАвторы">
             <End Role="Авторы" EntitySet="Авторы" />
             <End Role="Книги" EntitySet="Книги" />
+          </AssociationSet>
+          <EntitySet Name="Экземпляры_книги" EntityType="MOYABAZAModel.Экземпляры_книги" />
+          <AssociationSet Name="FK_Выданные_книги_Экземпляры_книги" Association="MOYABAZAModel.FK_Выданные_книги_Экземпляры_книги">
+            <End Role="Экземпляры_книги" EntitySet="Экземпляры_книги" />
+            <End Role="Выданные_книги" EntitySet="Выданные_книги" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Экземпляры_книги_Книги" Association="MOYABAZAModel.FK_Экземпляры_книги_Книги">
+            <End Role="Книги" EntitySet="Книги" />
+            <End Role="Экземпляры_книги" EntitySet="Экземпляры_книги" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Издательства">
@@ -526,17 +527,8 @@
           <Property Name="УДК" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Города" Relationship="MOYABAZAModel.FK_Книги_Города" FromRole="Книги" ToRole="Города" />
           <NavigationProperty Name="Издательства" Relationship="MOYABAZAModel.FK_Книги_Издательства" FromRole="Книги" ToRole="Издательства" />
-          <NavigationProperty Name="Экземпляры_книги" Relationship="MOYABAZAModel.FK_Экземпляры_книги_Книги" FromRole="Книги" ToRole="Экземпляры_книги" />
           <NavigationProperty Name="Авторы" Relationship="MOYABAZAModel.КнигиАвторы" FromRole="Книги" ToRole="Авторы" />
-        </EntityType>
-        <EntityType Name="Экземпляры_книги">
-          <Key>
-            <PropertyRef Name="Инвентарный_номер" />
-          </Key>
-          <Property Name="Инвентарный_номер" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id_книги" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Выданные_книги" Relationship="MOYABAZAModel.FK_Выданные_книги_Экземпляры_книги" FromRole="Экземпляры_книги" ToRole="Выданные_книги" />
-          <NavigationProperty Name="Книги" Relationship="MOYABAZAModel.FK_Экземпляры_книги_Книги" FromRole="Экземпляры_книги" ToRole="Книги" />
+          <NavigationProperty Name="Экземпляры_книги" Relationship="MOYABAZAModel.FK_Экземпляры_книги_Книги" FromRole="Книги" ToRole="Экземпляры_книги" />
         </EntityType>
         <Association Name="FK_Выданные_книги_Читатели">
           <End Type="MOYABAZAModel.Читатели" Role="Читатели" Multiplicity="1" />
@@ -547,18 +539,6 @@
             </Principal>
             <Dependent Role="Выданные_книги">
               <PropertyRef Name="Id_читателя" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Выданные_книги_Экземпляры_книги">
-          <End Type="MOYABAZAModel.Экземпляры_книги" Role="Экземпляры_книги" Multiplicity="1" />
-          <End Type="MOYABAZAModel.Выданные_книги" Role="Выданные_книги" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Экземпляры_книги">
-              <PropertyRef Name="Инвентарный_номер" />
-            </Principal>
-            <Dependent Role="Выданные_книги">
-              <PropertyRef Name="Инвентарный_номер" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -586,6 +566,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="КнигиАвторы">
+          <End Type="MOYABAZAModel.Авторы" Role="Авторы" Multiplicity="*" />
+          <End Type="MOYABAZAModel.Книги" Role="Книги" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Экземпляры_книги">
+          <Key>
+            <PropertyRef Name="Инвентарный_номер" />
+          </Key>
+          <Property Name="Инвентарный_номер" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_книги" Type="Int32" Nullable="false" />
+          <Property Name="Архивировано" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Выданные_книги" Relationship="MOYABAZAModel.FK_Выданные_книги_Экземпляры_книги" FromRole="Экземпляры_книги" ToRole="Выданные_книги" />
+          <NavigationProperty Name="Книги" Relationship="MOYABAZAModel.FK_Экземпляры_книги_Книги" FromRole="Экземпляры_книги" ToRole="Книги" />
+        </EntityType>
+        <Association Name="FK_Выданные_книги_Экземпляры_книги">
+          <End Type="MOYABAZAModel.Экземпляры_книги" Role="Экземпляры_книги" Multiplicity="1" />
+          <End Type="MOYABAZAModel.Выданные_книги" Role="Выданные_книги" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Экземпляры_книги">
+              <PropertyRef Name="Инвентарный_номер" />
+            </Principal>
+            <Dependent Role="Выданные_книги">
+              <PropertyRef Name="Инвентарный_номер" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Экземпляры_книги_Книги">
           <End Type="MOYABAZAModel.Книги" Role="Книги" Multiplicity="1" />
           <End Type="MOYABAZAModel.Экземпляры_книги" Role="Экземпляры_книги" Multiplicity="*" />
@@ -597,10 +603,6 @@
               <PropertyRef Name="Id_книги" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="КнигиАвторы">
-          <End Type="MOYABAZAModel.Авторы" Role="Авторы" Multiplicity="*" />
-          <End Type="MOYABAZAModel.Книги" Role="Книги" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -732,14 +734,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Экземпляры_книги">
-            <EntityTypeMapping TypeName="MOYABAZAModel.Экземпляры_книги">
-              <MappingFragment StoreEntitySet="Экземпляры книги">
-                <ScalarProperty Name="Id_книги" ColumnName="Id_книги" />
-                <ScalarProperty Name="Инвентарный_номер" ColumnName="Инвентарный номер" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <AssociationSetMapping Name="КнигиАвторы" TypeName="MOYABAZAModel.КнигиАвторы" StoreEntitySet="КнигиАвторы">
             <EndProperty Name="Книги">
               <ScalarProperty Name="Id" ColumnName="Id_Книги" />
@@ -748,6 +742,15 @@
               <ScalarProperty Name="Id" ColumnName="Id_Автора" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Экземпляры_книги">
+            <EntityTypeMapping TypeName="MOYABAZAModel.Экземпляры_книги">
+              <MappingFragment StoreEntitySet="Экземпляры книги">
+                <ScalarProperty Name="Архивировано" ColumnName="Архивировано" />
+                <ScalarProperty Name="Id_книги" ColumnName="Id_книги" />
+                <ScalarProperty Name="Инвентарный_номер" ColumnName="Инвентарный номер" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

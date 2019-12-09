@@ -17,8 +17,8 @@ namespace WPFBibleThump.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Книги()
         {
-            this.Экземпляры_книги = new HashSet<Экземпляры_книги>();
             this.Авторы = new HashSet<Авторы>();
+            this.Экземпляры_книги = new HashSet<Экземпляры_книги>();
         }
     
         public int Id { get; set; }
@@ -31,8 +31,8 @@ namespace WPFBibleThump.Model
         public virtual Города Города { get; set; }
         public virtual Издательства Издательства { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Экземпляры_книги> Экземпляры_книги { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Авторы> Авторы { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Экземпляры_книги> Экземпляры_книги { get; set; }
     }
 }

@@ -44,6 +44,7 @@ namespace WPFBibleThump.ViewModel
         private Книги _book;
         private Авторы _selectedAuthor;
         private Авторы _dataGridSelectedAuthor;
+        private Экземпляры_книги _dataGridSelectedCopy;
         private string _bookCopy;
         private string _buttonText;
         private string _title;
@@ -110,28 +111,27 @@ namespace WPFBibleThump.ViewModel
                     var maxInvNumber = model.Экземпляры_книги.Max(b => b.Инвентарный_номер);
                     int newInvNumbersCount = 0;
                     int.TryParse(BookCopy, out newInvNumbersCount);
-                    for(int i = maxInvNumber; i < maxInvNumber + newInvNumbersCount; i++)
+                    for (int i = maxInvNumber; i < maxInvNumber + newInvNumbersCount; i++)
                     {
                         var Copy = new Экземпляры_книги();
                         Copy.Инвентарный_номер = i + 1;
                         BookCopies.Add(Copy);
                     }
-                    
+                },
+                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.W == 1) != 0);
 
-               /* if (BookCopies.Where(x => x.Инвентарный_номер == BookCopy).FirstOrDefault() != null)
+            CopyDeleteCommand = new RelayCommand(
+                (param) =>
+                {
+                    if (DataGridSelectedCopy == null)
                     {
-                        MessageBox.Show("Этот инвентарный номер уже добавлен!");
-                    }
-                    else if (BookCopy == null)
-                    {
-                        MessageBox.Show("Инвентарный номер не может быть пустым!");
+                        MessageBox.Show("Экземпляр не выбран!");
                     }
                     else
                     {
-                        var Copy = new Экземпляры_книги();
-                        Copy.Инвентарный_номер = BookCopy;
-                        BookCopies.Add(Copy);
-                    }*/
+                        BookCopies.FirstOrDefault(bc => bc == DataGridSelectedCopy).Архивировано = true;
+                        BookCopies.Remove(DataGridSelectedCopy);
+                    }
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.BooksThesaurusName && uo.W == 1) != 0);
 
@@ -228,7 +228,7 @@ namespace WPFBibleThump.ViewModel
             get { return 1; }
             set
             {
-                
+
             }
         }
 
@@ -267,11 +267,10 @@ namespace WPFBibleThump.ViewModel
             {
                 if (_bookCopies == null)
                 {
-                    var bookCopies = new ObservableCollection<Экземпляры_книги>(_book.Экземпляры_книги);
+                    var bookCopies = new ObservableCollection<Экземпляры_книги>(_book.Экземпляры_книги.Where(e => e.Архивировано == false));
                     bookCopies.CollectionChanged += BookCopies_CollectionChanged;
                     _bookCopies = bookCopies;
                 }
-
                 return _bookCopies;
             }
 
@@ -307,6 +306,15 @@ namespace WPFBibleThump.ViewModel
             }
         }
 
+
+        public Экземпляры_книги DataGridSelectedCopy
+        {
+            get { return _dataGridSelectedCopy; }
+            set
+            {
+                _dataGridSelectedCopy = value;
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged([CallerMemberName] string prop = "")
