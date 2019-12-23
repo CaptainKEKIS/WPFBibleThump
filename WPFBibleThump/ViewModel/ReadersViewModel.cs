@@ -80,8 +80,23 @@ namespace WPFBibleThump.ViewModel
             DeleteCommand = new RelayCommand(
                 (param) =>
                 {
-                    model.Читатели.Remove(_selectedReader);
-                    model.SaveChanges();
+                    if (MessageBox.Show("Уверен?", "Назад дороги не будет", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes)
+                    {
+                        try
+                        {
+                            if (_selectedReader.Выданные_книги.Count != 0)
+                            {
+                                throw new DbUpdateException("У читателя есть выданные книги!!!!");
+                            }
+                            model.Читатели.Remove(_selectedReader);
+                            model.SaveChanges();
+                        }
+                        catch (DbUpdateException ex)
+                        {
+                            MessageBox.Show($"Произошла ошибка при удалении данных: {Environment.CommandLine}{ex.Message}", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        
+                    }
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.ReadersName && uo.D == 1) != 0 && param != null);
 

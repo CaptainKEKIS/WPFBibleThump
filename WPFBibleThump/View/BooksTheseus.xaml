@@ -28,7 +28,7 @@
                 <DataGridTextColumn x:Name="id_городаColumn" Binding="{Binding Города.Название}" Header="Город" Width="*"/>
                 <DataGridTextColumn x:Name="год_изданияColumn" Binding="{Binding Год_издания}" Header="Год издания" Width="90"/>
                 <DataGridTextColumn x:Name="уДКColumn" Binding="{Binding УДК}" Header="УДК" Width="*"/>
-                <DataGridTextColumn x:Name="количество_экземпляровColumn" Binding="{Binding Количество_экземпляров}" Header="Количество экземпляров" Width="155"/>
+                <DataGridTextColumn x:Name="количество_экземпляровColumn" Binding="{Binding CopiesCount}" Header="Количество экземпляров" Width="155"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
