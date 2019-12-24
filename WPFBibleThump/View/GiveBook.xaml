@@ -1,0 +1,49 @@
+﻿<Window x:Class="WPFBibleThump.View.GiveBook"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFBibleThump.View"
+        mc:Ignorable="d"
+        Title="GiveBook" Height="450" Width="1054.819">
+    <Grid>
+        <DockPanel>
+            <Label DockPanel.Dock="Top" Content="Читатель:"/>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" VerticalAlignment="Top">
+                <Label Content="Номер чит. билета:" Width="Auto" Height="30"/>
+                <TextBlock Text="{Binding ReaderNumber}" Width="100" Height="20"/>
+                <Label Content="Фамилия:" Width="Auto" Height="30"/>
+                <TextBlock Text="{Binding SName}" Width="120" Height="20"/>
+                <Label Content="Имя:" Width="Auto" Height="30"/>
+                <TextBlock Text="{Binding Name}" Width="120" Height="20"/>
+                <Label Content="Отчество:" Width="Auto" Height="30"/>
+                <TextBlock Text="{Binding TName}" Width="120" Height="20"/>
+                <Label Content="Дата регистрации:" Width="Auto" Height="30"/>
+                <TextBlock Text="{Binding RegistrationTime, StringFormat=dd.MM.yyyy}" Width="100" Height="20"/>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" VerticalAlignment="Top">
+                <Label Content="Телефон:" Width="Auto" Height="30"/>
+                <TextBlock Text="{Binding MobileNumber}" Width="120" Height="20"/>
+                <Label Content="Улица:" Width="Auto" Height="30"/>
+                <TextBlock Text="{Binding Street}" Width="200" Height="20"/>
+                <Label Content="Дом:" Width="Auto" Height="30"/>
+                <TextBlock Text="{Binding HouseNumber}" Width="100" Height="20"/>
+                <Label Content="Квартира:" Width="Auto" Height="30"/>
+                <TextBlock Text="{Binding Appartment}" Width="100" Height="20"/>
+                <Label Content="Дата перерегистрации:" Width="Auto" Height="30"/>
+                <TextBlock Text="{Binding ReRegistrationTime, StringFormat=dd.MM.yyyy, TargetNullValue=-}" Width="100" Height="20"/>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" VerticalAlignment="Top">
+                <Label DockPanel.Dock="Top" Content="Инвентарный номер книги:"/>
+                <TextBox Width="200"/>
+            </StackPanel>
+            <DataGrid ItemsSource="{Binding !!!!!!!}" SelectedItem="{Binding SelectedBook}" x:Name="fsdjkfjdsl">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="номер_читательского_билетаColumn" Binding="{Binding Номер_читательского_билета}" Header="Номер билета" Width="auto"/>
+                    <DataGridTextColumn x:Name="фамилияColumn" Binding="{Binding Фамилия}" Header="Фамилия" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+        <Button x:Name="ReturnBookButton" Command="{Binding IssueBook}" CommandParameter="{Binding ElementName=IssuedBooksDataGrid, Path=SelectedItem}" HorizontalAlignment="Left" Content="Вернуть книгу" DockPanel.Dock="Top"/>
+    </Grid>
+</Window>

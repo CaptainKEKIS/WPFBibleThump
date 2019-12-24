@@ -21,6 +21,7 @@ namespace WPFBibleThump.ViewModel
         public RelayCommand AddCommand { get; }
         public RelayCommand ChangeCommand { get; }
         public RelayCommand DeleteCommand { get; }
+        public RelayCommand ReturnBookCommand { get; }
         public RelayCommand IssueBookCommand { get; }
 
         public ReadersViewModel()
@@ -95,10 +96,17 @@ namespace WPFBibleThump.ViewModel
                         {
                             MessageBox.Show($"Произошла ошибка при удалении данных: {Environment.CommandLine}{ex.Message}", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
-                        
                     }
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.ReadersName && uo.D == 1) != 0 && param != null);
+
+            ReturnBookCommand = new RelayCommand(
+                (param) =>
+                {
+                    IssuingBooksFormMVVM issuingBooksForm = new IssuingBooksFormMVVM(SelectedReader);
+                    issuingBooksForm.ShowDialog();
+                },
+                (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.ReadersName && uo.E == 1) != 0 && param != null); // Возможно нужно добавить ещё уровень доступа
 
             IssueBookCommand = new RelayCommand(
                 (param) =>

@@ -197,6 +197,9 @@
     <Compile Include="View\BooksReg.xaml.cs">
       <DependentUpon>BooksReg.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\GiveBook.xaml.cs">
+      <DependentUpon>GiveBook.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\IssuingBooksFormMVVM.xaml.cs">
       <DependentUpon>IssuingBooksFormMVVM.xaml</DependentUpon>
     </Compile>
@@ -291,6 +294,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\BooksTheseus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GiveBook.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
