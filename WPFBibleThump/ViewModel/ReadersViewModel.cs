@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using WPFBibleThump.Model;
+using WPFBibleThump.View;
 
 namespace WPFBibleThump.ViewModel
 {
@@ -111,8 +112,8 @@ namespace WPFBibleThump.ViewModel
             IssueBookCommand = new RelayCommand(
                 (param) =>
                 {
-                    IssuingBooksFormMVVM issuingBooksForm = new IssuingBooksFormMVVM(SelectedReader);
-                    issuingBooksForm.ShowDialog();
+                    IssuingBooksReader issuingBooksReader = new IssuingBooksReader(SelectedReader);
+                    issuingBooksReader.ShowDialog();
                 },
                 (param) => App.ActiveUser.Пользователи_Объекты.Count(uo => uo.Объекты.SName == Constants.ReadersName && uo.E == 1) != 0 && param != null); // Возможно нужно добавить ещё уровень доступа
 

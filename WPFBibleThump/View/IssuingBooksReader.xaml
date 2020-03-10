@@ -21,16 +21,16 @@
             </StackPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" VerticalAlignment="Top"/>
             <Label DockPanel.Dock="Top" Content="Выданные книги:"/>
-            <DataGrid SelectedItem="{Binding SelectedBook}" ItemsSource="{Binding IssueBooks}" x:Name="IssueBooksDataGrid" DockPanel.Dock="Top" Height="300" Width="Auto" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid SelectedItem="{Binding SelectedBook}" ItemsSource="{Binding GiveOutBooks}" x:Name="GiveOutBooksDataGrid" DockPanel.Dock="Top" Height="300" Width="Auto" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Инв. номер" Binding="{Binding Path=Инвентарный_номер}" Width="auto" />
-                    <DataGridTextColumn Header="Название" Binding="{Binding Path=Экземпляры_книги.Книги.Название}" Width="auto" />
-                    <DataGridTextColumn Header="Издательство" Binding="{Binding Path=Экземпляры_книги.Книги.Издательство}" Width="*" />
+                    <DataGridTextColumn Header="Инв. номер" Binding="{Binding Path=Инвентарный_номер}" Width="auto"/>
+                    <DataGridTextColumn Header="Название" Binding="{Binding Path=Книги.Название}" Width="auto"/>
+                    <DataGridTextColumn Header="Издательство" Binding="{Binding Path=Книги.Издательство}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
             <TextBox x:Name="InventaryNumberToAdd" Width="300"/>
-            
-            <Button x:Name="ReturnBookButton" Command="{Binding IssueBook}" CommandParameter="{Binding ElementName=IssueBooksDataGrid, Path=SelectedItem}" HorizontalAlignment="Right" Content="Выдать книги" DockPanel.Dock="Top"/>
+            <Button x:Name="AddBook" Command="{Binding AddBook}" Content="Добавить книгу к выдаче" Width="auto" Padding="4"/>
+            <Button x:Name="ReturnBookButton" Command="{Binding GiveBook}" Content="Выдать книги" DockPanel.Dock="Top" Width="100" HorizontalAlignment="Right"/>
         </DockPanel>
     </Grid>
 </Window>

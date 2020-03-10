@@ -264,6 +264,7 @@
     <Compile Include="View\IssuingBooksReader.xaml.cs">
       <DependentUpon>IssuingBooksReader.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\IssuingBooksReaderViewModel.cs" />
     <Compile Include="View\ReadersReg.xaml.cs">
       <DependentUpon>ReadersReg.xaml</DependentUpon>
     </Compile>

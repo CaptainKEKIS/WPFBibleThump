@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPFBibleThump.Model;
+using WPFBibleThump.ViewModel;
 
 namespace WPFBibleThump.View
 {
@@ -19,9 +21,10 @@ namespace WPFBibleThump.View
     /// </summary>
     public partial class IssuingBooksReader : Window
     {
-        public IssuingBooksReader()
+        public IssuingBooksReader(Читатели reader)
         {
             InitializeComponent();
+            DataContext = new IssuingBooksReaderViewModel(reader);
         }
     }
 }

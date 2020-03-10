@@ -129,7 +129,7 @@ namespace WPFBibleThump.ViewModel
             }
         }
 
-        public Nullable<System.DateTime> ReRegistrationTime
+        public DateTime? ReRegistrationTime
         {
             get { return _reader.Дата_перерегистрации; }
             set

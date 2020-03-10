@@ -23,15 +23,11 @@
                 <MenuItem x:Name="AuthorTheseus" Header="Авторы" Click="AuthorTheseus_Click"/>
                 <MenuItem x:Name="PublishTheseus" Header="Издательства" Click="PublishTheseus_Click"/>
                 <MenuItem x:Name="SysCatalogue" Header="Системный каталог" Click="SysCatalogue_Click"/>
+            </MenuItem>
+            <MenuItem Header="Модули" FontSize="16">
                 <MenuItem x:Name="BooksTheseus" Header="Книги" Click="BooksTheseus_Click"/>
                 <MenuItem x:Name="IssuedBooks" Header="Выданные книги" Click="IssuedBooks_Click"/>
                 <MenuItem x:Name="Readers" Header="Читатели" Click="Readers_Click"/>
-            </MenuItem>
-            <MenuItem Header="Модули" FontSize="16">
-                <MenuItem Header="Читатели">
-                    <MenuItem x:Name="ReadersReg" Header="Регистрация читателей" Click="ReadersReg_Click"/>
-                    <MenuItem x:Name="IssuingBooks" Header="Регистрация читателей" Click="IssuingBooks_Click"/>
-                </MenuItem>
             </MenuItem>
         </Menu>
     </DockPanel>
