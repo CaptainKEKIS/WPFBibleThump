@@ -13,8 +13,6 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
-
         <StackPanel HorizontalAlignment="Left"  Grid.Row="0" Orientation="Horizontal">
             <Button x:Name="createButton" Content="Создать" Command="{Binding AddCommand}" />
             <Button x:Name="changeButton" Content="Изменить" Command="{Binding ChangeCommand}" CommandParameter="{Binding ElementName=fsdjkfjdsl, Path=SelectedItem}" />

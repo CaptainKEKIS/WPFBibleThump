@@ -25,6 +25,11 @@ namespace WPFBibleThump.ViewModel
             get;
             set;
         }
+        public ICollectionView UDKs
+        {
+            get;
+            set;
+        }
         public ICollectionView Publishes
         {
             get;
@@ -59,6 +64,7 @@ namespace WPFBibleThump.ViewModel
             _book = book;
             Authors = CollectionViewSource.GetDefaultView(App.MOYABAZA.Авторы.ToArray());
             Cities = CollectionViewSource.GetDefaultView(App.MOYABAZA.Города.ToArray());
+            UDKs = CollectionViewSource.GetDefaultView(App.MOYABAZA.Систематический_каталог.ToArray());
             Publishes = CollectionViewSource.GetDefaultView(App.MOYABAZA.Издательства.ToArray());
             if (book.Название == null)
             {
@@ -214,12 +220,12 @@ namespace WPFBibleThump.ViewModel
             }
         }
 
-        public string UDK
+        public Систематический_каталог UDK
         {
-            get { return _book.УДК; }
+            get { return App.MOYABAZA.Систематический_каталог.FirstOrDefault(x => x.Код == _book.УДК); }
             set
             {
-                _book.УДК = value;
+                _book.УДК = value.Код;
             }
         }
 

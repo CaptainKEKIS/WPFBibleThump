@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFBibleThump.View"
         mc:Ignorable="d"
-        Title="IssuingBooksReader" Height="498.305" Width="885.169">
+        Title="IssuingBooksReader" Height="450" Width="885.169">
     <Grid>
         <DockPanel>
             <Label DockPanel.Dock="Top" Content="Читатель:"/>
@@ -20,17 +20,18 @@
                 <TextBlock Text="{Binding TName}" Width="120" Height="20"/>
             </StackPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" VerticalAlignment="Top"/>
-            <Label DockPanel.Dock="Top" Content="Выданные книги:"/>
-            <DataGrid SelectedItem="{Binding SelectedBook}" ItemsSource="{Binding GiveOutBooks}" x:Name="GiveOutBooksDataGrid" DockPanel.Dock="Top" Height="300" Width="Auto" AutoGenerateColumns="False" IsReadOnly="True">
+            <Label DockPanel.Dock="Top" Content="Книги к выдаче:"/>
+            <DataGrid SelectedItem="{Binding SelectedBook}" ItemsSource="{Binding GiveOutBooks}" x:Name="GiveOutBooksDataGrid" DockPanel.Dock="Top" Height="260" Width="Auto" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Инв. номер" Binding="{Binding Path=Инвентарный_номер}" Width="auto"/>
-                    <DataGridTextColumn Header="Название" Binding="{Binding Path=Книги.Название}" Width="auto"/>
-                    <DataGridTextColumn Header="Издательство" Binding="{Binding Path=Книги.Издательство}" Width="*"/>
+                    <DataGridTextColumn Header="Инв. номер" Binding="{Binding Path=Экземпляры_книги.Инвентарный_номер}" Width="auto"/>
+                    <DataGridTextColumn Header="Название" Binding="{Binding Path=Экземпляры_книги.Книги.Название}" Width="auto"/>
+                    <DataGridTextColumn Header="Издательство" Binding="{Binding Path=Экземпляры_книги.Книги.Издательства.Название}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <TextBox x:Name="InventaryNumberToAdd" Width="300"/>
+            <TextBox x:Name="InventaryNumberToAdd" Text="{Binding InventaryNumber}" Width="300"/>
             <Button x:Name="AddBook" Command="{Binding AddBook}" Content="Добавить книгу к выдаче" Width="auto" Padding="4"/>
-            <Button x:Name="ReturnBookButton" Command="{Binding GiveBook}" Content="Выдать книги" DockPanel.Dock="Top" Width="100" HorizontalAlignment="Right"/>
+            <Button x:Name="DeleteBook" Command="{Binding DeleteBook}" CommandParameter="{Binding ElementName=GiveOutBooksDataGrid, Path=SelectedItem}" Content="Удалить из выдачи" Width="auto" Padding="4"/>
+            <Button x:Name="ReturnBookButton" Command="{Binding GiveBook}" Content="Выдать книги" Width="100" HorizontalAlignment="Right"/>
         </DockPanel>
     </Grid>
 </Window>
